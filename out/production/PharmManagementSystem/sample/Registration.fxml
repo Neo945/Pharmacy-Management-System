@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first.javafx.project.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+        <ImageView fitHeight="593.0" fitWidth="750.0">
+            <image>
+                <Image url="@../../Images/bckimg.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="62.0" layoutY="80.0" prefHeight="434.0" prefWidth="627.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+            <children>
+                <Label layoutX="296.0" layoutY="22.0" text="Registration Page">
+                    <font>
+                        <Font name="Tahoma Bold" size="25.0" />
+                    </font>
+                </Label>
+                <TextField layoutX="259.0" layoutY="86.0" promptText="User Name" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField layoutX="439.0" layoutY="86.0" promptText="Email ID" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <PasswordField layoutX="259.0" layoutY="145.0" promptText="Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <PasswordField layoutX="439.0" layoutY="145.0" promptText="Confirm Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField layoutX="259.0" layoutY="204.0" promptText="Contact No." style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <ChoiceBox layoutX="259.0" layoutY="283.0" prefWidth="150.0" />
+                <AnchorPane prefHeight="434.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 50  0 0 50;">
+                    <children>
+                        <ImageView fitHeight="206.0" fitWidth="209.0" layoutX="8.0" layoutY="114.0">
+                            <image>
+                                <Image url="@../../Images/RegistrationImage.jpg" />
+                            </image>
+                        </ImageView>
+                    </children></AnchorPane>
+                <Button layoutX="477.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #00cc00;" text="Register">
+                    <font>
+                        <Font name="Verdana Bold" size="12.0" />
+                    </font>
+                </Button>
+                <Hyperlink layoutX="346.0" layoutY="397.0" text="Already a user? Login?" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
