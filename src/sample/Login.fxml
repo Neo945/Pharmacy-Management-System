@@ -16,7 +16,7 @@
         </ImageView>
         <AnchorPane layoutX="132.0" layoutY="97.0" prefHeight="397.0" prefWidth="481.0" style="-fx-background-color: white; -fx-background-radius: 50;">
             <children>
-                <Label layoutX="168.0" layoutY="34.0" text=" Login Page">
+                <Label layoutX="168.0" layoutY="34.0" text=" Login Page" underline="true" wrapText="true">
                     <font>
                         <Font name="Tahoma Bold" size="25.0" />
                     </font>
@@ -30,7 +30,7 @@
                         <Font name="Arial Unicode MS" size="14.0" />
                     </font>
                 </Button>
-                <Hyperlink layoutX="155.0" layoutY="360.0" text="Forgot your username/password?" />
+                <Hyperlink layoutX="155.0" layoutY="360.0" text="Forgot your username/password?" underline="true" />
                 <Line endX="-100.0" endY="186.0" layoutX="327.0" layoutY="112.0" startX="-100.0" startY="-12.0" strokeWidth="2.0" />
                 <ImageView fitHeight="200.0" fitWidth="211.0" layoutY="99.0">
                     <image>
