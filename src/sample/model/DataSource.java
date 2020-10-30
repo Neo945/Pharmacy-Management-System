@@ -2,9 +2,10 @@ package sample.model;
 
 import sample.UserData;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class DataSource {
@@ -26,4 +27,24 @@ public class DataSource {
             System.out.println("Exception:" + sqlException);
         }
     }
+    public void search(String string) {
+//        PreparedStatement preparedStatement = conn.prepareStatement();
+//        preparedStatement.setString(1,"Thriller");
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        try{
+//            List<> songList = new LinkedList<>();
+//            while(resultSet.next()){
+//                artist.setID(resultSet.getInt(DB_TABLE_INDEX_ARTISTS_ID));
+//                artist.setName(resultSet.getString());
+//                List.add();
+//            }
+//            return songList;
+//        }catch (SQLException e){
+//            System.out.println("Exception: " + e.getMessage());
+//            System.out.println("Stack: " + Arrays.toString(e.getStackTrace()));
+//            return null;
+//        }
+    }
+    //queries
+
 }
