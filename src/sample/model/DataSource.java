@@ -10,6 +10,7 @@ import java.util.List;
 
 public class DataSource {
     private Connection conn;
+
     public boolean connectionOpen() {
         try {
             conn = DriverManager.getConnection(UserData.getCONNECTION(),UserData.getUserName(),UserData.getPassword());
@@ -27,9 +28,9 @@ public class DataSource {
             System.out.println("Exception:" + sqlException);
         }
     }
-    public void search(String string) {
+    public void search(String string,String table_name) {
 //        PreparedStatement preparedStatement = conn.prepareStatement();
-//        preparedStatement.setString(1,"Thriller");
+//        preparedStatement.setString(1,"",2,"");
 //        ResultSet resultSet = preparedStatement.executeQuery();
 //        try{
 //            List<> songList = new LinkedList<>();
@@ -43,8 +44,10 @@ public class DataSource {
 //            System.out.println("Exception: " + e.getMessage());
 //            System.out.println("Stack: " + Arrays.toString(e.getStackTrace()));
 //            return null;
-//        }
+//////        }
+//    }
+        //queries
     }
-    //queries
 
+//    public void insertInto
 }

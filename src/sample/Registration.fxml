@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="first.javafx.project.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="593.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="registration.FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
         <ImageView fitHeight="593.0" fitWidth="750.0">
@@ -22,13 +22,12 @@
                         <Font name="Tahoma Bold" size="25.0" />
                     </font>
                 </Label>
-                <TextField layoutX="259.0" layoutY="86.0" promptText="User Name" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <TextField layoutX="439.0" layoutY="86.0" promptText="Email ID" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <PasswordField layoutX="259.0" layoutY="145.0" promptText="Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <PasswordField layoutX="439.0" layoutY="145.0" promptText="Confirm Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <TextField layoutX="259.0" layoutY="204.0" promptText="Contact No." style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <ChoiceBox  prefWidth="150.0" />
-                <ComboBox promptText="Job" editable="true" layoutX="258.0" layoutY="272.0" prefWidth="150.0">
+                <TextField fx:id="name" layoutX="259.0" layoutY="86.0" promptText="Full Name" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField fx:id="emailID" layoutX="439.0" layoutY="86.0" promptText="Email ID" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <PasswordField fx:id="password" layoutX="259.0" layoutY="145.0" promptText="Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <PasswordField fx:id="confirmPassword" layoutX="439.0" layoutY="145.0" promptText="Confirm Password" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField fx:id="contact" layoutX="259.0" layoutY="204.0" promptText="Contact No." style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <ComboBox fx:id="combobox" editable="true" layoutX="258.0" layoutY="272.0" prefWidth="150.0" promptText="Job">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Pharmacist" />
@@ -40,7 +39,7 @@
 <!--                        <String fx:value="Default"/>-->
 <!--                    </value>-->
                 </ComboBox>
-                <TextField layoutX="439.0" layoutY="204.0" promptText="Address" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField fx:id="address" layoutX="439.0" layoutY="204.0" promptText="Address" style="-fx-background-color: tranparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
                 <AnchorPane prefHeight="434.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 50  0 0 50;">
                     <children>
                         <ImageView fitHeight="206.0" fitWidth="209.0" layoutX="8.0" layoutY="114.0">
@@ -49,13 +48,22 @@
                             </image>
                         </ImageView>
                     </children></AnchorPane>
-                <Button layoutX="374.0" layoutY="337.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #00cc00;" text="Register">
+                <Button fx:id="registerButton" layoutX="374.0" layoutY="356.0" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #00cc00;" text="Register">
                     <font>
                         <Font name="Verdana Bold" size="12.0" />
                     </font>
                 </Button>
-                <Hyperlink layoutX="346.0" layoutY="397.0" text="Already a user? Login?" wrapText="true" />
-            <DatePicker layoutX="440.0" layoutY="271.0" prefHeight="26.0" prefWidth="160.0" promptText="Date of Birth"/>
+                <Hyperlink layoutX="356.0" layoutY="396.0" text="Already a user? Login?" wrapText="true" />
+            <DatePicker fx:id="datePicker" layoutX="440.0" layoutY="271.0" prefHeight="26.0" prefWidth="160.0" promptText="Date of Birth" />
+                <Label fx:id="userLabel" layoutX="258.0" layoutY="113.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="dobLabel" layoutX="440.0" layoutY="297.0" prefHeight="18.0" prefWidth="160.0" />
+                <Label fx:id="jobLabel" layoutX="258.0" layoutY="297.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="addressLabel" layoutX="438.0" layoutY="231.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="contactLabel" layoutX="259.0" layoutY="231.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="confirmPassLabel" layoutX="438.0" layoutY="172.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="passLabel" layoutX="258.0" layoutY="172.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="emailLabel" layoutX="438.0" layoutY="113.0" prefHeight="18.0" prefWidth="149.0" />
+                <Label fx:id="allFieldsAreRequired" layoutX="334.0" layoutY="326.0" prefHeight="18.0" prefWidth="160.0"/>
             </children>
         </AnchorPane>
     </children>
