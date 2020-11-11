@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import java.lang.String?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
    </rowConstraints>
-   <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-
-      <ComboBox editable="true" layoutX="296.0" layoutY="262.0" prefWidth="150.0">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Pharmacist" />
-               <String fx:value="Cashier" />
-               <String fx:value="Owner" />
-            </FXCollections>
-         </items>
-         <value>
-            <String fx:value="Default"/>
-         </value>
-      </ComboBox>
-      <TextField GridPane.columnIndex="1">
-
-      </TextField>
-   </children>
+   <ImageView accessibleRole="BUTTON">
+      <image>
+         <Image url="@../../Images/bckimg.jpg" />
+      </image>
+      <effect>
+         <BoxBlur height="0.0" iterations="0" width="0.0" />
+      </effect></ImageView>
 </GridPane>

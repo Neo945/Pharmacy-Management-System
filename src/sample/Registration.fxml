@@ -63,7 +63,7 @@
                 <Label fx:id="confirmPassLabel" layoutX="438.0" layoutY="172.0" prefHeight="18.0" prefWidth="149.0" />
                 <Label fx:id="passLabel" layoutX="258.0" layoutY="172.0" prefHeight="18.0" prefWidth="149.0" />
                 <Label fx:id="emailLabel" layoutX="438.0" layoutY="113.0" prefHeight="18.0" prefWidth="149.0" />
-                <Label fx:id="allFieldsAreRequired" layoutX="334.0" layoutY="326.0" prefHeight="18.0" prefWidth="160.0"/>
+                <Label fx:id="allFieldsAreRequired" layoutX="334.0" layoutY="326.0" prefHeight="18.0" prefWidth="160.0" />
             </children>
         </AnchorPane>
     </children>
