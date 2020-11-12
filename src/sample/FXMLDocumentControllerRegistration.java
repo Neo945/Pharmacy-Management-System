@@ -1,4 +1,4 @@
-package registration;
+package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +8,11 @@ import sample.model.DataSource;
 
 import java.util.Date;
 
-public class FXMLDocumentController {
+public class FXMLDocumentControllerRegistration {
+    public Label label;
     DataSource dataSource;
 
-    public FXMLDocumentController() {
+    public FXMLDocumentControllerRegistration() {
         this.dataSource = new DataSource();
     }
 

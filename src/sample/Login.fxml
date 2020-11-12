@@ -8,12 +8,12 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.FXMLDocumentController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
         <ImageView fitHeight="591.0" fitWidth="745.0">
             <image>
-                <Image url="@../../Images/bckimg.jpg" />
+                <Image url="@../Images/bckimg.jpg" />
             </image>
         </ImageView>
         <AnchorPane layoutX="132.0" layoutY="97.0" prefHeight="397.0" prefWidth="481.0" style="-fx-background-color: white; -fx-background-radius: 50;">
@@ -46,22 +46,22 @@
                 <Line endX="-100.0" endY="186.0" layoutX="327.0" layoutY="112.0" startX="-100.0" startY="-12.0" strokeWidth="2.0" />
                 <ImageView fitHeight="200.0" fitWidth="211.0" layoutY="99.0">
                     <image>
-                        <Image url="@../../Images/LeftUserImage.jpg" />
+                        <Image url="@../Images/LeftUserImage.jpg" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="127.0">
                     <image>
-                        <Image url="@../../Images/BlackEmailImage.png" />
+                        <Image url="@../Images/BlackEmailImage.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="170.0">
                     <image>
-                        <Image url="@../../Images/BlackKeyImage.png" />
+                        <Image url="@../Images/BlackKeyImage.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="226.0">
                     <image>
-                        <Image url="@../../Images/FindJob.png" />
+                        <Image url="@../Images/FindJob.png" />
                     </image>
                 </ImageView>
             </children>

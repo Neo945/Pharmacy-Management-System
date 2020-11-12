@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DataSource {
     private Connection conn;
-    private final String register = "INSERT INTO employee (emp_id,emp_name, emp_email, emp_pass,emp_add,emp_contact_no,emp_role) VALUES(";
+    private final String register = "INSERT INTO employee (emp_id,emp_name, emp_email, emp_pass,emp_add,emp_role) VALUES(";
 
 
     public boolean connectionOpen() {
@@ -37,22 +37,25 @@ public class DataSource {
             ResultSet result = regState.executeQuery("Select max(emp_id) from employee;");
             result.next();
             String emp = result.getString("max(emp_id)");
+            System.out.println(emp);
             if(emp.isEmpty()){
                 emp = "E0";
+
             }
             String[] val = emp.split("E");//{0112}
-            int emp_id = Integer.parseInt(val[0]);
+            int emp_id = Integer.parseInt(val[1]);
             emp_id++;
             emp = "E" + emp_id;
-            regState.execute(register + emp + ", " + name + ", " + email + ", " + pass + ", " + add + ", " + contact + " , " + role + "," + ");");
+            regState.execute(register + "'" + emp + "','" + name + "','" + email + "','" + pass + "','" + add + "','" + role + "');");
+            regState.execute("Insert into employee_num(emp_id,emp_num) values('" + emp + "','"  + contact + "');");
             if(role.equals("Pharmacist")){
-                regState.execute("INSERT INTO pharmacist(emp_id) values(" + emp + ");");
+                regState.execute("INSERT INTO pharmacist(pemp_id) values('" + emp + " ');");
             }
             else{
-                regState.execute("INSERT INTO cashier(emp_id) values(" + emp + ");");
+                regState.execute("INSERT INTO cashier(cemp_id) values('" + emp + "');");
             }
         }catch (SQLException e){
-            //
+            System.out.println("Exception:" + e);
         }
     }
 

@@ -15,7 +15,7 @@
    </rowConstraints>
    <ImageView accessibleRole="BUTTON">
       <image>
-         <Image url="@../../Images/bckimg.jpg" />
+         <Image url="@../Images/bckimg.jpg" />
       </image>
       <effect>
          <BoxBlur height="0.0" iterations="0" width="0.0" />
