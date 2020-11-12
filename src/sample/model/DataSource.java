@@ -12,7 +12,7 @@ import java.util.List;
 public class DataSource {
     private Connection conn;
     private final String register = "INSERT INTO employee (emp_id,emp_name, emp_email, emp_pass,emp_add,emp_role) VALUES(";
-
+    private final String LoginSearchQ = "select emp_pass from employee where emp_email ='";
 
     public boolean connectionOpen() {
         try {
@@ -40,7 +40,6 @@ public class DataSource {
             System.out.println(emp);
             if(emp.isEmpty()){
                 emp = "E0";
-
             }
             String[] val = emp.split("E");//{0112}
             int emp_id = Integer.parseInt(val[1]);
@@ -54,11 +53,25 @@ public class DataSource {
             else{
                 regState.execute("INSERT INTO cashier(cemp_id) values('" + emp + "');");
             }
+            regState.close();
         }catch (SQLException e){
             System.out.println("Exception:" + e);
         }
     }
-
+    public boolean loginSearch(String email,String pass){
+        try{
+            Statement loginState = conn.createStatement();
+            ResultSet passSet = loginState.executeQuery(LoginSearchQ + email + "';");
+            passSet.next();
+            String checkPass = passSet.getString("emp_pass");
+            passSet.close();
+            loginState.close();
+            return checkPass.equals(pass);
+        }catch (SQLException e){
+            System.out.println("Exception: " + e);
+        }
+        return false;
+    }
 
 
 

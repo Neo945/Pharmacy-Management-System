@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerLogin">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
         <ImageView fitHeight="591.0" fitWidth="745.0">
@@ -23,7 +23,7 @@
                         <Font name="Tahoma Bold" size="25.0" />
                     </font>
                 </Label>
-                <TextField layoutX="296.0" layoutY="127.0" promptText="Email ID" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <TextField fx:id="email_id" layoutX="296.0" layoutY="127.0" promptText="Email ID" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
                 <ComboBox editable="true" layoutX="295.0" layoutY="227.0" prefWidth="150.0" promptText="Job">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -36,8 +36,8 @@
                     <!--                        <String fx:value="Default"/>-->
                     <!--                    </value>-->
                 </ComboBox>
-                <PasswordField layoutX="296.0" layoutY="170.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <Button layoutX="208.0" layoutY="322.0" mnemonicParsing="false" onAction="#onButtonCLicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #00cc00;" text="Login">
+                <PasswordField fx:id="password" layoutX="296.0" layoutY="170.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <Button fx:id="login" layoutX="208.0" layoutY="322.0" mnemonicParsing="false" onAction="#onButtonCLicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #00cc00;" text="Login">
                     <font>
                         <Font name="Arial Unicode MS" size="14.0" />
                     </font>
@@ -64,6 +64,9 @@
                         <Image url="@../Images/FindJob.png" />
                     </image>
                 </ImageView>
+            <Label fx:id="email_idLabel" layoutX="295.0" layoutY="154.0" prefHeight="18.0" prefWidth="150.0" />
+            <Label fx:id="passwordLabel" layoutX="295.0" layoutY="199.0" prefHeight="18.0" prefWidth="150.0" />
+            <Label fx:id="allField" layoutX="173.0" layoutY="303.0" prefHeight="18.0" prefWidth="150.0" />
             </children>
         </AnchorPane>
     </children>
