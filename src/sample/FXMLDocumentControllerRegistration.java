@@ -2,11 +2,18 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import sample.model.DataSource;
+import sample.model.Employee;
 
-import java.util.Date;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class FXMLDocumentControllerRegistration {
     public Label label;
@@ -54,6 +61,8 @@ public class FXMLDocumentControllerRegistration {
     private DatePicker datePicker;
     @FXML
     private TextField address;
+    @FXML
+    private Hyperlink login;
 
     public void onButtonClicked(ActionEvent e){
         if(checkValues()){
@@ -61,26 +70,34 @@ public class FXMLDocumentControllerRegistration {
             allFieldsAreRequired.setTextFill(Color.WHITE);
             try{
                 //get all the values and insert it into the database
-                String name = this.name.getText();
-                String emailID = this.emailID.getText();
-                String add = this.address.getText();
+                Employee employee = new Employee();
+                employee.setEmp_name(this.name.getText());
+                employee.setEmail(this.emailID.getText());
+                employee.setEmp_add(this.address.getText());
                 String password = this.password.getText();
-                String confirmPasswordText = this.confirmPassword.getText();
-                if(!confirmPasswordText.equals(password)){
+                if(!password.equals(this.confirmPassword.getText())){
                     confirmPassLabel.setText("*Password not matched");
                     confirmPassLabel.setTextFill(Color.RED);
                     return;
                 }
-                String contact = this.contact.getText();
-                String job = this.combobox.getEditor().getText();
+                employee.setEmp_pass(password);
+//                employee.getContact().add(this.contact.getText());
+                String[] contArray = this.contact.getText().split(";");
+//                employee.getContact().addAll(Arrays.asList(contArray));
+                for (String s : contArray) {
+                    employee.getContact().add(s);
+                }
+                employee.setEmp_role(this.combobox.getEditor().getText());
 //                Date date = new Date("");
                 String date = this.datePicker.getEditor().getText();
                 DataSource dataSource = new DataSource();
                 dataSource.connectionOpen();
-                dataSource.Registration(name,add,emailID,password,contact,job);
+                dataSource.Registration(employee);
                 dataSource.connectionClose();
+                toLoginPage(e);
             }catch (Exception exception){
-                //
+                System.out.println("Exception: (onButtonClicked)" + exception);
+                System.out.println("Exception: (onButtonClicked)" + Arrays.toString(exception.getStackTrace()));
             }
         }else {
             allFieldsAreRequired.setText("*All Fields Are Required");
@@ -140,5 +157,16 @@ public class FXMLDocumentControllerRegistration {
             userLabel.setText("");
         }
         return flag;
+    }
+    public void toLoginPage(ActionEvent e) {
+        try{
+            Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (IOException exception){
+            System.out.println("Exception: (toLoginPage)" + exception);
+        }
     }
 }
