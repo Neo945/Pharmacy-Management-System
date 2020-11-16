@@ -2,16 +2,25 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
 
+import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
+import java.util.Locale;
 
 public class FXMLDocumentControllerTransaction {
     @FXML
@@ -65,7 +74,8 @@ public class FXMLDocumentControllerTransaction {
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             totalCostValue += dataSource.getPrice(idMedName);
-            totalCost.setText("Total Cost -" + totalCostValue);
+            Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
+            totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
             dataSource.decrementQuant(idMedName);
             list.add(dataSource.getMed(idMedName));
         }catch (Exception e){
@@ -78,6 +88,15 @@ public class FXMLDocumentControllerTransaction {
             for (Medicines m:
                     DataSource.val) {
                 System.out.println(m.getName() + "\t" + m.getMed_id()+ "\t"  + m.getQuantity());
+            }
+        try{
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("Add Patient.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (IOException exception){
+            System.out.println("Exception: (toLoginPage)" + exception);
         }
 
     }

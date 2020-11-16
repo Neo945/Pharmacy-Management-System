@@ -11,6 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+
       <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #000000;" />
       <Button alignment="CENTER" contentDisplay="CENTER" layoutX="554.0" layoutY="480.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" style="-fx-background-radius: 15;" text="Print" textAlignment="CENTER">
          <font>
