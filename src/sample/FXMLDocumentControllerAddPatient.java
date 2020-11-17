@@ -2,9 +2,14 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
 import sample.model.Patient;
@@ -104,11 +109,12 @@ public class FXMLDocumentControllerAddPatient {
             System.out.println("Exception:(fillData) " + e.getMessage());
         }
     }
-    public void generateBill(){
+    public void generateBill(ActionEvent actionEvent){
         try{
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             if(false){
+//                Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
 
             }else {
                 Patient newPat= new Patient();
@@ -120,6 +126,11 @@ public class FXMLDocumentControllerAddPatient {
                 else newPat.setPat_gender("o");
                 dataSource.addPatient(newPat,DataSource.pharmacist);
             }
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("FinalBill.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
         }catch (Exception e){
             System.out.println("Exception:(generateBill) " + Arrays.toString(e.getStackTrace()));
         }
