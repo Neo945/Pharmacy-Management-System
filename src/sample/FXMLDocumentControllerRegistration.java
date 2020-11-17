@@ -1,15 +1,25 @@
-package registration;
+package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import sample.model.DataSource;
+import sample.model.Employee;
 
-public class FXMLDocumentController {
+import java.io.IOException;
+import java.util.Arrays;
+
+public class FXMLDocumentControllerRegistration {
+    public Label label;
     DataSource dataSource;
 
-    public FXMLDocumentController() {
+    public FXMLDocumentControllerRegistration() {
         this.dataSource = new DataSource();
     }
 
@@ -51,17 +61,43 @@ public class FXMLDocumentController {
     private DatePicker datePicker;
     @FXML
     private TextField address;
+    @FXML
+    private Hyperlink login;
 
     public void onButtonClicked(ActionEvent e){
-        boolean flag = checkValues();
-        if(flag){
+        if(checkValues()){
             allFieldsAreRequired.setText("");
             allFieldsAreRequired.setTextFill(Color.WHITE);
             try{
                 //get all the values and insert it into the database
-                System.out.println();
+                Employee employee = new Employee();
+                employee.setEmp_name(this.name.getText());
+                employee.setEmail(this.emailID.getText());
+                employee.setEmp_add(this.address.getText());
+                String password = this.password.getText();
+                if(!password.equals(this.confirmPassword.getText())){
+                    confirmPassLabel.setText("*Password not matched");
+                    confirmPassLabel.setTextFill(Color.RED);
+                    return;
+                }
+                employee.setEmp_pass(password);
+//                employee.getContact().add(this.contact.getText());
+                String[] contArray = this.contact.getText().split(";");
+//                employee.getContact().addAll(Arrays.asList(contArray));
+                for (String s : contArray) {
+                    employee.getContact().add(s);
+                }
+                employee.setEmp_role(this.combobox.getEditor().getText());
+//                Date date = new Date("");
+                String date = this.datePicker.getEditor().getText();
+                DataSource dataSource = new DataSource();
+                dataSource.connectionOpen();
+                dataSource.Registration(employee);
+                dataSource.connectionClose();
+                toLoginPage(e);
             }catch (Exception exception){
-                //
+                System.out.println("Exception: (onButtonClicked)" + exception);
+                System.out.println("Exception: (onButtonClicked)" + Arrays.toString(exception.getStackTrace()));
             }
         }else {
             allFieldsAreRequired.setText("*All Fields Are Required");
@@ -69,56 +105,68 @@ public class FXMLDocumentController {
         }
     }
     public boolean checkValues(){
+        boolean flag = true;
         if(name.getText().isEmpty()){//textField
             userLabel.setText("*Required");//label
             userLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             userLabel.setText("");
         }if(emailID.getText().isEmpty()){
             emailLabel.setText("*Required");
             emailLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             emailLabel.setText("");
         }if(contact.getText().isEmpty()){
             contactLabel.setText("*Required");
             contactLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             contactLabel.setText("");
         }if(password.getText().isEmpty()){
             passLabel.setText("*Required");
             passLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             passLabel.setText("");
         }if(confirmPassword.getText().isEmpty()){
             confirmPassLabel.setText("*Required");
             confirmPassLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             confirmPassLabel.setText("");
         }if(combobox.getEditor().getText().isEmpty()){
             jobLabel.setText("*Required");
             jobLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             jobLabel.setText("");
         }if(address.getText().isEmpty()) {
             addressLabel.setText("*Required");
             addressLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             addressLabel.setText("");
         }
         if(datePicker.getEditor().getText().isEmpty()) {
             userLabel.setText("*Required");
             userLabel.setTextFill(Color.RED);
-            return false;
+            flag = false;
         }else{
             userLabel.setText("");
         }
-        return true;
+        return flag;
+    }
+    public void toLoginPage(ActionEvent e) {
+        try{
+            Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (IOException exception){
+            System.out.println("Exception: (toLoginPage)" + exception);
+        }
     }
 }
