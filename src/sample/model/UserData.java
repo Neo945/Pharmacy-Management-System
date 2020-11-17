@@ -20,7 +20,7 @@ public class UserData {
     public static final String DB_MED_PRICE = "med_price";
     public static final String DB_MED_EXP_DATE = "med_expdate";
     public static final String DB_MED_QUANTITY = "quant_med";
-    public static final String DB_MED_MFG_DATE = "med_mfgdate";
+    public static final String DB_MED_MFG_DATE = "med_mfg";
     public static final String DB_MED_COM_ID = "com_id";
 
     public static final String DB_PAT_NAME = "patient";

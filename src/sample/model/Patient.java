@@ -4,12 +4,17 @@ public class Patient {
     private  String pat_id;
     private  String pat_name;
     private  String pat_add;
-    private  String pat_age;
+    private int pat_age;
     private  String pat_gender;
     private  String pemp_id;
 
     public String getPat_id() {
         return pat_id;
+    }
+
+    @Override
+    public String toString() {
+        return pat_name;
     }
 
     public void setPat_id(String pat_id) {
@@ -32,11 +37,11 @@ public class Patient {
         this.pat_add = pat_add;
     }
 
-    public String getPat_age() {
+    public int getPat_age() {
         return pat_age;
     }
 
-    public void setPat_age(String pat_age) {
+    public void setPat_age(int pat_age) {
         this.pat_age = pat_age;
     }
 

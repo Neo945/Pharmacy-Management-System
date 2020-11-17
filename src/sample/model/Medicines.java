@@ -1,6 +1,8 @@
 package sample.model;
 
-public class Medicines {
+import javafx.collections.ObservableArray;
+
+public class Medicines  {
     private  String name;
     private  String med_id;
     private  String med_price;
