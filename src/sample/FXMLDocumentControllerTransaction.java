@@ -11,16 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.Locale;
+import java.util.*;
 
 public class FXMLDocumentControllerTransaction {
     @FXML
@@ -48,17 +46,33 @@ public class FXMLDocumentControllerTransaction {
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
+            dataSource.addToHash();
             ArrayList<Medicines> searchList = dataSource.searchMed(search);
             for (Medicines m : searchList) {
                 BorderPane bp = new BorderPane();
+                HBox hbx = new HBox();
+
+                Button minusButton = new Button("-");
+                minusButton.setOnAction(this::onClickMinusButton);
+                minusButton.setId(m.getName() + "m");
+
                 Button plusButton = new Button("+");
                 plusButton.setOnAction(this::onClickPlusButton);
                 plusButton.setId(m.getName());
+
+//
                 System.out.println(m.getName());
-//                System.out.println(m.);
+                Label quant = new Label("" + DataSource.searchListHash.get(m));
                 Label medName = new Label(m.getName());
+
+                hbx.getChildren().add(minusButton);
+                hbx.getChildren().add(quant);
+                hbx.getChildren().add(plusButton);
+
+
                 bp.setLeft(medName);
-                bp.setRight(plusButton);
+                bp.setRight(hbx);
+//                bp.setRight(plusButton);roleback please
                 MedicineList.getItems().add(bp);
             }
             dataSource.connectionClose();
@@ -78,17 +92,21 @@ public class FXMLDocumentControllerTransaction {
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
             dataSource.decrementQuant(idMedName);
             list.add(dataSource.getMed(idMedName));
+            int count = DataSource.searchListHash.get(dataSource.getMed(idMedName));
+            DataSource.searchListHash.replace(dataSource.getMed(idMedName),count+1);
         }catch (Exception e){
             System.out.println("Exception:(onClickPlusButton) " + e.getMessage());
         }
     }
-    @FXML
+    private void onClickMinusButton(ActionEvent actionEvent) {
+    }
+        @FXML
     private void onClickProceed(ActionEvent actionEvent){
-        DataSource.val= list;
-            for (Medicines m:
-                    DataSource.val) {
-                System.out.println(m.getName() + "\t" + m.getMed_id()+ "\t"  + m.getQuantity());
-            }
+//        DataSource.val= list;
+//            for (Medicines m:
+//                    DataSource.val) {
+//                System.out.println(m.getName() + "\t" + m.getMed_id()+ "\t"  + m.getQuantity());
+//            }
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Add Patient.fxml"));

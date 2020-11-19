@@ -3,6 +3,7 @@ package sample.model;
 import java.net.UnknownServiceException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.jar.Attributes;
 
 
@@ -28,7 +29,9 @@ public class DataSource {
     public static final String getPriceSQL = "SELECT " + UserData.DB_MED_PRICE + " FROM " + UserData.DB_MED_NAME
                                             + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
     public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
-    public static ArrayList<Medicines> val;
+    public static ArrayList<Medicines> val = new ArrayList<>();
+    public static ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
+    public static HashMap<String,Integer> medicineHashMap = new HashMap<>();
 
     public boolean connectionOpen() {
         try {
@@ -172,30 +175,6 @@ public class DataSource {
         }
         return null;
     }
-//    public ArrayList<Employee> searchEmp(String medName){
-//        try{
-//            preparedStatement = conn.prepareStatement(medSearch);
-//            medName = "%" +  medName + "%";
-//            preparedStatement.setString(1,medName);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
-//            while(resultSet.next()){
-//                Medicines medicines = new Medicines();
-//                medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
-//                medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
-//                medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
-//                medicines.setMed_price(resultSet.getString(UserData.DB_MED_PRICE));
-//                medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
-//                medicines.setQuantity(resultSet.getString(UserData.DB_MED_QUANTITY));
-//                medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
-//                medicinesArrayList.add(medicines);
-//            }
-//            return medicinesArrayList;
-//        }catch (SQLException e){
-//            System.out.println("Exception: " + e.getMessage());
-//        }
-//        return null;
-//    }
 
     public ArrayList<Patient> searchPat(String patName){
         try{
@@ -319,7 +298,7 @@ public class DataSource {
             if(patID==null){
                 patID = "P0";
             }
-            String[] val = patID.split("P");//{0112}
+            String[] val = patID.split("P");
             int patIDVAL = Integer.parseInt(val[1]);
             patIDVAL++;
             patID = "P" + patIDVAL;
