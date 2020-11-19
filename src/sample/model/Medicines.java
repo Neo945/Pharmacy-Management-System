@@ -3,9 +3,9 @@ package sample.model;
 import javafx.collections.ObservableArray;
 
 public class Medicines  {
-    private  String name;
+    public   String name;
     private  String med_id;
-    private  double med_price;
+    public   double med_price;
     private  String exp_date;
     private  String quantity;
     private  String mfg_date;
