@@ -1,3 +1,5 @@
+package sample;
+
 //package sample;
 //
 //import javafx.event.ActionEvent;
@@ -20,7 +22,7 @@
 //import java.util.Currency;
 //import java.util.Locale;
 //
-//public class FXMLDocumentControllerAddPatient {
+public class FXMLDocumentControllerAddPatient {
 //    @FXML
 //    private TextField searchPatient;
 //    @FXML
@@ -136,4 +138,4 @@
 //        }
 //    }
 //
-//}
+}
