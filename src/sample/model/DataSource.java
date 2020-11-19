@@ -29,9 +29,13 @@ public class DataSource {
     public static final String getPriceSQL = "SELECT " + UserData.DB_MED_PRICE + " FROM " + UserData.DB_MED_NAME
                                             + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
     public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
-    public static ArrayList<Medicines> val = new ArrayList<>();
+//    public static ArrayList<Medicines> val = new ArrayList<>();
     public static ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
     public static HashMap<String,Integer> medicineHashMap = new HashMap<>();
+    //{
+    // "Name":value;
+    // "Name2":value;
+    // }
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
 
     public boolean connectionOpen() {
@@ -181,6 +185,7 @@ public class DataSource {
             return 0;
         }
     }
+
     public double getPriceInList(String name){
         try{
             for (Medicines m :
@@ -290,8 +295,16 @@ public class DataSource {
     }
 
 
-
-
+    public void addToHash(){
+        try{
+            for (Medicines m :
+                    medicinesArrayList) {
+                medicineHashMap.put(m.getName(),0);
+            }
+        }catch (Exception e){
+            System.out.println("Exception:(addToHash) " + e.getMessage());
+        }
+    }
 
 
 

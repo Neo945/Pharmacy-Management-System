@@ -33,22 +33,16 @@ public class FXMLDocumentControllerTransaction {
     private Button proceedButton;
     @FXML
     private Label emptyLabel;
-    private final ArrayList<Medicines> list;
-    private int totalCostValue = 0;
-
-    public FXMLDocumentControllerTransaction() {
-        this.list = new ArrayList<>();
-    }
-
-    public void onClickSearchMedicine(ActionEvent actionEvent) {
+    private double totalCostValue = 0;
+    public void initialize(){
         try {
             MedicineList.getItems().clear();
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
+            dataSource.createMedicineList();
             dataSource.addToHash();
-            ArrayList<Medicines> searchList = dataSource.searchMed(search);
-            for (Medicines m : searchList) {
+            for (Medicines m : DataSource.medicinesArrayList) {
                 BorderPane bp = new BorderPane();
                 HBox hbx = new HBox();
 
@@ -58,11 +52,12 @@ public class FXMLDocumentControllerTransaction {
 
                 Button plusButton = new Button("+");
                 plusButton.setOnAction(this::onClickPlusButton);
-                plusButton.setId(m.getName());
+                plusButton.setId(m.getName() + "p");
 
-//
-                System.out.println(m.getName());
-                Label quant = new Label("" + DataSource.searchListHash.get(m));
+
+                Label quant = new Label(String.format("%2d ",DataSource.medicineHashMap.get(m.getName())));
+                quant.setId(m.getName() + "q");
+
                 Label medName = new Label(m.getName());
 
                 hbx.getChildren().add(minusButton);
@@ -72,8 +67,46 @@ public class FXMLDocumentControllerTransaction {
 
                 bp.setLeft(medName);
                 bp.setRight(hbx);
-//                bp.setRight(plusButton);roleback please
                 MedicineList.getItems().add(bp);
+            }
+            dataSource.connectionClose();
+        } catch (Exception e) {
+            System.out.println("Exception:(onClickSearchMedicine) " + e.getMessage());
+        }
+    }
+    public void onClickSearchMedicine(ActionEvent actionEvent) {
+        try {
+            MedicineList.getItems().clear();
+            String search = searchMed.getText();
+            DataSource dataSource = new DataSource();
+            for (Medicines m : DataSource.medicinesArrayList) {
+                if(m.getName().contains(search)){
+                    BorderPane bp = new BorderPane();
+                    HBox hbx = new HBox();
+
+                    Button minusButton = new Button("-");
+                    minusButton.setOnAction(this::onClickMinusButton);
+                    minusButton.setId(m.getName() + "m");
+
+                    Button plusButton = new Button("+");
+                    plusButton.setOnAction(this::onClickPlusButton);
+                    plusButton.setId(m.getName() + "p");
+
+
+                    Label quant = new Label(String.format("%2d ",DataSource.medicineHashMap.get(m.getName())));
+                    quant.setId(m.getName() + "q");
+
+                    Label medName = new Label(m.getName());
+
+                    hbx.getChildren().add(minusButton);
+                    hbx.getChildren().add(quant);
+                    hbx.getChildren().add(plusButton);
+
+
+                    bp.setLeft(medName);
+                    bp.setRight(hbx);
+                    MedicineList.getItems().add(bp);
+                }
             }
             dataSource.connectionClose();
         } catch (Exception e) {
@@ -82,23 +115,50 @@ public class FXMLDocumentControllerTransaction {
     }
 
     private void onClickPlusButton(ActionEvent actionEvent) {
-        System.out.println((actionEvent.getSource().toString().split("=")[1].split(",")[0]));
         try{
-            String idMedName = actionEvent.getSource().toString().split("=")[1].split(",")[0];
+            String idMedName = actionEvent.getSource().toString().split("=")[1].split(",")[0].split("p")[0];
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
+            if(DataSource.medicineHashMap.get(idMedName)>9) return;
             totalCostValue += dataSource.getPrice(idMedName);
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
-            dataSource.decrementQuant(idMedName);
-            list.add(dataSource.getMed(idMedName));
-            int count = DataSource.searchListHash.get(dataSource.getMed(idMedName));
-            DataSource.searchListHash.replace(dataSource.getMed(idMedName),count+1);
+//            dataSource.decrementQuant(idMedName);
+//            list.add(dataSource.getMed(idMedName));
+            if(DataSource.medicineHashMap.get(idMedName)>9) return;
+            int count = DataSource.medicineHashMap.get(dataSource.getMed(idMedName).getName());
+            DataSource.medicineHashMap.replace(dataSource.getMed(idMedName).getName(),count+1);
+            for(int i = 0;i<MedicineList.getItems().size();i++){
+                if(((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1).getId().split("q")[0].equals(idMedName)){
+                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1)).setText(String.format("%2d ",DataSource.medicineHashMap.get(idMedName)));
+                }
+            }
         }catch (Exception e){
             System.out.println("Exception:(onClickPlusButton) " + e.getMessage());
         }
     }
     private void onClickMinusButton(ActionEvent actionEvent) {
+        try{
+            String idMedName = actionEvent.getSource().toString().split("=")[1].split(",")[0].split("m")[0];
+            DataSource dataSource = new DataSource();
+            dataSource.connectionOpen();
+            if(totalCostValue==0)return;
+            if(DataSource.medicineHashMap.get(idMedName)<1) return;
+            totalCostValue -= dataSource.getPrice(idMedName);
+            Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
+            totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
+//            dataSource.decrementQuant(idMedName);
+//            list.add(dataSource.getMed(idMedName));
+            int count = DataSource.medicineHashMap.get(dataSource.getMed(idMedName).getName());
+            DataSource.medicineHashMap.replace(dataSource.getMed(idMedName).getName(),count-1);
+            for(int i = 0;i<MedicineList.getItems().size();i++){
+                if(((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1).getId().split("q")[0].equals(idMedName)){
+                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1)).setText(String.format("%2d ",DataSource.medicineHashMap.get(idMedName)));
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Exception:(onClickPlusButton) " + e.getMessage());
+        }
     }
         @FXML
     private void onClickProceed(ActionEvent actionEvent){
@@ -114,7 +174,7 @@ public class FXMLDocumentControllerTransaction {
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (IOException exception){
-            System.out.println("Exception: (toLoginPage)" + exception);
+            System.out.println("Exception: (onClickProceed)" + exception);
         }
 
     }
