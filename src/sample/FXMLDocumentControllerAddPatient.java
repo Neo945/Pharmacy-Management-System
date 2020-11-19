@@ -111,20 +111,21 @@ public class FXMLDocumentControllerAddPatient {
             PatientName.setText(selectedItemsPatient.getPat_name());
             patAdd.setText(selectedItemsPatient.getPat_add());
             patAge.setText("" + selectedItemsPatient.getPat_age());
-            String gender = "" + selectedItemsPatient.getPat_age();
+            String gender = selectedItemsPatient.getPat_gender();
             if(gender.equals("m")){
-                male.selectedProperty().setValue(true);
-                female.selectedProperty().setValue(false);
-                others.selectedProperty().setValue(false);
+                male.selectedProperty().set(true);
+                female.selectedProperty().set(false);
+                others.selectedProperty().set(false);
             }else if(gender.equals("f")){
                 male.selectedProperty().set(false);
                 female.selectedProperty().set(true);
                 others.selectedProperty().set(false);
-            }else {
-                male.selectedProperty().set(false);
-                female.selectedProperty().set(false);
-                others.selectedProperty().set(true);
             }
+//            }else {
+//                male.selectedProperty().set(false);
+//                female.selectedProperty().set(false);
+//                others.selectedProperty().set(true);
+//            }
 //            patient = selectedItemsPatient;
         }catch (Exception e){
             System.out.println("Exception:(fillData) " + e.getMessage());

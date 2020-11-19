@@ -45,7 +45,7 @@
                   <ToggleGroup fx:id="genderToggle" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="female" layoutX="121.0" layoutY="176.0" mnemonicParsing="false" text="Female" toggleGroup="$genderToggle" />
-            <RadioButton layoutX="64.0" layoutY="209.0" mnemonicParsing="false" text="Others" toggleGroup="$genderToggle" />
+            <RadioButton layoutX="64.0" layoutY="209.0" mnemonicParsing="false" text="Others" toggleGroup="$genderToggle" fx:id="others"/>
          </children>
       </AnchorPane>
    </children>
