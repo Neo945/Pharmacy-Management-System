@@ -17,6 +17,7 @@ import sample.model.DataSource;
 import sample.model.Medicines;
 import sample.model.Patient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class FXMLDocumentControllerAddPatient {
     @FXML
     private RadioButton others;
     private double sum = 0;
+    private Patient patient;
     public void initialize(){
         try{
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
@@ -78,11 +80,13 @@ public class FXMLDocumentControllerAddPatient {
             System.out.println("Exception:(initialize) " + e.getMessage());
         }
         try{
+
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             dataSource.searchPat();
             for (Patient patient : DataSource.patientArrayList) {
                 searchList.getItems().add(patient);
+                System.out.println(patient.getPat_name());
             }
             dataSource.connectionClose();
         }catch (Exception e){
@@ -94,67 +98,65 @@ public class FXMLDocumentControllerAddPatient {
         try{
             searchList.getItems().clear();
             String searchString = searchPatient.getText();
-            DataSource dataSource = new DataSource();
-            dataSource.connectionOpen();
-            dataSource.searchPat();
             for (Patient patient : DataSource.patientArrayList) {
                 if(patient.getPat_name().contains(searchString)) searchList.getItems().add(patient);
             }
-            dataSource.connectionClose();
         }catch (Exception e){
             System.out.println("Exception:(onSearchClick) " + e.getMessage());
         }
     }
-//    public void fillData(MouseEvent actionEvent){
+    public void fillData(MouseEvent actionEvent){
+        try{
+            Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
+            PatientName.setText(selectedItemsPatient.getPat_name());
+            patAdd.setText(selectedItemsPatient.getPat_add());
+            patAge.setText("" + selectedItemsPatient.getPat_age());
+            String gender = "" + selectedItemsPatient.getPat_age();
+            if(gender.equals("m")){
+                male.selectedProperty().setValue(true);
+                female.selectedProperty().setValue(false);
+                others.selectedProperty().setValue(false);
+            }else if(gender.equals("f")){
+                male.selectedProperty().set(false);
+                female.selectedProperty().set(true);
+                others.selectedProperty().set(false);
+            }else {
+                male.selectedProperty().set(false);
+                female.selectedProperty().set(false);
+                others.selectedProperty().set(true);
+            }
+//            patient = selectedItemsPatient;
+        }catch (Exception e){
+            System.out.println("Exception:(fillData) " + e.getMessage());
+        }
+    }
+    public void generateBill(ActionEvent actionEvent) throws IOException {
 //        try{
-//            Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
-//            PatientName.setText(selectedItemsPatient.getPat_name());
-//            patAdd.setText(selectedItemsPatient.getPat_add());
-//            patAge.setText("" + selectedItemsPatient.getPat_age());
-//            String gender = "" + selectedItemsPatient.getPat_age();
-//            if(gender.equals("m")){
-//                male.selectedProperty().setValue(true);
-//                female.selectedProperty().setValue(false);
-//                others.selectedProperty().setValue(false);
-//            }else if(gender.equals("f")){
-//                male.selectedProperty().set(false);
-//                female.selectedProperty().set(true);
-//                others.selectedProperty().set(false);
-//            }else {
-//                male.selectedProperty().set(false);
-//                female.selectedProperty().set(false);
-//                others.selectedProperty().set(true);
-//            }
-//            this.selectedPat = selectedItemsPatient;
-//        }catch (Exception e){
-//            System.out.println("Exception:(fillData) " + e.getMessage());
-//        }
-//    }
-//    public void generateBill(ActionEvent actionEvent){
-//        try{
-//            DataSource dataSource = new DataSource();
-//            dataSource.connectionOpen();
-//            if(false){
-////                Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
-//
-//            }else {
-//                Patient newPat= new Patient();
-//                newPat.setPat_name(PatientName.getText());
-//                newPat.setPat_add(patAdd.getText());
-//                newPat.setPat_age(Integer.parseInt(patAge.getText()));
-//                if(female.isSelected()) newPat.setPat_gender("f");
-//                else if(male.isSelected()) newPat.setPat_gender("m");
-//                else newPat.setPat_gender("o");
-//                dataSource.addPatient(newPat,DataSource.pharmacist);
-//            }
-//            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
-//            Parent root = FXMLLoader.load(getClass().getResource("FinalBill.fxml"));
-//            primaryStage.setTitle("Hello ");
-//            primaryStage.setScene(new Scene(root, 750, 600));
-//            primaryStage.show();
+            DataSource dataSource = new DataSource();
+            dataSource.connectionOpen();
+            Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
+            if(selectedItemsPatient!=null){
+//                Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
+                DataSource.selectedPatient = selectedItemsPatient;
+            }else {
+                Patient newPat= new Patient();
+                newPat.setPat_name(PatientName.getText());
+                newPat.setPat_add(patAdd.getText());
+                newPat.setPat_age(Integer.parseInt(patAge.getText()));
+                if(female.isSelected()) newPat.setPat_gender("f");
+                else if(male.isSelected()) newPat.setPat_gender("m");
+                else newPat.setPat_gender("o");
+                dataSource.addPatient(newPat,DataSource.pharmacist);
+                DataSource.selectedPatient = newPat;
+            }
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("FinalBill.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
 //        }catch (Exception e){
 //            System.out.println("Exception:(generateBill) " + Arrays.toString(e.getStackTrace()));
 //        }
-//    }
+    }
 //
 }

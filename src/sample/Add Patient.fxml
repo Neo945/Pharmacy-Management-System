@@ -15,7 +15,7 @@
                   <Font size="13.0" />
                </font>
             </CheckBox>
-            <Button layoutX="113.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #6bc45a; -fx-background-radius: 15;" text="Generate Bill" textFill="WHITE">
+            <Button layoutX="113.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #6bc45a; -fx-background-radius: 15;" text="Generate Bill" textFill="WHITE" onAction="#generateBill">
                <font>
                   <Font size="13.0" />
                </font>
@@ -33,7 +33,7 @@
             <Font name="Verdana" size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="searchList" layoutX="188.0" layoutY="96.0" prefHeight="81.0" prefWidth="298.0"/>
+      <ListView fx:id="searchList" layoutX="188.0" layoutY="96.0" prefHeight="81.0" prefWidth="298.0" onMouseClicked="#fillData"/>
       <AnchorPane layoutX="188.0" layoutY="220.0" prefHeight="253.0" prefWidth="298.0" style="-fx-border-color: black;">
          <children>
             <TextField fx:id="PatientName" layoutX="33.0" layoutY="32.0" promptText="Name" />
