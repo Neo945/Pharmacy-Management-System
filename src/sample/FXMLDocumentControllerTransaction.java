@@ -161,21 +161,16 @@ public class FXMLDocumentControllerTransaction {
         }
     }
         @FXML
-    private void onClickProceed(ActionEvent actionEvent) throws IOException {
-//        DataSource.val= list;
-//            for (Medicines m:
-//                    DataSource.val) {
-//                System.out.println(m.getName() + "\t" + m.getMed_id()+ "\t"  + m.getQuantity());
-//            }
-//        try{
+    private void onClickProceed(ActionEvent actionEvent) {
+        try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Add Patient.fxml"));
             primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
-//        }catch (IOException exception){
-//            System.out.println("Exception: (onClickProceed)" + exception);
-//        }
+        }catch (IOException exception){
+            System.out.println("Exception: (onClickProceed)" + exception);
+        }
 
     }
 }

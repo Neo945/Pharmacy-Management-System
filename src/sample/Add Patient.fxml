@@ -28,7 +28,7 @@
          </children>
       </AnchorPane>
       <TextField fx:id="searchPatient" layoutX="188.0" layoutY="44.0" prefHeight="30.0" prefWidth="200.0" promptText="Search Patient" />
-      <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="44.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="84.0" style="-fx-background-color: #3792cb;" text="Search" textFill="WHITE" wrapText="true">
+      <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="44.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="84.0" style="-fx-background-color: #3792cb;" text="Search" textFill="WHITE" wrapText="true" onAction="#onSearchClick">
          <font>
             <Font name="Verdana" size="14.0" />
          </font>

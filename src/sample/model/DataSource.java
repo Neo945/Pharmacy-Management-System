@@ -242,7 +242,7 @@ public class DataSource {
 
     public void searchPat(){
         try{
-            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_PAT_NAME + " WHERE " + UserData.DB_PAT_PAT_NAME  + ";");
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_PAT_NAME  + ";");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Patient patient = new Patient();
