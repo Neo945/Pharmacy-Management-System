@@ -39,7 +39,7 @@ public class UserData {
 
     private static final String DBname = "Pharmacy";
     private static final String UserName = "root";
-    private static final String Password = "Shree$h2";
+    private static final String Password = "";
     private static final String CONNECTION = "jdbc:mysql://localhost/" + DBname;
 
     public static String getUserName() {
