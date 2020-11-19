@@ -5,7 +5,7 @@ import javafx.collections.ObservableArray;
 public class Medicines  {
     private  String name;
     private  String med_id;
-    private  String med_price;
+    private  double med_price;
     private  String exp_date;
     private  String quantity;
     private  String mfg_date;
@@ -19,7 +19,7 @@ public class Medicines  {
         this.med_id = med_id;
     }
 
-    public void setMed_price(String med_price) {
+    public void setMed_price(double med_price) {
         this.med_price = med_price;
     }
 
@@ -48,7 +48,7 @@ public class Medicines  {
         return med_id;
     }
 
-    public String getMed_price() {
+    public double getMed_price() {
         return med_price;
     }
 

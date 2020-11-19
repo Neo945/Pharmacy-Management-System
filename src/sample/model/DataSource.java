@@ -32,6 +32,7 @@ public class DataSource {
     public static ArrayList<Medicines> val = new ArrayList<>();
     public static ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
     public static HashMap<String,Integer> medicineHashMap = new HashMap<>();
+    public static ArrayList<Patient> patientArrayList = new ArrayList<>();
 
     public boolean connectionOpen() {
         try {
@@ -41,7 +42,7 @@ public class DataSource {
             System.out.println("Exception: (connectionOpen)" + sqlException);
             return false;
         }
-    }
+    }//done
     public void connectionClose() {
         try {
             if(conn!=null)
@@ -49,7 +50,7 @@ public class DataSource {
         }catch (SQLException sqlException){
             System.out.println("Exception: (connectionOpen)" + sqlException);
         }
-    }
+    }//done
 
 
 
@@ -72,7 +73,7 @@ public class DataSource {
         }catch (SQLException e){
             System.out.println("Exception: (Registration)" + e);
         }
-    }
+    }//done
     private void addRole(String role,String emp){
         String role1;
         try{
@@ -88,7 +89,7 @@ public class DataSource {
         }catch (SQLException e){
             System.out.println("Exception: (addRole)" + e);
         }
-    }
+    }//done
     private String getEmpId(){
         try{
             statement = conn.createStatement();
@@ -108,7 +109,7 @@ public class DataSource {
             System.out.println("Exception: (getEmpId)"  + e);
         }
         return null;
-    }
+    }//done
     private void addContact(Employee employee){
         try{
             preparedStatement = conn.prepareStatement(regIntoContact);
@@ -123,7 +124,7 @@ public class DataSource {
         }catch (SQLException e){
             System.out.println("Exception: (addContact)" + e);
         }
-    }
+    }//done
 
 
 
@@ -142,26 +143,19 @@ public class DataSource {
             System.out.println("Exception: (loginSearch)" + e);
         }
         return false;
-    }
+    }//done
 
 
-    public ArrayList<Medicines> searchMed(String medName){
+    public void createMedicineList(){
         try{
-            if(medName!=null){
-                preparedStatement = conn.prepareStatement(medSearch);
-                medName = "%" +  medName + "%";
-                preparedStatement.setString(1,medName);
-            }else{
-                preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
-            }
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
             ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
             while(resultSet.next()){
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
                 medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
-                medicines.setMed_price(resultSet.getString(UserData.DB_MED_PRICE));
+                medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
                 medicines.setQuantity(resultSet.getString(UserData.DB_MED_QUANTITY));
                 medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
@@ -169,38 +163,11 @@ public class DataSource {
             }
             resultSet.close();
             preparedStatement.close();
-            return medicinesArrayList;
         }catch (SQLException e){
             System.out.println("Exception: " + e.getMessage());
         }
-        return null;
-    }
+    }//done
 
-    public ArrayList<Patient> searchPat(String patName){
-        try{
-            preparedStatement = conn.prepareStatement(patSearch);
-            patName = "%" +  patName + "%";
-            preparedStatement.setString(1,patName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<Patient> patientArrayList = new ArrayList<>();
-            while(resultSet.next()){
-                Patient patient = new Patient();
-                patient.setPat_name(resultSet.getString(UserData.DB_PAT_PAT_NAME));
-                patient.setPat_id(resultSet.getString(UserData.DB_PAT_PAT_ID));
-                patient.setPat_add(resultSet.getString(UserData.DB_PAT_ADD));
-                patient.setPat_age(resultSet.getInt(UserData.DB_PAT_AGE));
-                patient.setPemp_id(resultSet.getString(UserData.DB_PAT_PEMP_ID));
-                patient.setPat_gender(resultSet.getString(UserData.DB_PAT_GENDER));
-                patientArrayList.add(patient);
-            }
-            resultSet.close();
-            preparedStatement.close();
-            return patientArrayList;
-        }catch (SQLException e){
-            System.out.println("Exception: " + e.getMessage());
-        }
-        return null;
-    }
 
     public int getPrice(String name){
         try{
@@ -214,9 +181,25 @@ public class DataSource {
             return 0;
         }
     }
+    public double getPriceInList(String name){
+        try{
+            for (Medicines m :
+                    medicinesArrayList) {
+                if(m.getName().equals(name)) return m.getMed_price();
+            }
+            return -1;
+        }catch (Exception e){
+            System.out.println("Exception:(getPrice) "  + e);
+            return -1;
+        }
+    }//done
+
     public boolean decrementQuant(String name) {
         try{
-            preparedStatement = conn.prepareStatement(buyMed);
+            preparedStatement = conn.prepareStatement("UPDATE " + UserData.DB_MED_NAME +
+                    " SET " + UserData.DB_MED_QUANTITY + " = " + UserData.DB_MED_QUANTITY + " - "  +
+                    medicineHashMap.get(name) + " WHERE "
+                    + UserData.DB_MED_MED_NAME + " = ?");
             preparedStatement.setString(1, name);
             preparedStatement.execute();
             return true;
@@ -224,33 +207,22 @@ public class DataSource {
             System.out.println("Exception:(decrementQuant) " + e.getMessage());
             return false;
         }
-    }
+    }//done
 
-    public Medicines getMed(String name) throws SQLException {
+    public Medicines getMed(String name)  {
         try{
-            preparedStatement = conn.prepareStatement(getMedSQL);
-            preparedStatement.setString(1,name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                Medicines medicines = new Medicines();
-                medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
-                medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
-                medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
-                medicines.setMed_price(resultSet.getString(UserData.DB_MED_PRICE));
-                medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
-                medicines.setQuantity(resultSet.getString(UserData.DB_MED_QUANTITY));
-                medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
-                return medicines;
-            }else return null;
-        }catch (SQLException e){
+            for (Medicines m :
+                    medicinesArrayList) {
+                if(m.getName().equals(name)) return m;
+            }
+            return null;
+        }catch (Exception e){
             System.out.println("Exception:(getMed) " + e.getMessage());
             return null;
         }
 
-    }
-//    public void addMedicine(Medicines medicines){
-//
-//    }
+    }//done
+
     public boolean existsDB(Patient patient){
         try {
             statement = conn.createStatement();
@@ -263,19 +235,27 @@ public class DataSource {
         }
     }
 
-    /**
-     * create table patient(
-     * pat_add varchar(255) not null,
-     * pat_name varchar(50),
-     * pat_age integer not null,
-     * pat_gender char(1) check(pat_gender in('f','m')),
-     * pat_id char(6) primary key check(pat_id like 'P%'),
-     * pemp_id char(6),
-     * foreign key(pemp_id) references pharmacist(pemp_id)
-     * );
-     * @param newPat
-     * @param pharma
-     */
+    public void searchPat(){
+        try{
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_PAT_NAME + " WHERE " + UserData.DB_PAT_PAT_NAME  + ";");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Patient patient = new Patient();
+                patient.setPat_name(resultSet.getString(UserData.DB_PAT_PAT_NAME));
+                patient.setPat_id(resultSet.getString(UserData.DB_PAT_PAT_ID));
+                patient.setPat_add(resultSet.getString(UserData.DB_PAT_ADD));
+                patient.setPat_age(resultSet.getInt(UserData.DB_PAT_AGE));
+                patient.setPemp_id(resultSet.getString(UserData.DB_PAT_PEMP_ID));
+                patient.setPat_gender(resultSet.getString(UserData.DB_PAT_GENDER));
+                patientArrayList.add(patient);
+            }
+            resultSet.close();
+            preparedStatement.close();
+        }catch (SQLException e){
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }//later
+
     public void addPatient(Patient newPat, String pharma){
         try {
             statement = conn.createStatement();
@@ -288,7 +268,7 @@ public class DataSource {
         }catch (SQLException e){
             System.out.println("Exception:(addPatient) " + e.getMessage());
         }
-    }
+    }//done
     public String generatePatID(Patient pat){
         try{
             statement = conn.createStatement();
@@ -333,23 +313,6 @@ public class DataSource {
 
 
 
-//    public void search(String string,String table_name) {
-//        PreparedStatement preparedStatement = conn.prepareStatement();
-//        preparedStatement.setString(1,"",2,"");
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        try{
-//            List<> songList = new LinkedList<>();
-//            while(resultSet.next()){
-//                artist.setID(resultSet.getInt(DB_TABLE_INDEX_ARTISTS_ID));
-//                artist.setName(resultSet.getString());
-//                List.add();
-//            }
-//            return songList;
-//        }catch (SQLException e){
-//            System.out.println("Exception: " + e.getMessage());
-//            System.out.println("Stack: " + Arrays.toString(e.getStackTrace()));
-//            return null;
-//        }
-//    }
+
 
 }
