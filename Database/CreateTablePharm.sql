@@ -58,7 +58,7 @@ sup_num varchar(20)
 );
 
 create table patient(
-pat_add varchar(255) not null,
+pat_num varchar(20) not null,
 pat_name varchar(50),
 pat_age integer not null,
 pat_gender char(1) check(pat_gender in('f','m')),
@@ -81,7 +81,7 @@ med_expdate date not null,
 quant_med integer default 0,
 med_mfg date not null,
 constraint medicine_exp check(med_expdate>med_mfg),
-com_id char(6) not null, 
+com_id char(6) not null,
 foreign key(com_id) references company(com_id)
 );
 
@@ -94,8 +94,9 @@ bill_amount decimal(5,2) not null
 );
 
 create table med_in_bill(
-bill_id char(7), 
+bill_id char(7),
 foreign key(bill_id) references bill(bill_id),
 med_id char(6),
-foreign key(med_id) references medicine(med_id)
+foreign key(med_id) references medicine(med_id),
+quantity integer not  null check(quantity>=1)
 );
