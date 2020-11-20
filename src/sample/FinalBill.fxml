@@ -19,7 +19,7 @@
             <TableView fx:id="medicinesTableView" layoutY="75.0" prefHeight="286.0" prefWidth="479.0">
               <columns>
                 <TableColumn fx:id="name" prefWidth="222.1999969482422" text="name" />
-                  <TableColumn prefWidth="91.39996337890625" text="quant" fx:id="quant"/>
+                  <TableColumn fx:id="quant" prefWidth="91.39996337890625" text="quant" />
                 <TableColumn fx:id="med_price" prefWidth="162.5999755859375" text="med_price" />
               </columns>
                <opaqueInsets>
@@ -33,7 +33,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" layoutX="588.0" layoutY="480.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" style="-fx-background-radius: 15;" text="Save" textAlignment="CENTER">
+      <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" layoutX="588.0" layoutY="480.0" mnemonicParsing="false" onAction="#onSaveClicked" prefHeight="34.0" prefWidth="57.0" style="-fx-background-radius: 15;" text="Save" textAlignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>

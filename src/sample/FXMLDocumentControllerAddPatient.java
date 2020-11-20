@@ -62,6 +62,7 @@ public class FXMLDocumentControllerAddPatient {
     private Patient patient;
     public void initialize(){
         try{
+            medList.getItems().clear();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             for (Medicines m :
                     DataSource.medicinesArrayList) {
@@ -85,10 +86,9 @@ public class FXMLDocumentControllerAddPatient {
             System.out.println("Exception:(initialize) " + e.getMessage());
         }
         try{
-
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            dataSource.searchPat();
+            if(DataSource.patientArrayList.isEmpty())dataSource.searchPat();
             for (Patient patient : DataSource.patientArrayList) {
                 searchList.getItems().add(patient);
                 System.out.println(patient.getPat_name());
@@ -114,7 +114,7 @@ public class FXMLDocumentControllerAddPatient {
         try{
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
             PatientName.setText(selectedItemsPatient.getPat_name());
-            patAdd.setText(selectedItemsPatient.getPat_add());
+            patAdd.setText(selectedItemsPatient.getPat_num());
             patAge.setText("" + selectedItemsPatient.getPat_age());
             String gender = selectedItemsPatient.getPat_gender();
             if(gender.equals("m")){
@@ -152,7 +152,7 @@ public class FXMLDocumentControllerAddPatient {
             }else {
                 Patient newPat= new Patient();
                 newPat.setPat_name(PatientName.getText());
-                newPat.setPat_add(patAdd.getText());
+                newPat.setPat_num(patAdd.getText());
                 newPat.setPat_age(Integer.parseInt(patAge.getText()));
                 if(female.isSelected()) newPat.setPat_gender("f");
                 else if(male.isSelected()) newPat.setPat_gender("m");

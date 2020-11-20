@@ -7,7 +7,7 @@ public class Medicines  {
     private  String med_id;
     public   double med_price;
     private  String exp_date;
-    private  String quantity;
+    private  int quantity;
     private  String mfg_date;
     private  String company;
     private int quant;
@@ -36,7 +36,7 @@ public class Medicines  {
         this.exp_date = exp_date;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -65,7 +65,7 @@ public class Medicines  {
         return exp_date;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

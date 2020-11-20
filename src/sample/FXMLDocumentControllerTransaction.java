@@ -120,6 +120,7 @@ public class FXMLDocumentControllerTransaction {
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             if(DataSource.medicineHashMap.get(idMedName)>9) return;
+            if((dataSource.getMed(idMedName).getQuantity())<=(DataSource.medicineHashMap.get(idMedName)))return;
             totalCostValue += dataSource.getPrice(idMedName);
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);

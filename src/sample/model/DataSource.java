@@ -160,13 +160,14 @@ public class DataSource {
             preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
+                if(resultSet.getInt(UserData.DB_MED_QUANTITY)==0) continue;
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
                 medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
                 medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
-                medicines.setQuantity(resultSet.getString(UserData.DB_MED_QUANTITY));
+                medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
                 medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
                 medicinesArrayList.add(medicines);
             }
@@ -253,7 +254,7 @@ public class DataSource {
                 Patient patient = new Patient();
                 patient.setPat_name(resultSet.getString(UserData.DB_PAT_PAT_NAME));
                 patient.setPat_id(resultSet.getString(UserData.DB_PAT_PAT_ID));
-                patient.setPat_add(resultSet.getString(UserData.DB_PAT_ADD));
+                patient.setPat_num(resultSet.getString(UserData.DB_PAT_ADD));
                 patient.setPat_age(resultSet.getInt(UserData.DB_PAT_AGE));
                 patient.setPemp_id(resultSet.getString(UserData.DB_PAT_PEMP_ID));
                 patient.setPat_gender(resultSet.getString(UserData.DB_PAT_GENDER));
@@ -270,8 +271,8 @@ public class DataSource {
         try {
             statement = conn.createStatement();
             String patId = generatePatID(newPat);
-            String sql = "Insert into patient(pat_add,pat_name,pat_age,pat_gender,pat_id) values('"
-                    + newPat.getPat_add() + "','" + newPat.getPat_name() + "'," + newPat.getPat_age() + ",'" + newPat.getPat_gender()
+            String sql = "Insert into patient(pat_num,pat_name,pat_age,pat_gender,pat_id) values('"
+                    + newPat.getPat_num() + "','" + newPat.getPat_name() + "'," + newPat.getPat_age() + ",'" + newPat.getPat_gender()
                     + "','" + patId + "');";
             System.out.println(sql);
             statement.execute(sql);
@@ -335,6 +336,8 @@ public class DataSource {
                             dtf.format(now) + "," + id + "," + selectedPatient.getPat_id() + "," + amount + ");");
                     statement.execute("Insert into med_in_bill values(" + id + "," + m.getMed_id() +
                             "," + medicineHashMap.get(m.getName()) + ")");
+                    int q = m.getQuant();
+                    m.setQuant(q - medicineHashMap.get(m.getName()));
                 }
             }
         }catch (SQLException e){
