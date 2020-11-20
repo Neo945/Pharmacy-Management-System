@@ -40,8 +40,8 @@ public class FXMLDocumentControllerTransaction {
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            dataSource.createMedicineList();
-            dataSource.addToHash();
+            if(DataSource.medicinesArrayList.isEmpty()) dataSource.createMedicineList();
+            if(DataSource.medicineHashMap.isEmpty()) dataSource.addToHash();
             for (Medicines m : DataSource.medicinesArrayList) {
                 BorderPane bp = new BorderPane();
                 HBox hbx = new HBox();

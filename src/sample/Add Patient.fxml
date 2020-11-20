@@ -15,25 +15,26 @@
                   <Font size="13.0" />
                </font>
             </CheckBox>
-            <Button layoutX="113.0" layoutY="406.0" mnemonicParsing="false" style="-fx-background-color: #6bc45a; -fx-background-radius: 15;" text="Generate Bill" textFill="WHITE" onAction="#generateBill">
+            <Button layoutX="113.0" layoutY="406.0" mnemonicParsing="false" onAction="#generateBill" style="-fx-background-color: #6bc45a; -fx-background-radius: 15;" text="Generate Bill" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="12.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 15; -fx-background-color: #d73a49;" text="Back" textFill="WHITE">
+            <Button layoutX="12.0" layoutY="406.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 15; -fx-background-color: #d73a49;" text="Back" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
+            <Label fx:id="robotLabel" layoutX="91.0" layoutY="375.0" />
          </children>
       </AnchorPane>
       <TextField fx:id="searchPatient" layoutX="188.0" layoutY="44.0" prefHeight="30.0" prefWidth="200.0" promptText="Search Patient" />
-      <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="44.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="84.0" style="-fx-background-color: #3792cb;" text="Search" textFill="WHITE" wrapText="true" onAction="#onSearchClick">
+      <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="402.0" layoutY="44.0" mnemonicParsing="false" onAction="#onSearchClick" prefHeight="28.0" prefWidth="84.0" style="-fx-background-color: #3792cb;" text="Search" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Verdana" size="14.0" />
          </font>
       </Button>
-      <ListView fx:id="searchList" layoutX="188.0" layoutY="96.0" prefHeight="81.0" prefWidth="298.0" onMouseClicked="#fillData"/>
+      <ListView fx:id="searchList" layoutX="188.0" layoutY="96.0" onMouseClicked="#fillData" prefHeight="81.0" prefWidth="298.0" />
       <AnchorPane layoutX="188.0" layoutY="220.0" prefHeight="253.0" prefWidth="298.0" style="-fx-border-color: black;">
          <children>
             <TextField fx:id="PatientName" layoutX="33.0" layoutY="32.0" promptText="Name" />
@@ -45,7 +46,7 @@
                   <ToggleGroup fx:id="genderToggle" />
                </toggleGroup></RadioButton>
             <RadioButton fx:id="female" layoutX="121.0" layoutY="176.0" mnemonicParsing="false" text="Female" toggleGroup="$genderToggle" />
-            <RadioButton layoutX="64.0" layoutY="209.0" mnemonicParsing="false" text="Others" toggleGroup="$genderToggle" fx:id="others"/>
+            <RadioButton fx:id="others" layoutX="64.0" layoutY="209.0" mnemonicParsing="false" text="Others" toggleGroup="$genderToggle" />
          </children>
       </AnchorPane>
    </children>

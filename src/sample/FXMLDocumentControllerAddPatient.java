@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -54,6 +56,8 @@ public class FXMLDocumentControllerAddPatient {
     private RadioButton female;
     @FXML
     private RadioButton others;
+    @FXML
+    private Label robotLabel;
     private double sum = 0;
     private Patient patient;
     public void initialize(){
@@ -131,8 +135,13 @@ public class FXMLDocumentControllerAddPatient {
             System.out.println("Exception:(fillData) " + e.getMessage());
         }
     }
-    public void generateBill(ActionEvent actionEvent) throws IOException {
-//        try{
+    public void generateBill(ActionEvent actionEvent) {
+        try{
+            if(!robotCheck.isSelected()){
+                robotLabel.setText("*Required");
+                robotLabel.setTextFill(Color.RED);
+                return;
+            }
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
@@ -155,9 +164,20 @@ public class FXMLDocumentControllerAddPatient {
             primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
-//        }catch (Exception e){
-//            System.out.println("Exception:(generateBill) " + Arrays.toString(e.getStackTrace()));
-//        }
+        }catch (Exception e){
+            System.out.println("Exception:(generateBill) " + Arrays.toString(e.getStackTrace()));
+        }
+    }
+    public void onBackClicked(ActionEvent actionEvent){
+        try {
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("Transaction.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (Exception e){
+            System.out.println("Exception:(onBackClicked) " + e.getMessage());
+        }
     }
 //
 }
