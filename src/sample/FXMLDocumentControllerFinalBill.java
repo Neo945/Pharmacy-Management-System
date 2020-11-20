@@ -19,6 +19,8 @@ public class FXMLDocumentControllerFinalBill {
     private TableColumn<Medicines,String> name;
     @FXML
     private TableColumn<Medicines,Double> med_price;
+    @FXML
+    private TableColumn<Medicines,Integer> quant;
 //    private final
     @FXML
     private Button save;
@@ -30,10 +32,14 @@ public class FXMLDocumentControllerFinalBill {
         ObservableList<Medicines> list = FXCollections.observableArrayList();
         for (Medicines m :
                 DataSource.medicinesArrayList) {
-            if(DataSource.medicineHashMap.get(m.getName())>0) list.add(m);
+            if(DataSource.medicineHashMap.get(m.getName())>0) {
+                m.setQuant(DataSource.medicineHashMap.get(m.getName()));
+                list.add(m);
+            }
         }
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         med_price.setCellValueFactory(new PropertyValueFactory<>("med_price"));
+        quant.setCellValueFactory(new PropertyValueFactory<>("quant"));
         medicinesTableView.setItems(list);
 //        medicinesTableView.getColumns().addAll(name,med_price);
     }

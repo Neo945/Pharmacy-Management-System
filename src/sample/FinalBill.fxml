@@ -16,10 +16,11 @@
       </Button>
       <AnchorPane layoutX="199.0" layoutY="84.0" prefHeight="382.0" prefWidth="494.0">
          <children>
-            <TableView fx:id="medicinesTableView" layoutX="47.0" layoutY="73.0" prefHeight="286.0" prefWidth="400.0">
+            <TableView fx:id="medicinesTableView" layoutY="75.0" prefHeight="286.0" prefWidth="479.0">
               <columns>
-                <TableColumn fx:id="name" prefWidth="200.0" text="name" />
-                <TableColumn fx:id="med_price" prefWidth="199.0" text="med_price" />
+                <TableColumn fx:id="name" prefWidth="222.1999969482422" text="name" />
+                  <TableColumn prefWidth="91.39996337890625" text="quant" fx:id="quant"/>
+                <TableColumn fx:id="med_price" prefWidth="162.5999755859375" text="med_price" />
               </columns>
                <opaqueInsets>
                   <Insets bottom="2.0" left="2.0" right="1.0" top="1.0" />

@@ -10,6 +10,15 @@ public class Medicines  {
     private  String quantity;
     private  String mfg_date;
     private  String company;
+    private int quant;
+
+    public int getQuant() {
+        return quant;
+    }
+
+    public void setQuant(int quant) {
+        this.quant = quant;
+    }
 
     public void setName(String name) {
         this.name = name;

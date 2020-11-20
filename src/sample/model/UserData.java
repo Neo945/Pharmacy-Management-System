@@ -1,6 +1,6 @@
 package sample.model;
 
-import java.security.PublicKey;
+//import java.security.PublicKey;
 
 public class UserData {
 
