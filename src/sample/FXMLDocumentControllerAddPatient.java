@@ -77,6 +77,7 @@ public class FXMLDocumentControllerAddPatient {
             BorderPane bp = new BorderPane();
             bp.setLeft(new Label("Total"));
             Label labsum = new Label(indiaCurrency.getSymbol() + " " + sum);
+            DataSource.amount = sum;
             labsum.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
             bp.setRight(labsum);
             medList.getItems().add(bp);

@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -11,6 +12,7 @@ import sample.model.DataSource;
 import sample.model.Medicines;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FXMLDocumentControllerFinalBill {
     @FXML
@@ -26,7 +28,7 @@ public class FXMLDocumentControllerFinalBill {
     private Button save;
     @FXML
     private Button print;
-
+//    private HashMap<Medicines,>
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
         ObservableList<Medicines> list = FXCollections.observableArrayList();
@@ -44,4 +46,14 @@ public class FXMLDocumentControllerFinalBill {
 //        medicinesTableView.getColumns().addAll(name,med_price);
     }
 //    public onSave
+    public void onSaveClicked(ActionEvent actionEvent){
+        try {
+            DataSource dataSource = new DataSource();
+            dataSource.connectionOpen();
+            dataSource.addToBill();
+            dataSource.connectionClose();
+        }catch (Exception e){
+            System.out.println("Exception:(onSaveClicked) " + e.getMessage());
+        }
+    }
 }

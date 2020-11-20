@@ -2,6 +2,8 @@ package sample.model;
 
 import java.net.UnknownServiceException;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.Attributes;
@@ -39,6 +41,7 @@ public class DataSource {
     // "Name2":value;
     // }
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
+    public static double amount;
 
     public boolean connectionOpen() {
         try {
@@ -308,26 +311,54 @@ public class DataSource {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    /**
+     * create table bill(
+     * bill_date date not null,
+     * bill_id char(6) primary key check(bill_id like 'B%'),
+     * pat_id char(6),
+     * foreign key(pat_id) references patient(pat_id),
+     * bill_amount decimal(5,2) not null
+     * );
+     */
+    public void addToBill(){
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+//            System.out.println(dtf.format(now));
+            statement = conn.createStatement();
+            for (Medicines m :
+                    DataSource.medicinesArrayList) {
+                if(DataSource.medicineHashMap.get(m.getName())>0) {
+//                    m.setQuant(DataSource.medicineHashMap.get(m.getName()));
+                    String id = getBillId();
+                    statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(" +
+                            dtf.format(now) + "," + id + "," + selectedPatient.getPat_id() + "," + amount + ");");
+                    statement.execute("Insert into med_in_bill values(" + id + "," + m.getMed_id() +
+                            "," + medicineHashMap.get(m.getName()) + ")");
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Exception:(addToBill) " + e.getMessage());
+        }
+    }
+        private String getBillId(){
+            try{
+                statement = conn.createStatement();
+                ResultSet result = statement.executeQuery("Select max(bill_id) from bill;");
+                result.next();
+                String emp = result.getString("max(bill_id)");
+                System.out.println(emp);
+                if(emp==null){
+                    emp = "B0";
+                }
+                String[] val = emp.split("B");//{0112}
+                int emp_id = Integer.parseInt(val[1]);
+                emp_id++;
+                emp = "B" + emp_id;
+                return emp;
+            }catch (SQLException e){
+                System.out.println("Exception: (getEmpId)"  + e);
+            }
+            return null;
+        }
+    }
