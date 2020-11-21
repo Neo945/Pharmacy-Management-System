@@ -180,42 +180,6 @@ public class DataSource {
     }//done
 
 
-    public double getPrice(String name){
-        try{
-            return  MedNameHashMap.get(name).getMed_price();
-        }catch (Exception e){
-            System.out.println("Exception:(getPrice) "  + e);
-            return 0;
-        }
-    }
-
-    public double getPriceInList(String name){
-        try{
-            for (Medicines m :
-                    medicinesArrayList) {
-                if(m.getName().equals(name)) return m.getMed_price();
-            }
-            return -1;
-        }catch (Exception e){
-            System.out.println("Exception:(getPrice) "  + e);
-            return -1;
-        }
-    }//done
-
-    public boolean decrementQuant(String name) {
-        try{
-            preparedStatement = conn.prepareStatement("UPDATE " + UserData.DB_MED_NAME +
-                    " SET " + UserData.DB_MED_QUANTITY + " = " + UserData.DB_MED_QUANTITY + " - "  +
-                    medicineHashMap.get(name) + " WHERE "
-                    + UserData.DB_MED_MED_NAME + " = ?");
-            preparedStatement.setString(1, name);
-            preparedStatement.execute();
-            return true;
-        }catch (SQLException e){
-            System.out.println("Exception:(decrementQuant) " + e.getMessage());
-            return false;
-        }
-    }//done
 
     public Medicines getMed(String name)  {
         try{
@@ -293,27 +257,6 @@ public class DataSource {
         return null;
     }
 
-
-//    public void addToHash(){
-//        try{
-//            for (Medicines m :
-//                    medicinesArrayList) {
-//                medicineHashMap.put(m.getName(),0);
-//            }
-//        }catch (Exception e){
-//            System.out.println("Exception:(addToHash) " + e.getMessage());
-//        }
-//    }
-
-    /**
-     * create table bill(
-     * bill_date date not null,
-     * bill_id char(6) primary key check(bill_id like 'B%'),
-     * pat_id char(6),
-     * foreign key(pat_id) references patient(pat_id),
-     * bill_amount decimal(5,2) not null
-     * );
-     */
     public void addToBill(){
         try{
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
