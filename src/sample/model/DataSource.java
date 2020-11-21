@@ -257,13 +257,15 @@ public class DataSource {
             LocalDateTime now = LocalDateTime.now();
             statement = conn.createStatement();
             String id = getBillId();
-            statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(" +
-                    dtf.format(now) + "," + id + "," + selectedPatient.getPat_id() + "," + amount + ");");
+            statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
+                    dtf.format(now) + "','" + id + "','" + selectedPatient.getPat_id() + "'," + amount + ");");
             MedNameHashMap.forEach((k,v)->{
                 if(v.getQuantity()>0){
                     try {
-                        statement.execute("Insert into med_in_bill values(" + id + "," + v.getMed_id() +
-                                "," + v.getQuant() + ")");
+                        statement.execute("Insert into med_in_bill values('" + id + "','" + v.getMed_id() +
+                                "'," + v.getQuant() + ");");
+                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + ";");
+                        v.setQuantity(v.getQuantity()-v.getQuant());
                     } catch (SQLException sqlException) {
                         sqlException.printStackTrace();
                     }

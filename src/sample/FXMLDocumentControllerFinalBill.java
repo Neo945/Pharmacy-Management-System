@@ -55,6 +55,7 @@ public class FXMLDocumentControllerFinalBill {
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             dataSource.addToBill();
+//            dataSource.decrement();
             dataSource.connectionClose();
         }catch (Exception e){
             System.out.println("Exception:(onSaveClicked) " + e.getMessage());
