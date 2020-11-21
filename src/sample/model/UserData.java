@@ -1,6 +1,6 @@
 package sample.model;
 
-import java.security.PublicKey;
+//import java.security.PublicKey;
 
 public class UserData {
 
@@ -26,7 +26,7 @@ public class UserData {
     public static final String DB_PAT_NAME = "patient";
     public static final String DB_PAT_PAT_ID = "pat_id";
     public static final String DB_PAT_PAT_NAME = "pat_name";
-    public static final String DB_PAT_ADD = "pat_add";
+    public static final String DB_PAT_ADD = "pat_num";
     public static final String DB_PAT_AGE = "pat_age";
     public static final String DB_PAT_GENDER = "pat_gender";
     public static final String DB_PAT_PEMP_ID = "pemp_id";
