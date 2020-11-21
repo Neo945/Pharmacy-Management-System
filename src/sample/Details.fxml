@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Details">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #151515;" />
+        <Button layoutX="630.0" layoutY="531.0" mnemonicParsing="false" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Back" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
+        <Label layoutX="204.0" layoutY="383.0" text="Address">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="202.0" layoutY="214.0" text="Mobile No.">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="204.0" layoutY="149.0" text="Name">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Label>
+        <Line endX="-100.0" endY="323.0" layoutX="501.0" layoutY="134.0" opacity="0.3" startX="-100.0" />
+        <Label layoutX="202.0" layoutY="278.0" text="Email ID">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="164.0" layoutY="34.0" prefHeight="45.0" prefWidth="236.0" text="Personal Information">
+            <font>
+                <Font name="Verdana" size="20.0" />
+            </font>
+        </Label>
+        <Line endX="500.0" layoutX="250.0" layoutY="115.0" opacity="0.3" startX="-100.0" />
+        <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" />
+      <Label alignment="TOP_CENTER" layoutX="480.0" layoutY="148.0" prefHeight="19.0" prefWidth="150.0" text="Name" />
+      <Label alignment="TOP_CENTER" layoutX="480.0" layoutY="213.0" prefHeight="19.0" prefWidth="150.0" text="Label" />
+      <Label alignment="TOP_CENTER" layoutX="480.0" layoutY="288.0" prefHeight="18.0" prefWidth="150.0" text="Label" />
+      <Label alignment="TOP_CENTER" layoutX="480.0" layoutY="383.0" prefHeight="64.0" prefWidth="150.0" text="Label" />
+    </children>
+</AnchorPane>
