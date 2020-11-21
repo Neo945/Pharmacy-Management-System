@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerHomePage">
    <children>
       <ImageView fitHeight="600.0" fitWidth="750.0">
          <image>
@@ -58,12 +58,12 @@
             <Accordion prefHeight="40.0" prefWidth="84.0" />
             <ImageView accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/SettingsIcon.png" />
+                  <Image url="@../Images/SettingsIcon.png" />
                </image>
             </ImageView>
             <ImageView accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT">
                <image>
-                  <Image url="@../../../../../Downloads/NotificationImage.png" />
+                  <Image url="@../Images/NotificationImage.png" />
                </image>
             </ImageView>
          </children>

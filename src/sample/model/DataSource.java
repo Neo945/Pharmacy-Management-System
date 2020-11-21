@@ -31,10 +31,11 @@ public class DataSource {
                                             + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
     public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
 
-    public static Object loginBoy;
+    public static Employee loginBoy;
     public static Patient selectedPatient;
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
     public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
+    public static ArrayList<Employee> employees = new ArrayList<>();
     public static double amount;
 
     public boolean connectionOpen() {
@@ -57,7 +58,31 @@ public class DataSource {
 
 
 
-
+    public void createEmployeeList(){
+        try {
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select * from employee;");
+            while (resultSet.next()){
+                Employee employee = new Employee();
+                employee.setEmp_pass(resultSet.getString("emp_pass"));
+                employee.setEmp_role(resultSet.getString("emp_role"));
+                employee.setEmp_id(resultSet.getString("emp_id"));
+                employee.setEmp_add(resultSet.getString("emp_add"));
+                employee.setEmail(resultSet.getString("emp_mail"));
+                employee.setEmp_name(resultSet.getString("emp_name"));
+                employees.add(employee);
+            }
+        }catch (SQLException e){
+            System.out.println("Exception:(createEmployeeList) " + e.getMessage());
+        }
+    }
+    public Employee searchEmp(String email){
+        for (Employee e:
+             employees) {
+            if(e.getEmail().equals(email)) return e;
+        }
+        return null;
+    }
 
     public void Registration(Employee employee){
         try{
@@ -67,12 +92,13 @@ public class DataSource {
             preparedStatement.setString(1,emp);
             preparedStatement.setString(2,employee.getEmp_name());
             preparedStatement.setString(3,employee.getEmail());
-            preparedStatement.setString(4,employee.getEmp_pass());
+//            preparedStatement.setString(4,employee.getEmp_pass());
             preparedStatement.setString(5,employee.getEmp_add());
             preparedStatement.setString(6,employee.getEmp_role());
             preparedStatement.execute();
             addRole(employee.getEmp_role(),emp);
             addContact(employee);
+            employees.add(employee);
         }catch (SQLException e){
             System.out.println("Exception: (Registration)" + e);
         }
