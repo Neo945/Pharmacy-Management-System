@@ -19,8 +19,8 @@ public class Employee {
         return contact;
     }
 
-    public void setContact(ArrayList<String> contact) {
-        this.contact = contact;
+    public void setContact(String contact) {
+        this.contact.add(contact);
     }
 
     public String getEmp_id() {

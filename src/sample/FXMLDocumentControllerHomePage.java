@@ -18,9 +18,9 @@ import java.io.IOException;
 
 public class FXMLDocumentControllerHomePage {
     @FXML
-    private Label name;
+    public Label name;
     @FXML
-    private Label email;
+    public Label email;
 //    @FXML
 //    private Button setting;
 //    @FXML

@@ -8,29 +8,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 
-public class Details {
+public class FXMLDocumentControllerSetting {
     @FXML
-    private Label name;
+    private TextField name;
     @FXML
-    private Label email;
+    private TextField email;
     @FXML
-    private Label address;
+    private TextField address;
     @FXML
-    private Label number;
+    private TextField number;
     @FXML
     private Button back;
-    public void initialize(){
-        try{
-            name.setText(DataSource.loginBoy.getEmp_name());
-            email.setText(DataSource.loginBoy.getEmail());
-            address.setText(DataSource.loginBoy.getEmp_add());
-            number.setText(DataSource.loginBoy.getContact().get(0));
-        }catch (Exception e){
-            System.out.println("Exception:" + e.getMessage());
-        }
+    @FXML
+    private Button save;
+    public void onSaveClicked(){
+        if(email.getText()!=null)DataSource.loginBoy.setEmail(email.getText());
+        if(address.getText()!=null)DataSource.loginBoy.setEmp_add(address.getText());
+        if(number.getText()!=null)DataSource.loginBoy.setContact(number.getText());
+        DataSource dataSource = new DataSource();
+        dataSource.connectionOpen();
+//        dataSource.updateValue();
+        dataSource.connectionClose();
     }
     public void onBackClicked(ActionEvent actionEvent){
         try {
