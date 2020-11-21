@@ -9,16 +9,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class FXMLDocumentControllerFinalBill {
     @FXML
@@ -34,7 +39,8 @@ public class FXMLDocumentControllerFinalBill {
     private Button save;
     @FXML
     private Button print;
-//    private HashMap<Medicines,>
+    @FXML
+    private Label price;
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
         ObservableList<Medicines> list = FXCollections.observableArrayList();
@@ -47,6 +53,10 @@ public class FXMLDocumentControllerFinalBill {
         med_price.setCellValueFactory(new PropertyValueFactory<>("med_price"));
         quant.setCellValueFactory(new PropertyValueFactory<>("quant"));
         medicinesTableView.setItems(list);
+        Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
+        price.setText("Total - " + indiaCurrency.getSymbol() + " " + (DataSource.amount));
+        price.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+
 //        medicinesTableView.getColumns().addAll(name,med_price);
     }
 //    public onSave

@@ -116,16 +116,11 @@ public class FXMLDocumentControllerTransaction {
             String idMedName = actionEvent.getSource().toString().split("=")[1].split(",")[0].split("p")[0];
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.MedNameHashMap.get(idMedName).getQuant()>9) return;
-//            if((dataSource.getMed(idMedName).getQuantity())<=(DataSource.medicineHashMap.get(idMedName)))return;
-            if((DataSource.MedNameHashMap.get(idMedName).getQuantity())<=(DataSource.MedNameHashMap.get(idMedName).getQuant()))return;
+            if(DataSource.MedNameHashMap.get(idMedName).getQuant()>8) return;
+            if((DataSource.MedNameHashMap.get(idMedName).getQuantity())<(DataSource.MedNameHashMap.get(idMedName).getQuant()))return;
             totalCostValue += DataSource.MedNameHashMap.get(idMedName).getMed_price();
-//            totalCostValue += dataSource.getPrice(idMedName);
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
-//            dataSource.decrementQuant(idMedName);
-//            list.add(dataSource.getMed(idMedName));
-            if(DataSource.MedNameHashMap.get(idMedName).getQuant()>8) return;
             int count = DataSource.MedNameHashMap.get(idMedName).getQuant();
             DataSource.MedNameHashMap.get(idMedName).setQuant(count+1);
             for(int i = 0;i<MedicineList.getItems().size();i++){
