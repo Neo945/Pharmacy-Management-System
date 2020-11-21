@@ -9,33 +9,51 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #000000;" />
-      <Button layoutX="375.0" layoutY="532.0" mnemonicParsing="false" style="-fx-background-color: #ff605c;" text="Cancel" textFill="WHITE" />
-      <Button layoutX="455.0" layoutY="532.0" mnemonicParsing="false" style="-fx-background-color: #00ca4e;" text="Save Changes" textFill="WHITE" />
-      <TextField layoutX="471.0" layoutY="74.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField layoutX="471.0" layoutY="148.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField layoutX="471.0" layoutY="327.0" prefHeight="95.0" prefWidth="250.0" />
-      <Label layoutX="215.0" layoutY="366.0" text="Address">
+      <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #151515;" />
+      <Button layoutX="369.0" layoutY="535.0" mnemonicParsing="false" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Cancel" textFill="WHITE">
          <font>
-            <Font name="Verdana" size="14.0" />
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="449.0" layoutY="535.0" mnemonicParsing="false" style="-fx-background-color: #00ca4e; -fx-background-radius: 15; -fx-border-radius: 15;" text="Save Changes" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <TextField layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField layoutX="471.0" layoutY="211.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField layoutX="471.0" layoutY="345.0" prefHeight="95.0" prefWidth="250.0" />
+      <Label layoutX="204.0" layoutY="383.0" text="Address">
+         <font>
+            <Font name="Verdana" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="212.0" layoutY="152.0" text="Mobile No.">
+      <Label layoutX="202.0" layoutY="214.0" text="Mobile No.">
          <font>
-            <Font name="Verdana" size="14.0" />
+            <Font name="Verdana" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="212.0" layoutY="78.0" text="Name">
+      <Label layoutX="204.0" layoutY="149.0" text="Name">
          <font>
-            <Font name="Verdana" size="14.0" />
+            <Font name="Verdana" size="15.0" />
          </font>
       </Label>
-      <Line endX="-100.0" endY="366.0" layoutX="501.0" layoutY="62.0" opacity="0.3" startX="-100.0" />
-      <TextField layoutX="471.0" layoutY="233.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="212.0" layoutY="237.0" text="Email ID">
+      <Line endX="-100.0" endY="323.0" layoutX="501.0" layoutY="134.0" opacity="0.3" startX="-100.0" />
+      <TextField layoutX="471.0" layoutY="275.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="202.0" layoutY="278.0" text="Email ID">
          <font>
-            <Font name="Verdana" size="14.0" />
+            <Font name="Verdana" size="15.0" />
          </font>
       </Label>
+      <Label layoutX="176.0" layoutY="26.0" text="Settings">
+         <font>
+            <Font name="Arial Black" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="176.0" layoutY="86.0" text="Personal Information">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Line endX="500.0" layoutX="250.0" layoutY="115.0" opacity="0.3" startX="-100.0" />
+      <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" />
    </children>
 </AnchorPane>
