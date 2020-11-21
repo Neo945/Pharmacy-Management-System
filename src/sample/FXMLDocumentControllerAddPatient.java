@@ -64,17 +64,16 @@ public class FXMLDocumentControllerAddPatient {
         try{
             medList.getItems().clear();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
-            for (Medicines m :
-                    DataSource.medicinesArrayList) {
-                if(DataSource.medicineHashMap.get(m.getName())>0){
+            DataSource.MedNameHashMap.forEach((k,v)-> {
+                if(v.getQuant()>0){
                     BorderPane bp = new BorderPane();
-                    bp.setRight(new Label( indiaCurrency.getSymbol() + " " + m.getMed_price()));
-                    bp.setLeft(new Label(m.getName()));
-                    bp.setCenter(new Label("X " + DataSource.medicineHashMap.get(m.getName())));
-                    sum+=m.getMed_price()*DataSource.medicineHashMap.get(m.getName());
+                    bp.setRight(new Label( indiaCurrency.getSymbol() + " " + v.getMed_price()));
+                    bp.setLeft(new Label(k));
+                    bp.setCenter(new Label("X " + v.getQuant()));
+                    sum+=v.getMed_price()*v.getQuant();
                     medList.getItems().add(bp);
                 }
-            }
+            });
             BorderPane bp = new BorderPane();
             bp.setLeft(new Label("Total"));
             Label labsum = new Label(indiaCurrency.getSymbol() + " " + sum);
@@ -91,7 +90,6 @@ public class FXMLDocumentControllerAddPatient {
             if(DataSource.patientArrayList.isEmpty())dataSource.searchPat();
             for (Patient patient : DataSource.patientArrayList) {
                 searchList.getItems().add(patient);
-                System.out.println(patient.getPat_name());
             }
             dataSource.connectionClose();
         }catch (Exception e){
