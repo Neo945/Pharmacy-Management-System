@@ -1,12 +1,11 @@
 package sample.model;
 
-import java.net.UnknownServiceException;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.jar.Attributes;
 
 
 public class DataSource {
@@ -221,7 +220,8 @@ public class DataSource {
     public void addPatient(Patient newPat, String pharma){
         try {
             statement = conn.createStatement();
-            String patId = generatePatID(newPat);
+            String patId = generatePatID();
+            newPat.setPat_id(patId);
             String sql = "Insert into patient(pat_num,pat_name,pat_age,pat_gender,pat_id) values('"
                     + newPat.getPat_num() + "','" + newPat.getPat_name() + "'," + newPat.getPat_age() + ",'" + newPat.getPat_gender()
                     + "','" + patId + "');";
@@ -231,7 +231,7 @@ public class DataSource {
             System.out.println("Exception:(addPatient) " + e.getMessage());
         }
     }//done
-    public String generatePatID(Patient pat){
+    public String generatePatID(){
         try{
             statement = conn.createStatement();
             ResultSet result = statement.executeQuery("select max(pat_id) from patient;");
@@ -257,17 +257,20 @@ public class DataSource {
             LocalDateTime now = LocalDateTime.now();
             statement = conn.createStatement();
             String id = getBillId();
-            statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
-                    dtf.format(now) + "','" + id + "','" + selectedPatient.getPat_id() + "'," + amount + ");");
+//            selectedPatient.setPat_id();
+            String query = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
+                    dtf.format(now) + "','" + id + "','" + selectedPatient.getPat_id() + "'," + amount + ");";
+            System.out.println(query);
+            statement.execute(query);
             MedNameHashMap.forEach((k,v)->{
                 if(v.getQuantity()>0){
                     try {
                         statement.execute("Insert into med_in_bill values('" + id + "','" + v.getMed_id() +
                                 "'," + v.getQuant() + ");");
-                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + ";");
+                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + " where med_id = '" + v.getMed_id() + "';");
                         v.setQuantity(v.getQuantity()-v.getQuant());
                     } catch (SQLException sqlException) {
-                        sqlException.printStackTrace();
+                        System.out.println("Exception:(addToBill) " + sqlException.getMessage());
                     }
                 }
             });

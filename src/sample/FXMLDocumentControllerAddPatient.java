@@ -119,12 +119,6 @@ public class FXMLDocumentControllerAddPatient {
                 female.selectedProperty().set(true);
                 others.selectedProperty().set(false);
             }
-//            }else {
-//                male.selectedProperty().set(false);
-//                female.selectedProperty().set(false);
-//                others.selectedProperty().set(true);
-//            }
-//            patient = selectedItemsPatient;
         }catch (Exception e){
             System.out.println("Exception:(fillData) " + e.getMessage());
         }

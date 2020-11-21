@@ -33,7 +33,7 @@ public class Patient {
         return pat_num;
     }
 
-    public void setPat_num(String pat_add) {
+    public void setPat_num(String pat_num) {
         this.pat_num = pat_num;
     }
 
