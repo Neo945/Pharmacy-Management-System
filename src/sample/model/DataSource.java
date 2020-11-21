@@ -41,6 +41,7 @@ public class DataSource {
     // "Name2":value;
     // }
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
+    public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
     public static double amount;
 
     public boolean connectionOpen() {
@@ -169,7 +170,7 @@ public class DataSource {
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
                 medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
                 medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
-                medicinesArrayList.add(medicines);
+                MedNameHashMap.put(medicines.getName(),medicines);
             }
             resultSet.close();
             preparedStatement.close();
@@ -179,14 +180,10 @@ public class DataSource {
     }//done
 
 
-    public int getPrice(String name){
+    public double getPrice(String name){
         try{
-            preparedStatement = conn.prepareStatement(getPriceSQL);
-            preparedStatement.setString(1,name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            return  resultSet.getInt("med_price");
-        }catch (SQLException e){
+            return  MedNameHashMap.get(name).getMed_price();
+        }catch (Exception e){
             System.out.println("Exception:(getPrice) "  + e);
             return 0;
         }
@@ -222,11 +219,7 @@ public class DataSource {
 
     public Medicines getMed(String name)  {
         try{
-            for (Medicines m :
-                    medicinesArrayList) {
-                if(m.getName().equals(name)) return m;
-            }
-            return null;
+            return MedNameHashMap.get(name);
         }catch (Exception e){
             System.out.println("Exception:(getMed) " + e.getMessage());
             return null;
@@ -301,16 +294,16 @@ public class DataSource {
     }
 
 
-    public void addToHash(){
-        try{
-            for (Medicines m :
-                    medicinesArrayList) {
-                medicineHashMap.put(m.getName(),0);
-            }
-        }catch (Exception e){
-            System.out.println("Exception:(addToHash) " + e.getMessage());
-        }
-    }
+//    public void addToHash(){
+//        try{
+//            for (Medicines m :
+//                    medicinesArrayList) {
+//                medicineHashMap.put(m.getName(),0);
+//            }
+//        }catch (Exception e){
+//            System.out.println("Exception:(addToHash) " + e.getMessage());
+//        }
+//    }
 
     /**
      * create table bill(
@@ -325,21 +318,20 @@ public class DataSource {
         try{
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
-//            System.out.println(dtf.format(now));
             statement = conn.createStatement();
-            for (Medicines m :
-                    DataSource.medicinesArrayList) {
-                if(DataSource.medicineHashMap.get(m.getName())>0) {
-//                    m.setQuant(DataSource.medicineHashMap.get(m.getName()));
-                    String id = getBillId();
-                    statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(" +
-                            dtf.format(now) + "," + id + "," + selectedPatient.getPat_id() + "," + amount + ");");
-                    statement.execute("Insert into med_in_bill values(" + id + "," + m.getMed_id() +
-                            "," + medicineHashMap.get(m.getName()) + ")");
-                    int q = m.getQuant();
-                    m.setQuant(q - medicineHashMap.get(m.getName()));
+            String id = getBillId();
+            statement.execute("Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(" +
+                    dtf.format(now) + "," + id + "," + selectedPatient.getPat_id() + "," + amount + ");");
+            MedNameHashMap.forEach((k,v)->{
+                if(v.getQuantity()>0){
+                    try {
+                        statement.execute("Insert into med_in_bill values(" + id + "," + v.getMed_id() +
+                                "," + v.getQuant() + ")");
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
                 }
-            }
+            });
         }catch (SQLException e){
             System.out.println("Exception:(addToBill) " + e.getMessage());
         }
