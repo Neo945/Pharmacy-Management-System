@@ -11,18 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import sample.model.DataSource;
-import sample.model.Medicines;
 import sample.model.Patient;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
@@ -30,8 +25,8 @@ import java.util.Locale;
 public class FXMLDocumentControllerAddPatient {
     @FXML
     private TextField searchPatient;
-    @FXML
-    private Button searchButton;
+//    @FXML
+//    private Button searchButton;
     @FXML
     private ListView<Patient> searchList;
     @FXML
@@ -40,16 +35,16 @@ public class FXMLDocumentControllerAddPatient {
     private TextField patAdd;
     @FXML
     private TextField patAge;
-    @FXML
-    private ToggleGroup genderToggle;
+//    @FXML
+//    private ToggleGroup genderToggle;
     @FXML
     private ListView<BorderPane> medList;
     @FXML
     private CheckBox robotCheck;
-    @FXML
-    private Button back;
-    @FXML
-    private Button generateBill;
+//    @FXML
+//    private Button back;
+//    @FXML
+//    private Button generateBill;
     @FXML
     private RadioButton male;
     @FXML
@@ -59,7 +54,7 @@ public class FXMLDocumentControllerAddPatient {
     @FXML
     private Label robotLabel;
     private double sum = 0;
-    private Patient patient;
+//    private Patient patient;
     public void initialize(){
         try{
             medList.getItems().clear();

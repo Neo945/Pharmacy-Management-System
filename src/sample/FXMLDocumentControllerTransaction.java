@@ -14,10 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import sample.model.DataSource;
-import sample.model.Medicines;
 
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class FXMLDocumentControllerTransaction {

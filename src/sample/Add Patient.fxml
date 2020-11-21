@@ -38,7 +38,7 @@
       <AnchorPane layoutX="188.0" layoutY="220.0" prefHeight="253.0" prefWidth="298.0" style="-fx-border-color: black;">
          <children>
             <TextField fx:id="PatientName" layoutX="33.0" layoutY="32.0" promptText="Name" />
-            <TextField fx:id="patAdd" layoutX="33.0" layoutY="83.0" promptText="Address" />
+            <TextField fx:id="patAdd" layoutX="33.0" layoutY="83.0" promptText="Number" />
             <TextField fx:id="patAge" layoutX="33.0" layoutY="127.0" promptText="Age" />
 
             <RadioButton fx:id="male" layoutX="33.0" layoutY="176.0" mnemonicParsing="false" text="Male">

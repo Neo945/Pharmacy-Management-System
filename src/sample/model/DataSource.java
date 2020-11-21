@@ -31,15 +31,9 @@ public class DataSource {
     public static final String getPriceSQL = "SELECT " + UserData.DB_MED_PRICE + " FROM " + UserData.DB_MED_NAME
                                             + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
     public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
-//    public static ArrayList<Medicines> val = new ArrayList<>();
+
     public static Object loginBoy;
     public static Patient selectedPatient;
-    public static ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
-    public static HashMap<String,Integer> medicineHashMap = new HashMap<>();
-    //{
-    // "Name":value;
-    // "Name2":value;
-    // }
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
     public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
     public static double amount;

@@ -38,13 +38,11 @@ public class FXMLDocumentControllerFinalBill {
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
         ObservableList<Medicines> list = FXCollections.observableArrayList();
-        for (Medicines m :
-                DataSource.medicinesArrayList) {
-            if(DataSource.medicineHashMap.get(m.getName())>0) {
-                m.setQuant(DataSource.medicineHashMap.get(m.getName()));
-                list.add(m);
+        DataSource.MedNameHashMap.forEach((k,v)-> {
+            if(v.getQuant()>0) {
+                list.add(v);
             }
-        }
+        });
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         med_price.setCellValueFactory(new PropertyValueFactory<>("med_price"));
         quant.setCellValueFactory(new PropertyValueFactory<>("quant"));
