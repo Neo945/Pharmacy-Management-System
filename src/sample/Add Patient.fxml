@@ -54,25 +54,29 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="12.0" layoutY="406.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 15; -fx-background-color: #d73a49;" text="Back" textFill="WHITE">
+            <Button layoutX="12.0" layoutY="406.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 15; -fx-background-color: #d73a49;" text="Back" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
+            <Label fx:id="robotLabel" layoutX="91.0" layoutY="375.0" />
          </children>
       </AnchorPane>
       <TextField fx:id="searchPatient" layoutX="187.0" layoutY="103.0" prefHeight="30.0" prefWidth="212.0" promptText="Search Patient" />
       <Button fx:id="searchButton" alignment="CENTER" contentDisplay="CENTER" layoutX="412.0" layoutY="103.0" mnemonicParsing="false" onAction="#onSearchClick" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #009ee2; -fx-background-radius: 15;" text="Search" textFill="WHITE" wrapText="true">
+
          <font>
             <Font name="Verdana" size="13.0" />
          </font>
       </Button>
+
       <ListView fx:id="searchList" layoutX="187.0" layoutY="155.0" onMouseClicked="#fillData" prefHeight="81.0" prefWidth="298.0" />
       <AnchorPane layoutX="187.0" layoutY="279.0" prefHeight="208.0" prefWidth="298.0" style="-fx-background-color: #ffffff; -fx-border-color: #bfbfbf;">
          <children>
             <TextField fx:id="PatientName" layoutX="26.0" layoutY="22.0" prefHeight="26.0" prefWidth="179.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
             <TextField fx:id="patAdd" layoutX="25.0" layoutY="70.0" prefHeight="26.0" prefWidth="251.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
             <TextField fx:id="patAge" layoutX="228.0" layoutY="22.0" prefHeight="26.0" prefWidth="48.0" promptText="Age" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
+
 
             <RadioButton fx:id="male" layoutX="26.0" layoutY="116.0" mnemonicParsing="false" text="Male">
                <toggleGroup>

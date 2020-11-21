@@ -3,7 +3,7 @@ package sample.model;
 public class Patient {
     private  String pat_id;
     private  String pat_name;
-    private  String pat_add;
+    private  String pat_num;
     private int pat_age;
     private  String pat_gender;
     private  String pemp_id;
@@ -29,12 +29,12 @@ public class Patient {
         this.pat_name = pat_name;
     }
 
-    public String getPat_add() {
-        return pat_add;
+    public String getPat_num() {
+        return pat_num;
     }
 
-    public void setPat_add(String pat_add) {
-        this.pat_add = pat_add;
+    public void setPat_num(String pat_num) {
+        this.pat_num = pat_num;
     }
 
     public int getPat_age() {
