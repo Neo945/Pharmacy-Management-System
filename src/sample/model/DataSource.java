@@ -340,6 +340,12 @@ public class DataSource {
                 statement.execute("Update employee set emp_add = '" +
                         loginBoy.getEmp_add() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
             }
+            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            resultSet.next();
+            if(!(resultSet.getString("emp_pass").equals(loginBoy.getEmp_pass()))){
+                statement.execute("Update employee set emp_pass = '" +
+                        loginBoy.getEmp_pass() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
             statement.execute("delete from employee_num where emp_id = '" + loginBoy.getEmp_id() + "';");
 //            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
 //            resultSet.next();
@@ -347,7 +353,6 @@ public class DataSource {
                     loginBoy.getContact()) {
                 statement.execute("insert into employee_num values('" + loginBoy.getEmp_id() + "','" + s + "');");
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }

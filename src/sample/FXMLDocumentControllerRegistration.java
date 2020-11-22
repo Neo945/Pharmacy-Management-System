@@ -72,8 +72,8 @@ public class FXMLDocumentControllerRegistration {
                 //get all the values and insert it into the database
                 Employee employee = new Employee();
                 employee.setEmp_name(this.name.getText());
-                employee.setEmail(this.emailID.getText());
-                employee.setEmp_add(this.address.getText());
+                employee.setEmail(this.emailID.getText().toLowerCase());
+                employee.setEmp_add(this.address.getText().toLowerCase());
                 String password = this.password.getText();
                 if(!password.equals(this.confirmPassword.getText())){
                     confirmPassLabel.setText("*Password not matched");
@@ -85,7 +85,7 @@ public class FXMLDocumentControllerRegistration {
                 String[] contArray = this.contact.getText().split(";");
 //                employee.getContact().addAll(Arrays.asList(contArray));
                 for (String s : contArray) {
-                    employee.getContact().add(s);
+                    employee.setContact(s);
                 }
                 employee.setEmp_role(this.combobox.getEditor().getText());
 //                Date date = new Date("");

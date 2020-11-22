@@ -38,7 +38,7 @@ public class FXMLDocumentControllerLogin {
             allField.setTextFill(Color.WHITE);
             try{
                 //get all the values and insert it into the database
-                String email_id = this.email_id.getText();
+                String email_id = this.email_id.getText().toLowerCase();
                 String password = this.password.getText();
                 DataSource dataSource = new DataSource();
                 dataSource.connectionOpen();

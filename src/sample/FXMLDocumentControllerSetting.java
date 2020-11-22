@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 
@@ -27,10 +29,24 @@ public class FXMLDocumentControllerSetting {
     private Button back;
     @FXML
     private Button save;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private PasswordField confirmPassword;
+    @FXML
+    private Label confirmPassLabel;
     public void onSaveClicked(ActionEvent actionEvent){
-        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText());
-        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText());
+        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText().toLowerCase());
+        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText().toLowerCase());
         if(!number.getText().isEmpty())DataSource.loginBoy.setContact(number.getText());
+        if(!password.getText().isEmpty()){
+            if(!password.getText().equals(this.confirmPassword.getText())){
+                confirmPassLabel.setText("*Password not matched");
+                confirmPassLabel.setTextFill(Color.RED);
+                return;
+            }
+            DataSource.loginBoy.setEmp_pass(number.getText());
+        }
         System.out.println(DataSource.loginBoy.getEmp_add());
         System.out.println(DataSource.loginBoy.getEmail());
         DataSource dataSource = new DataSource();

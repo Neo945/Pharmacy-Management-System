@@ -16,27 +16,27 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <TextField fx:id="name" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="number" layoutX="471.0" layoutY="211.0" prefHeight="25.0" prefWidth="250.0" />
+      <PasswordField fx:id="password" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="number" layoutX="471.0" layoutY="260.0" prefHeight="25.0" prefWidth="250.0" />
       <TextField fx:id="address" layoutX="471.0" layoutY="345.0" prefHeight="95.0" prefWidth="250.0" />
       <Label layoutX="204.0" layoutY="383.0" text="Address">
          <font>
             <Font name="Verdana" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="202.0" layoutY="214.0" text="Mobile No.">
+      <Label layoutX="200.0" layoutY="263.0" text="Mobile No.">
          <font>
             <Font name="Verdana" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="204.0" layoutY="149.0" text="Name">
+      <Label layoutX="204.0" layoutY="149.0" text="Password">
          <font>
             <Font name="Verdana" size="15.0" />
          </font>
       </Label>
       <Line endX="-100.0" endY="323.0" layoutX="501.0" layoutY="134.0" opacity="0.3" startX="-100.0" />
-      <TextField fx:id="email" layoutX="471.0" layoutY="275.0" prefHeight="25.0" prefWidth="250.0" />
-      <Label layoutX="202.0" layoutY="278.0" text="Email ID">
+      <TextField fx:id="email" layoutX="471.0" layoutY="300.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="202.0" layoutY="303.0" text="Email ID">
          <font>
             <Font name="Verdana" size="15.0" />
          </font>
@@ -53,5 +53,12 @@
       </Label>
       <Line endX="500.0" layoutX="250.0" layoutY="115.0" opacity="0.3" startX="-100.0" />
       <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" />
+      <PasswordField fx:id="confirmPassword" layoutX="471.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="199.0" layoutY="195.0" text="Confirm Password">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="confirmPassLabel" layoutX="471.0" layoutY="218.0" prefHeight="18.0" prefWidth="250.0" />
    </children>
 </AnchorPane>
