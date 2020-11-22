@@ -188,7 +188,7 @@ public class DataSource {
             preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                if(resultSet.getInt(UserData.DB_MED_QUANTITY)==0) continue;
+                if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
