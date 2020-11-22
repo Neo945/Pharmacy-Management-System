@@ -167,6 +167,16 @@ public class FXMLDocumentControllerTransaction {
         }catch (IOException exception){
             System.out.println("Exception: (onClickProceed)" + exception);
         }
-
+    }
+    public void onClickBack(ActionEvent actionEvent) {
+        try{
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (IOException exception){
+            System.out.println("Exception: (onClickProceed)" + exception);
+        }
     }
 }

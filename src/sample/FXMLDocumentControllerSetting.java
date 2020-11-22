@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 
+import java.io.IOException;
+
 public class FXMLDocumentControllerSetting {
     @FXML
     private TextField name;
@@ -25,14 +27,26 @@ public class FXMLDocumentControllerSetting {
     private Button back;
     @FXML
     private Button save;
-    public void onSaveClicked(){
-        if(email.getText()!=null)DataSource.loginBoy.setEmail(email.getText());
-        if(address.getText()!=null)DataSource.loginBoy.setEmp_add(address.getText());
-        if(number.getText()!=null)DataSource.loginBoy.setContact(number.getText());
+    public void onSaveClicked(ActionEvent actionEvent){
+        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText());
+        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText());
+        if(!number.getText().isEmpty())DataSource.loginBoy.setContact(number.getText());
+        System.out.println(DataSource.loginBoy.getEmp_add());
+        System.out.println(DataSource.loginBoy.getEmail());
         DataSource dataSource = new DataSource();
         dataSource.connectionOpen();
-//        dataSource.updateValue();
+        dataSource.updateValue();
         dataSource.connectionClose();
+        System.out.println("Changes saved");
+        try {
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
     public void onBackClicked(ActionEvent actionEvent){
         try {

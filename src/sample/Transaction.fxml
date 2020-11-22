@@ -29,7 +29,7 @@
                <font>
                   <Font name="Verdana" size="15.0" />
                </font></Label>
-            <Button fx:id="proceedButton1" layoutX="392.0" layoutY="45.0" mnemonicParsing="false" onAction="#onClickProceed" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="back" layoutX="392.0" layoutY="45.0" mnemonicParsing="false" onAction="#onClickBack" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>

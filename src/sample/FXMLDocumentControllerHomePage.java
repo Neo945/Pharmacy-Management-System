@@ -9,8 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 
@@ -21,10 +23,10 @@ public class FXMLDocumentControllerHomePage {
     public Label name;
     @FXML
     public Label email;
-//    @FXML
-//    private Button setting;
-//    @FXML
-//    private Button notify;
+    @FXML
+    private ImageView setting;
+    @FXML
+    private ImageView notify;
     @FXML
     private Button logout;
     @FXML
@@ -39,8 +41,10 @@ public class FXMLDocumentControllerHomePage {
         try{
             name.setText(DataSource.loginBoy.getEmp_name());
             name.setTextFill(Color.WHITE);
+            name.setTextAlignment(TextAlignment.CENTER);
             email.setText(DataSource.loginBoy.getEmail());
             email.setTextFill(Color.WHITE);
+            email.setTextAlignment(TextAlignment.CENTER);
             details.setText(DataSource.loginBoy.getEmp_role() + " Details");
             if(DataSource.loginBoy.getEmp_role().equals("Pharmacist")){
                 searchMed.setVisible(false);
@@ -91,7 +95,7 @@ public class FXMLDocumentControllerHomePage {
             Stage notifyStage = new Stage();
             BorderPane bp = new BorderPane();
             ListView<String> stringListView = new ListView<>();
-            stringListView.getItems().set(1,"");
+            stringListView.getItems().set(0,"");
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
             notifyStage.setScene(new Scene(bp,750, 600));

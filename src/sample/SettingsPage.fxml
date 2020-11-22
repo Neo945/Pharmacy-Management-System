@@ -8,11 +8,11 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerSetting">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #151515;" />
-      <Button fx:id="back" layoutX="369.0" layoutY="535.0" mnemonicParsing="false" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Cancel" textFill="WHITE">
+      <Button fx:id="back" layoutX="369.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Cancel" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="save" layoutX="449.0" layoutY="535.0" mnemonicParsing="false" style="-fx-background-color: #00ca4e; -fx-background-radius: 15; -fx-border-radius: 15;" text="Save Changes" textFill="WHITE">
+      <Button fx:id="save" layoutX="449.0" layoutY="535.0" mnemonicParsing="false" onAction="#onSaveClicked" style="-fx-background-color: #00ca4e; -fx-background-radius: 15; -fx-border-radius: 15;" text="Save Changes" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

@@ -68,7 +68,7 @@ public class DataSource {
                 employee.setEmp_role(resultSet.getString("emp_role"));
                 employee.setEmp_id(resultSet.getString("emp_id"));
                 employee.setEmp_add(resultSet.getString("emp_add"));
-                employee.setEmail(resultSet.getString("emp_mail"));
+                employee.setEmail(resultSet.getString("emp_email"));
                 employee.setEmp_name(resultSet.getString("emp_name"));
                 employees.add(employee);
             }
@@ -92,7 +92,7 @@ public class DataSource {
             preparedStatement.setString(1,emp);
             preparedStatement.setString(2,employee.getEmp_name());
             preparedStatement.setString(3,employee.getEmail());
-//            preparedStatement.setString(4,employee.getEmp_pass());
+            preparedStatement.setString(4,employee.getEmp_pass());
             preparedStatement.setString(5,employee.getEmp_add());
             preparedStatement.setString(6,employee.getEmp_role());
             preparedStatement.execute();
@@ -324,4 +324,32 @@ public class DataSource {
             }
             return null;
         }
+
+    public void updateValue() {
+        try{
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            resultSet.next();
+            if((!resultSet.getString("emp_email").equals(loginBoy.getEmail()))){
+                statement.execute("Update employee set emp_email = '" +
+                        loginBoy.getEmail() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
+            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            resultSet.next();
+            if(!(resultSet.getString("emp_add").equals(loginBoy.getEmp_add()))){
+                statement.execute("Update employee set emp_add = '" +
+                        loginBoy.getEmp_add() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
+            statement.execute("delete from employee_num where emp_id = '" + loginBoy.getEmp_id() + "';");
+//            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+//            resultSet.next();
+            for (String s :
+                    loginBoy.getContact()) {
+                statement.execute("insert into employee_num values('" + loginBoy.getEmp_id() + "','" + s + "');");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+}
