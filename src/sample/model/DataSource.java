@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 public class DataSource {
     public static ObservableList<Label> notificationList = FXCollections.observableArrayList();;
+    public static Medicines selectedMedicine;
     private Connection conn;
     private Statement statement;
     private PreparedStatement preparedStatement;
@@ -185,7 +186,7 @@ public class DataSource {
 
     public void createMedicineList(){
         try{
-            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.comp_id = medicine.comp_id;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;
@@ -196,7 +197,7 @@ public class DataSource {
                 medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
                 medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
-                medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
+                medicines.setCompany(resultSet.getString("comp_name"));
                 MedNameHashMap.put(medicines.getName(),medicines);
             }
             resultSet.close();
@@ -389,5 +390,9 @@ public class DataSource {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+    }
+
+    public void addMedicine(Medicines newMed) {
+
     }
 }
