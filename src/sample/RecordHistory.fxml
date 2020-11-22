@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerRecordHistory">
    <children>
       <ImageView fitHeight="600.0" fitWidth="750.0">
          <image>
@@ -40,14 +40,14 @@
             </Button>
          </children>
       </AnchorPane>
-      <TableView layoutX="250.0" layoutY="110.0" opacity="0.7" prefHeight="373.0" prefWidth="400.0">
+      <TableView fx:id="record" layoutX="250.0" layoutY="110.0" opacity="0.7" prefHeight="373.0" prefWidth="400.0">
         <columns>
-          <TableColumn prefWidth="100.0" text="Patient's Name" />
-          <TableColumn prefWidth="100.0" text="Billing Date" />
-            <TableColumn prefWidth="100.0" text="Amount" />
-            <TableColumn prefWidth="100.0" text="Status" />
+          <TableColumn fx:id="pat_name" prefWidth="100.0" text="Patient's Name" />
+          <TableColumn fx:id="bill_Date" prefWidth="100.0" text="Billing Date" />
+            <TableColumn fx:id="bill_amount" prefWidth="100.0" text="Amount" />
+            <TableColumn fx:id="status" prefWidth="100.0" text="Status" />
         </columns>
       </TableView>
-      <Button alignment="CENTER" layoutX="197.0" layoutY="527.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textFill="WHITE" />
+      <Button alignment="CENTER" layoutX="197.0" layoutY="527.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textFill="WHITE" />
    </children>
 </AnchorPane>

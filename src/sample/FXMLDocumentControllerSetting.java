@@ -45,7 +45,7 @@ public class FXMLDocumentControllerSetting {
                 confirmPassLabel.setTextFill(Color.RED);
                 return;
             }
-            DataSource.loginBoy.setEmp_pass(number.getText());
+            DataSource.loginBoy.setEmp_pass(password.getText());
         }
         System.out.println(DataSource.loginBoy.getEmp_add());
         System.out.println(DataSource.loginBoy.getEmail());

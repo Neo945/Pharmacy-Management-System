@@ -1,6 +1,11 @@
 package sample.model;
 
 
+import javafx.beans.value.ObservableListValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +14,7 @@ import java.util.HashMap;
 
 
 public class DataSource {
+    public static ObservableList<Label> notificationList = FXCollections.observableArrayList();;
     private Connection conn;
     private Statement statement;
     private PreparedStatement preparedStatement;
@@ -36,7 +42,9 @@ public class DataSource {
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
     public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
     public static ArrayList<Employee> employees = new ArrayList<>();
+    public static ArrayList<Bill> bills = new ArrayList<>();
     public static double amount;
+
 
     public boolean connectionOpen() {
         try {
@@ -327,20 +335,21 @@ public class DataSource {
 
     public void updateValue() {
         try{
+            String updateEmpSelectQuery = "Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';";
             statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            ResultSet resultSet = statement.executeQuery(updateEmpSelectQuery);
             resultSet.next();
             if((!resultSet.getString("emp_email").equals(loginBoy.getEmail()))){
                 statement.execute("Update employee set emp_email = '" +
                         loginBoy.getEmail() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
             }
-            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            resultSet = statement.executeQuery(updateEmpSelectQuery);
             resultSet.next();
             if(!(resultSet.getString("emp_add").equals(loginBoy.getEmp_add()))){
                 statement.execute("Update employee set emp_add = '" +
                         loginBoy.getEmp_add() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
             }
-            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+            resultSet = statement.executeQuery(updateEmpSelectQuery);
             resultSet.next();
             if(!(resultSet.getString("emp_pass").equals(loginBoy.getEmp_pass()))){
                 statement.execute("Update employee set emp_pass = '" +
@@ -355,6 +364,30 @@ public class DataSource {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+    public void generateBillList(){
+        try {
+            bills.clear();
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select * from bill join patient on patient.pat_id = bill.pat_id;");
+            while (resultSet.next()){
+                Bill bill = new Bill();
+                bill.setBill_date(resultSet.getDate("bill_date").toString());
+                bill.setBill_id(resultSet.getString("bill_id"));
+                bill.setPat_name(resultSet.getString("pat_name"));
+                bill.setBill_amount(resultSet.getDouble("bill_amount"));
+//                resultSet = statement.executeQuery("select * from med_in_bill where bill_id = '" + bill.getBill_id() + "';");
+//                while (resultSet.next()){
+//                    MedicineInBill medicineInBill = new MedicineInBill();
+//                    medicineInBill.setMed_id(resultSet.getString("med_id"));
+//                    medicineInBill.setQuant(resultSet.getInt("quantity"));
+//                    bill.getMed_id().add(medicineInBill);
+//                }
+                bills.add(bill);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
     }
 }

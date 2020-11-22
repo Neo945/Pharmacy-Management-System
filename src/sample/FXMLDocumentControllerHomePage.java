@@ -94,11 +94,12 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage notifyStage = new Stage();
             BorderPane bp = new BorderPane();
-            ListView<String> stringListView = new ListView<>();
-            stringListView.getItems().set(0,"");
+            ListView<Label> stringListView = new ListView<>();
+            if(DataSource.notificationList.isEmpty()) DataSource.notificationList.add(new Label("No Notification"));
+            stringListView.getItems().addAll(DataSource.notificationList);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
-            notifyStage.setScene(new Scene(bp,750, 600));
+            notifyStage.setScene(new Scene(bp,200, 100));
             notifyStage.show();
         }catch (Exception e){
             System.out.println("Exception(onNotificationClicked):" + e.getMessage());
@@ -124,6 +125,7 @@ public class FXMLDocumentControllerHomePage {
             primaryStage.show();
         }catch (Exception e){
             System.out.println("Exception(): " + e.getMessage() );
+            e.printStackTrace();
         }
     }public void onAddMedicineClicked(ActionEvent actionEvent){
         try{

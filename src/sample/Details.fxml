@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Details">
     <children>
         <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #151515;" />
-        <Button fx:id="back" layoutX="630.0" layoutY="531.0" mnemonicParsing="false" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Back" textFill="WHITE">
+        <Button onAction="#onBackClicked" fx:id="back" layoutX="630.0" layoutY="531.0" mnemonicParsing="false" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Back" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font></Button>

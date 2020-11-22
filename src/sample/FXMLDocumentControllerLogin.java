@@ -86,4 +86,19 @@ public class FXMLDocumentControllerLogin {
         }
         return flag;
     }
+    public void signup(ActionEvent actionEvent){
+        try{
+            try{
+                Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+                Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+                primaryStage.setTitle("Hello ");
+                primaryStage.setScene(new Scene(root, 750, 600));
+                primaryStage.show();
+            }catch (IOException exception){
+                System.out.println("Exception: (login->homePage)" + exception);
+            }
+        }catch (Exception e){
+            System.out.println("Exception(onLogoutClicked):" + e.getMessage());
+        }
+    }
 }
