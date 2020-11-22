@@ -18,6 +18,7 @@ import sample.model.DataSource;
 import sample.model.Patient;
 
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
@@ -104,7 +105,7 @@ public class FXMLDocumentControllerAddPatient {
         }
     }
     public void fillData(MouseEvent actionEvent){
-        try{
+//        try{
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
             PatientName.setText(selectedItemsPatient.getPat_name());
             patAdd.setText(selectedItemsPatient.getPat_num());
@@ -119,9 +120,9 @@ public class FXMLDocumentControllerAddPatient {
                 female.selectedProperty().set(true);
                 others.selectedProperty().set(false);
             }
-        }catch (Exception e){
-            System.out.println("Exception:(fillData) " + e.getMessage());
-        }
+//        }catch (Exception e){
+//            System.out.println("Exception:(fillData) " + e.getMessage());
+//        }
     }
     public void generateBill(ActionEvent actionEvent) {
         try{
@@ -148,15 +149,15 @@ public class FXMLDocumentControllerAddPatient {
                 DataSource.selectedPatient = newPat;
             }
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
-            Parent root = FXMLLoader.load(getClass().getResource("FinalBill.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("PharmacistBill.fxml"));
             primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
-        }catch (Exception e){
-            System.out.println("Exception:(generateBill) " + Arrays.toString(e.getStackTrace()));
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
-    public void onBackClicked(ActionEvent actionEvent){
+        public void onBackClicked(ActionEvent actionEvent){
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Transaction.fxml"));

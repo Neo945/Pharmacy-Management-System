@@ -1,6 +1,11 @@
 package sample.model;
 
 
+import javafx.beans.value.ObservableListValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +14,8 @@ import java.util.HashMap;
 
 
 public class DataSource {
+    public static ObservableList<Label> notificationList = FXCollections.observableArrayList();;
+    public static Medicines selectedMedicine;
     private Connection conn;
     private Statement statement;
     private PreparedStatement preparedStatement;
@@ -31,11 +38,14 @@ public class DataSource {
                                             + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
     public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
 
-    public static Object loginBoy;
+    public static Employee loginBoy;
     public static Patient selectedPatient;
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
     public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
+    public static ArrayList<Employee> employees = new ArrayList<>();
+    public static ArrayList<Bill> bills = new ArrayList<>();
     public static double amount;
+
 
     public boolean connectionOpen() {
         try {
@@ -57,7 +67,31 @@ public class DataSource {
 
 
 
-
+    public void createEmployeeList(){
+        try {
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select * from employee;");
+            while (resultSet.next()){
+                Employee employee = new Employee();
+                employee.setEmp_pass(resultSet.getString("emp_pass"));
+                employee.setEmp_role(resultSet.getString("emp_role"));
+                employee.setEmp_id(resultSet.getString("emp_id"));
+                employee.setEmp_add(resultSet.getString("emp_add"));
+                employee.setEmail(resultSet.getString("emp_email"));
+                employee.setEmp_name(resultSet.getString("emp_name"));
+                employees.add(employee);
+            }
+        }catch (SQLException e){
+            System.out.println("Exception:(createEmployeeList) " + e.getMessage());
+        }
+    }
+    public Employee searchEmp(String email){
+        for (Employee e:
+             employees) {
+            if(e.getEmail().equals(email)) return e;
+        }
+        return null;
+    }
 
     public void Registration(Employee employee){
         try{
@@ -73,6 +107,7 @@ public class DataSource {
             preparedStatement.execute();
             addRole(employee.getEmp_role(),emp);
             addContact(employee);
+            employees.add(employee);
         }catch (SQLException e){
             System.out.println("Exception: (Registration)" + e);
         }
@@ -151,10 +186,10 @@ public class DataSource {
 
     public void createMedicineList(){
         try{
-            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + ";");
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.comp_id = medicine.comp_id;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                if(resultSet.getInt(UserData.DB_MED_QUANTITY)==0) continue;
+                if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
@@ -162,7 +197,7 @@ public class DataSource {
                 medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
                 medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
-                medicines.setCompany(resultSet.getString(UserData.DB_MED_COM_ID));
+                medicines.setCompany(resultSet.getString("comp_name"));
                 MedNameHashMap.put(medicines.getName(),medicines);
             }
             resultSet.close();
@@ -298,4 +333,66 @@ public class DataSource {
             }
             return null;
         }
+
+    public void updateValue() {
+        try{
+            String updateEmpSelectQuery = "Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';";
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(updateEmpSelectQuery);
+            resultSet.next();
+            if((!resultSet.getString("emp_email").equals(loginBoy.getEmail()))){
+                statement.execute("Update employee set emp_email = '" +
+                        loginBoy.getEmail() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
+            resultSet = statement.executeQuery(updateEmpSelectQuery);
+            resultSet.next();
+            if(!(resultSet.getString("emp_add").equals(loginBoy.getEmp_add()))){
+                statement.execute("Update employee set emp_add = '" +
+                        loginBoy.getEmp_add() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
+            resultSet = statement.executeQuery(updateEmpSelectQuery);
+            resultSet.next();
+            if(!(resultSet.getString("emp_pass").equals(loginBoy.getEmp_pass()))){
+                statement.execute("Update employee set emp_pass = '" +
+                        loginBoy.getEmp_pass() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            }
+            statement.execute("delete from employee_num where emp_id = '" + loginBoy.getEmp_id() + "';");
+//            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
+//            resultSet.next();
+            for (String s :
+                    loginBoy.getContact()) {
+                statement.execute("insert into employee_num values('" + loginBoy.getEmp_id() + "','" + s + "');");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+    public void generateBillList(){
+        try {
+            bills.clear();
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select * from bill join patient on patient.pat_id = bill.pat_id;");
+            while (resultSet.next()){
+                Bill bill = new Bill();
+                bill.setBill_date(resultSet.getDate("bill_date").toString());
+                bill.setBill_id(resultSet.getString("bill_id"));
+                bill.setPat_name(resultSet.getString("pat_name"));
+                bill.setBill_amount(resultSet.getDouble("bill_amount"));
+//                resultSet = statement.executeQuery("select * from med_in_bill where bill_id = '" + bill.getBill_id() + "';");
+//                while (resultSet.next()){
+//                    MedicineInBill medicineInBill = new MedicineInBill();
+//                    medicineInBill.setMed_id(resultSet.getString("med_id"));
+//                    medicineInBill.setQuant(resultSet.getInt("quantity"));
+//                    bill.getMed_id().add(medicineInBill);
+//                }
+                bills.add(bill);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void addMedicine(Medicines newMed) {
+
+    }
+}
