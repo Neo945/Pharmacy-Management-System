@@ -186,7 +186,7 @@ public class DataSource {
 
     public void createMedicineList(){
         try{
-            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.comp_id = medicine.comp_id;");
+            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.com_id = medicine.com_id;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;

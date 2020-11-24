@@ -99,7 +99,7 @@ public class FXMLDocumentControllerHomePage {
             stringListView.getItems().addAll(DataSource.notificationList);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
-            notifyStage.setScene(new Scene(bp,200, 100));
+            notifyStage.setScene(new Scene(bp,300, 200));
             notifyStage.show();
         }catch (Exception e){
             System.out.println("Exception(onNotificationClicked):" + e.getMessage());

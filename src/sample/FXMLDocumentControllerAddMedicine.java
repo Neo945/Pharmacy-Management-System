@@ -3,15 +3,10 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import sample.model.DataSource;
-import sample.model.MedicineInBill;
 import sample.model.Medicines;
-import sample.model.Patient;
 
 public class FXMLDocumentControllerAddMedicine {
     @FXML
