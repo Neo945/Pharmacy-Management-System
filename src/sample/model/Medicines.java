@@ -76,4 +76,9 @@ public class Medicines  {
     public String getCompany() {
         return company;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

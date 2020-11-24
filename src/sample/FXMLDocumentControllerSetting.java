@@ -36,16 +36,16 @@ public class FXMLDocumentControllerSetting {
     @FXML
     private Label confirmPassLabel;
     public void onSaveClicked(ActionEvent actionEvent){
-        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText().toLowerCase());
-        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText().toLowerCase());
-        if(!number.getText().isEmpty())DataSource.loginBoy.setContact(number.getText());
-        if(!password.getText().isEmpty()){
-            if(!password.getText().equals(this.confirmPassword.getText())){
+        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText().toLowerCase().strip());
+        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText().toLowerCase().strip());
+        if(!number.getText().isEmpty())DataSource.loginBoy.setContact(number.getText().strip());
+        if(!password.getText().strip().isEmpty()){
+            if(!password.getText().equals(this.confirmPassword.getText().strip())){
                 confirmPassLabel.setText("*Password not matched");
                 confirmPassLabel.setTextFill(Color.RED);
                 return;
             }
-            DataSource.loginBoy.setEmp_pass(password.getText());
+            DataSource.loginBoy.setEmp_pass(password.getText().strip());
         }
         System.out.println(DataSource.loginBoy.getEmp_add());
         System.out.println(DataSource.loginBoy.getEmail());

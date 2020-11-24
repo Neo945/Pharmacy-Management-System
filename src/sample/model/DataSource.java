@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class DataSource {
@@ -189,7 +190,6 @@ public class DataSource {
             preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.com_id = medicine.com_id;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
@@ -392,7 +392,82 @@ public class DataSource {
         }
     }
 
-    public void addMedicine(Medicines newMed) {
-
+    public void addMedicine() {
+        try{
+            statement = conn.createStatement();
+            Medicines addMed = MedNameHashMap.get(selectedMedicine.getName());
+            if(addMed==null){
+                ResultSet resultSet = statement.executeQuery("select * from company where " +
+                        "comp_name like '" + selectedMedicine.getCompany() + "';");
+                if(resultSet.next()){
+                    selectedMedicine.setCompany(resultSet.getString("com_id"));
+                }else {
+                    String comp_id = generateCompId();
+                    statement.execute("insert into company(com_id,comp_name) " +
+                            "values ('" + comp_id + "','" + selectedMedicine.getCompany() + "');");
+                }
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDateTime now = LocalDateTime.now();
+                selectedMedicine.setMfg_date(dtf.format(now));
+                String[] arrStr = selectedMedicine.getMfg_date().split("-");
+                int month = Integer.parseInt(arrStr[1]);
+                Random random = new Random();
+                int addMonth = 1 + random.nextInt(9);
+                month+=addMonth;
+                selectedMedicine.setExp_date(arrStr[0] + "-" + month + "-" + arrStr[2]);
+                selectedMedicine.setMed_id(generateMedId());
+                MedNameHashMap.put(selectedMedicine.getName(),selectedMedicine);
+                statement.execute("insert into medicine(med_name,med_id,med_price,med_expdate,med_mfg,quant_med,com_id) " +
+                        "values('" + selectedMedicine.getName() + "','" + selectedMedicine.getMed_id() + "','" + selectedMedicine.getMed_price() + "','" + selectedMedicine.getExp_date()
+                + "','" + selectedMedicine.getMfg_date() + "','" + selectedMedicine.getQuantity() + "','" + selectedMedicine.getCompany() + "');");
+            }else{
+                System.out.println(selectedMedicine.getQuantity());
+                System.out.println(selectedMedicine.getMed_id());
+                statement.execute("Update medicine set quant_med = " + selectedMedicine.getQuantity()
+                        + " where med_id = '" + selectedMedicine.getMed_id() + "';");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private String generateMedId(){
+        try{
+            statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("Select max(med_id) from medicine;");
+            result.next();
+            String emp = result.getString("max(med_id)");
+            System.out.println(emp);
+            if(emp==null){
+                emp = "M0";
+            }
+            String[] val = emp.split("M");//{0112}
+            int emp_id = Integer.parseInt(val[1]);
+            emp_id++;
+            emp = "M" + emp_id;
+            return emp;
+        }catch (SQLException e){
+            System.out.println("Exception: (getEmpId)"  + e);
+        }
+        return null;
+    }
+    private String generateCompId(){
+        try{
+            statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("Select max(com_id) from company;");
+            result.next();
+            String emp = result.getString("max(com_id)");
+            System.out.println(emp);
+            if(emp==null){
+                emp = "C0";
+            }
+            String[] val = emp.split("C");//{0112}
+            int emp_id = Integer.parseInt(val[1]);
+            emp_id++;
+            emp = "C" + emp_id;
+            return emp;
+        }catch (SQLException e){
+            System.out.println("Exception: (getEmpId)"  + e);
+        }
+        return null;
     }
 }

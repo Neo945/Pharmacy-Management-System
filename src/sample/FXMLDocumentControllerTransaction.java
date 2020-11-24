@@ -34,12 +34,13 @@ public class FXMLDocumentControllerTransaction {
     private double totalCostValue = 0;
     public void initialize(){
         try {
-            MedicineList.getItems().clear();
+//            MedicineList.getItems().clear();
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.MedNameHashMap.isEmpty()) dataSource.createMedicineList();
+            /*if(DataSource.MedNameHashMap.isEmpty())*/ dataSource.createMedicineList();
             DataSource.MedNameHashMap.forEach((k,v)-> {
+                if(!(v.getQuantity()<1)){
                 BorderPane bp = new BorderPane();
                 HBox hbx = new HBox();
 
@@ -65,6 +66,7 @@ public class FXMLDocumentControllerTransaction {
                 bp.setLeft(medName);
                 bp.setRight(hbx);
                 MedicineList.getItems().add(bp);
+                }
             });
             dataSource.connectionClose();
         } catch (Exception e) {
@@ -117,7 +119,7 @@ public class FXMLDocumentControllerTransaction {
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             if(DataSource.MedNameHashMap.get(idMedName).getQuant()>8) return;
-            if((DataSource.MedNameHashMap.get(idMedName).getQuantity())<(DataSource.MedNameHashMap.get(idMedName).getQuant()))return;
+            if((DataSource.MedNameHashMap.get(idMedName).getQuantity())<=(DataSource.MedNameHashMap.get(idMedName).getQuant()))return;
             totalCostValue += DataSource.MedNameHashMap.get(idMedName).getMed_price();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);

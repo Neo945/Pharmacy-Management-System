@@ -2,11 +2,17 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
+import sample.model.UserData;
 
 public class FXMLDocumentControllerAddMedicine {
     @FXML
@@ -58,30 +64,42 @@ public class FXMLDocumentControllerAddMedicine {
             Medicines selectedItemsMedicine = medicinesListView.getSelectionModel().getSelectedItem();
             med_name.setText(selectedItemsMedicine.getName());
             company_name.setText(selectedItemsMedicine.getCompany());
-            quantity.setText("" + selectedItemsMedicine.getQuantity());
-            price.setText(selectedItemsMedicine.getMed_price() + "");
+            quantity.setText(String.format("%d",selectedItemsMedicine.getQuantity()));
+            price.setText(String.format("%f",selectedItemsMedicine.getMed_price()));
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     public void onClickProceed(ActionEvent actionEvent){
         try {
+            Medicines newMed= new Medicines();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             Medicines selectedItemsMedicine = medicinesListView.getSelectionModel().getSelectedItem();
             if(selectedItemsMedicine!=null){
                 DataSource.selectedMedicine = selectedItemsMedicine;
+                DataSource.selectedMedicine.setQuantity(Integer.parseInt(quantity.getText()));
             }else {
-                Medicines newMed= new Medicines();
                 newMed.setName(med_name.getText());
                 newMed.setQuantity(Integer.parseInt(quantity.getText()));
-                newMed.setMed_price(Double.parseDouble(quantity.getText()));
+                newMed.setMed_price(Double.parseDouble(price.getText()));
                 newMed.setCompany(company_name.getText());
-                dataSource.addMedicine(newMed);
                 DataSource.selectedMedicine = newMed;
             }
+            dataSource.addMedicine();
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+    public void onBackClicked(ActionEvent actionEvent){
+        try {
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (Exception e){
+            System.out.println("Exception:" + e.getMessage());
         }
     }
 }

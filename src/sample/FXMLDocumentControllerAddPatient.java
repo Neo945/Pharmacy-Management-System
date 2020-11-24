@@ -96,7 +96,7 @@ public class FXMLDocumentControllerAddPatient {
     public void onSearchClick(ActionEvent actionEvent){
         try{
             searchList.getItems().clear();
-            String searchString = searchPatient.getText();
+            String searchString = searchPatient.getText().strip();
             for (Patient patient : DataSource.patientArrayList) {
                 if(patient.getPat_name().contains(searchString)) searchList.getItems().add(patient);
             }
@@ -107,8 +107,8 @@ public class FXMLDocumentControllerAddPatient {
     public void fillData(MouseEvent actionEvent){
 //        try{
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
-            PatientName.setText(selectedItemsPatient.getPat_name());
-            patAdd.setText(selectedItemsPatient.getPat_num());
+            PatientName.setText(selectedItemsPatient.getPat_name().strip());
+            patAdd.setText(selectedItemsPatient.getPat_num().strip());
             patAge.setText("" + selectedItemsPatient.getPat_age());
             String gender = selectedItemsPatient.getPat_gender();
             if(gender.equals("m")){
@@ -139,9 +139,9 @@ public class FXMLDocumentControllerAddPatient {
                 DataSource.selectedPatient = selectedItemsPatient;
             }else {
                 Patient newPat= new Patient();
-                newPat.setPat_name(PatientName.getText());
-                newPat.setPat_num(patAdd.getText());
-                newPat.setPat_age(Integer.parseInt(patAge.getText()));
+                newPat.setPat_name(PatientName.getText().strip());
+                newPat.setPat_num(patAdd.getText().strip());
+                newPat.setPat_age(Integer.parseInt(patAge.getText().strip()));
                 if(female.isSelected()) newPat.setPat_gender("f");
                 else if(male.isSelected()) newPat.setPat_gender("m");
                 else newPat.setPat_gender("o");
