@@ -81,6 +81,8 @@ public class FXMLDocumentControllerFinalBill {
             dataSource.addToBill();
             dataSource.connectionClose();
             TimeUnit.SECONDS.sleep(2);
+            if(DataSource.notificationList.get(0).getText().equals("No Notification")) DataSource.notificationList.clear();
+            DataSource.notificationList.add(new Label(DataSource.selectedPatient.getPat_name() + "\t" + DataSource.amount + "\t" +  "Bill Generated!!"));
             System.out.println("Saved Successfully");
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));

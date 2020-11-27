@@ -7,12 +7,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.model.DataSource;
 import sample.model.Medicines;
 import sample.model.UserData;
+
+import java.util.concurrent.TimeUnit;
 
 public class FXMLDocumentControllerAddMedicine {
     @FXML
@@ -87,6 +90,15 @@ public class FXMLDocumentControllerAddMedicine {
                 DataSource.selectedMedicine = newMed;
             }
             dataSource.addMedicine();
+
+            TimeUnit.SECONDS.sleep(2);
+            if(DataSource.notificationList.get(0).getText().equals("No Notification")) DataSource.notificationList.clear();
+            DataSource.notificationList.add(new Label(DataSource.selectedMedicine.getName() + "\t Added!!"));
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
         }catch (Exception e){
             e.printStackTrace();
         }

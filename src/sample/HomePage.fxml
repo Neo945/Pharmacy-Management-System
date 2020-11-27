@@ -42,7 +42,7 @@
             </Button>
             <Label fx:id="name" layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" />
             <Label fx:id="email" layoutX="8.0" layoutY="189.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" />
-            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="12.0" layoutY="14.0">
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="13.0" layoutY="14.0">
                <image>
                   <Image url="@../Images/DashboardUserImage.png" />
                </image>
@@ -53,28 +53,26 @@
             <Font name="Arial Black" size="27.0" />
          </font>
       </Label>
-      <HBox layoutX="642.0" prefHeight="16.0" prefWidth="70.0" spacing="2.0">
-         <children>
-            <Accordion prefHeight="40.0" prefWidth="84.0" />
-            <Button mnemonicParsing="false" onAction="#onSettingCLicked" style="-fx-background-radius: 0; -fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fx:id="notify" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/SettingsIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#onNotificationClicked" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fx:id="setting" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT">
-                     <image>
-                        <Image url="@../Images/NotificationImage.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </HBox>
+      <HBox layoutX="633.0" prefHeight="16.0" prefWidth="70.0" spacing="2.0" />
+      <Accordion prefHeight="40.0" prefWidth="84.0" />
+      <Button layoutX="632.0" layoutY="13.0" mnemonicParsing="false" onAction="#onSettingCLicked" style="-fx-background-radius: 0; -fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="notify" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/SettingsIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="684.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNotificationClicked" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="setting" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT">
+               <image>
+                  <Image url="@../Images/NotificationImage.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="notiNo" alignment="CENTER" contentDisplay="CENTER" layoutX="710.0" layoutY="7.0" prefHeight="18.0" prefWidth="15.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="0" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

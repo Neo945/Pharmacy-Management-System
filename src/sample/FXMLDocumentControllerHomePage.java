@@ -17,8 +17,11 @@ import javafx.stage.Stage;
 import sample.model.DataSource;
 
 import java.io.IOException;
+import java.util.jar.Attributes;
 
 public class FXMLDocumentControllerHomePage {
+    @FXML
+    private Label notiNo;
     @FXML
     public Label name;
     @FXML
@@ -37,6 +40,7 @@ public class FXMLDocumentControllerHomePage {
     private Button AddMed;
     @FXML
     private Button searchMed;
+    private final ListView<Label> stringListView = new ListView<>();
     public void initialize(){
         try{
             name.setText(DataSource.loginBoy.getEmp_name());
@@ -45,6 +49,8 @@ public class FXMLDocumentControllerHomePage {
             email.setText(DataSource.loginBoy.getEmail());
             email.setTextFill(Color.WHITE);
             email.setTextAlignment(TextAlignment.CENTER);
+            if(DataSource.notificationList.isEmpty()) notiNo.setVisible(false);
+            else notiNo.setText(DataSource.notificationList.size() + "");
             details.setText(DataSource.loginBoy.getEmp_role() + " Details");
             if(DataSource.loginBoy.getEmp_role().equals("Pharmacist")){
                 searchMed.setVisible(false);
@@ -95,9 +101,11 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage notifyStage = new Stage();
             BorderPane bp = new BorderPane();
-            ListView<Label> stringListView = new ListView<>();
+            Button clear = new Button("Clear All notification");
+            clear.setOnAction(this::onClearClicked);
             if(DataSource.notificationList.isEmpty()) DataSource.notificationList.add(new Label("No Notification"));
             stringListView.getItems().addAll(DataSource.notificationList);
+            bp.setBottom(clear);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
             notifyStage.setScene(new Scene(bp,300, 200));
@@ -106,6 +114,14 @@ public class FXMLDocumentControllerHomePage {
             System.out.println("Exception(onNotificationClicked):" + e.getMessage());
         }
     }
+
+    private void onClearClicked(ActionEvent actionEvent) {
+        DataSource.notificationList.clear();
+        stringListView.getItems().clear();
+        notiNo.setVisible(false);
+        ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
+    }
+
     public void onDetailsClicked(ActionEvent actionEvent){
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
@@ -136,7 +152,7 @@ public class FXMLDocumentControllerHomePage {
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
-            System.out.println("Exception(): " + e.getMessage() );
+            System.out.println("Exception(): " + e.getMessage());
         }
     }
     public void onSearchClicked(ActionEvent actionEvent){
