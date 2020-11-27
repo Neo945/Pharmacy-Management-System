@@ -12,11 +12,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("registration.fxml"));
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("registration.fxml"));
         primaryStage.setTitle("Pharmacy Management System");
         primaryStage.resizableProperty().set(false);
         primaryStage.setScene(new Scene(root, 750, 600));
         primaryStage.show();
+        }catch (Exception e){
+            System.out.println("start");
+            e.printStackTrace();
+        }
     }
 
 

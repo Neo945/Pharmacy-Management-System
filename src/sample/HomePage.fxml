@@ -12,22 +12,22 @@
             <Image url="@../Images/medicine-science-concept-background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="details" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="118.0" mnemonicParsing="false" onAction="#onDetailsClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #cc99cc;" text="Cashier Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="details" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="118.0" mnemonicParsing="false" onAction="#onDetailsClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #cc99cc;" text="Cashier Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Verdana Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="transactionDetails" contentDisplay="CENTER" layoutX="400.0" layoutY="118.0" mnemonicParsing="false" onAction="#onTransactionClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #98fb98;" text="Transaction Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="transactionDetails" contentDisplay="CENTER" layoutX="361.0" layoutY="118.0" mnemonicParsing="false" onAction="#onTransactionClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #98fb98;" text="Transaction Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Verdana Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="searchMed" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="214.0" mnemonicParsing="false" onAction="#onSearchClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #00bfff;" text="Search Patient/Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="searchMed" alignment="CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="118.0" mnemonicParsing="false" onAction="#onSearchClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #00bfff;" text="Search Patient/Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Verdana Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="AddMed" alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="214.0" mnemonicParsing="false" onAction="#onAddMedicineClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #ff6347;" text="Add Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+      <Button fx:id="AddMed" alignment="CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="118.0" mnemonicParsing="false" onAction="#onAddMedicineClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #ff6347;" text="Add Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Verdana Bold" size="15.0" />
          </font>

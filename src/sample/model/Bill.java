@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bill {
     private String bill_id;
-    private ArrayList<MedicineInBill> med_id;
+    private ArrayList<Medicines> med_id = new ArrayList<>();
     private String bill_date;
     private double bill_amount;
     private String pat_name;
@@ -18,11 +18,11 @@ public class Bill {
         this.bill_id = bill_id;
     }
 
-    public ArrayList<MedicineInBill> getMed_id() {
+    public ArrayList<Medicines> getMed_id() {
         return med_id;
     }
 
-    public void setMed_id(ArrayList<MedicineInBill> med_id) {
+    public void setMed_id(ArrayList<Medicines> med_id) {
         this.med_id = med_id;
     }
 

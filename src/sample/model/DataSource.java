@@ -46,6 +46,8 @@ public class DataSource {
     public static ArrayList<Employee> employees = new ArrayList<>();
     public static ArrayList<Bill> bills = new ArrayList<>();
     public static double amount;
+    public static Bill bill;
+    public static String caller;
 
 
     public boolean connectionOpen() {
@@ -378,13 +380,21 @@ public class DataSource {
                 bill.setBill_id(resultSet.getString("bill_id"));
                 bill.setPat_name(resultSet.getString("pat_name"));
                 bill.setBill_amount(resultSet.getDouble("bill_amount"));
-//                resultSet = statement.executeQuery("select * from med_in_bill where bill_id = '" + bill.getBill_id() + "';");
-//                while (resultSet.next()){
-//                    MedicineInBill medicineInBill = new MedicineInBill();
-//                    medicineInBill.setMed_id(resultSet.getString("med_id"));
-//                    medicineInBill.setQuant(resultSet.getInt("quantity"));
-//                    bill.getMed_id().add(medicineInBill);
-//                }
+                resultSet = statement.executeQuery("select * from med_in_bill " +
+                        "join medicine on medicine.med_id = med_in_bill.med_id " +
+                        "where bill_id = '" + bill.getBill_id() + "';");
+                while(resultSet.next()){
+                    Medicines medicines = new Medicines();
+                    medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
+                    medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
+                    medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
+                    medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
+                    medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
+//                    medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
+                    medicines.setQuant(resultSet.getInt("quantity"));
+//                    medicines.setCompany(resultSet.getString("comp_name"));
+                    bill.getMed_id().add(medicines);
+                }
                 bills.add(bill);
             }
         } catch (SQLException sqlException) {

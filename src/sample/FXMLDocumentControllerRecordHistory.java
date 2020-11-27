@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.model.Bill;
 import sample.model.DataSource;
@@ -40,7 +41,20 @@ public class FXMLDocumentControllerRecordHistory {
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         record.setItems(list);
     }
-
+    public void showBill(MouseEvent actionEvent){
+        try {
+        DataSource.bill = record.getSelectionModel().getSelectedItem();
+//        DataSource.caller = "record";
+        Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+        Parent root = FXMLLoader.load(getClass().getResource("billRecord.fxml"));
+        primaryStage.setTitle("Hello ");
+        primaryStage.setScene(new Scene(root, 750, 600));
+        primaryStage.show();
+        } catch (Exception exception) {
+            System.out.println("showBill");
+            exception.printStackTrace();
+        }
+    }
     public void onBackClicked(ActionEvent actionEvent){
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());

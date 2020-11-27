@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerBillRecord">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="750.0">
+            <image>
+                <Image url="@../Images/medicine-science-concept-background.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="218.0" layoutY="6.0" prefHeight="510.0" prefWidth="468.0">
+            <children>
+                <TableView fx:id="medicinesTableView" layoutX="40.0" layoutY="170.0" prefHeight="286.0" prefWidth="390.0">
+                    <columns>
+                        <TableColumn fx:id="name" prefWidth="130.0" text="Products" />
+                        <TableColumn fx:id="quant" prefWidth="130.0" text="Quantity" />
+                        <TableColumn fx:id="med_price" prefWidth="130.0" text="Cost" />
+                    </columns>
+                    <opaqueInsets>
+                        <Insets bottom="2.0" left="2.0" right="1.0" top="1.0" />
+                    </opaqueInsets>
+                </TableView>
+                <Label fx:id="pat_name" alignment="CENTER" layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" style="-fx-border-color: #bfbfbf;" text="Label">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="price" layoutX="294.0" layoutY="465.0" prefHeight="38.0" prefWidth="135.0" text="Total -">
+                    <font>
+                        <Font name="Verdana Bold" size="15.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+                <Label alignment="CENTER" layoutX="39.0" layoutY="465.0" prefHeight="38.0" prefWidth="67.5" text="Status -">
+                    <font>
+                        <Font name="Verdana" size="15.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" style="-fx-border-color: #bfbfbf;" text="Label">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="294.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" style="-fx-border-color: #bfbfbf;" text="Label">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" style="-fx-border-color: #bfbfbf;" text="Label">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" style="-fx-border-color: #bfbfbf;" text="Label">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="108.0" layoutY="465.0" prefHeight="38.0" prefWidth="42.0" text="Paid">
+                    <font>
+                        <Font name="Verdana Bold" size="15.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Button fx:id="back" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textFill="WHITE">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;">
+            <children>
+                <Button layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Add Medicine" textFill="#dddddd">
+                    <font>
+                        <Font name="Verdana" size="17.0" />
+                    </font>
+                </Button>
+                <Button layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Add Patient" textFill="#dddddd">
+                    <font>
+                        <Font name="Verdana" size="17.0" />
+                    </font>
+                </Button>
+                <Button layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Bill" textFill="WHITE">
+                    <font>
+                        <Font name="Verdana" size="17.0" />
+                    </font>
+                    <effect>
+                        <Glow level="0.2" />
+                    </effect>
+                </Button>
+            </children>
+        </AnchorPane>
+        <ImageView fx:id="tick" fitHeight="38.0" fitWidth="42.0" layoutX="705.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <image>
+                <Image url="@../Images/tick-icon.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
