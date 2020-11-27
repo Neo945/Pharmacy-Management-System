@@ -85,6 +85,7 @@ public class FXMLDocumentControllerHomePage {
                 primaryStage.show();
             }catch (IOException exception){
                 System.out.println("Exception: (login->homePage)" + exception);
+                exception.printStackTrace();
             }
         }catch (Exception e){
             System.out.println("Exception(onSettingClicked):" + e.getMessage());

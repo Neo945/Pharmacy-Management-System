@@ -410,11 +410,11 @@ public class DataSource {
                 LocalDateTime now = LocalDateTime.now();
                 selectedMedicine.setMfg_date(dtf.format(now));
                 String[] arrStr = selectedMedicine.getMfg_date().split("-");
-                int month = Integer.parseInt(arrStr[1]);
+                int year = Integer.parseInt(arrStr[0]);
                 Random random = new Random();
-                int addMonth = 1 + random.nextInt(9);
-                month+=addMonth;
-                selectedMedicine.setExp_date(arrStr[0] + "-" + month + "-" + arrStr[2]);
+                int addYear = 1 + random.nextInt(9);
+                year+=addYear;
+                selectedMedicine.setExp_date(year + "-" + arrStr[1] + "-" + arrStr[2]);
                 selectedMedicine.setMed_id(generateMedId());
                 MedNameHashMap.put(selectedMedicine.getName(),selectedMedicine);
                 statement.execute("insert into medicine(med_name,med_id,med_price,med_expdate,med_mfg,quant_med,com_id) " +

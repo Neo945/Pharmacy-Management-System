@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class FXMLDocumentControllerSetting {
     @FXML
-    private TextField name;
+    private Label name;
     @FXML
     private TextField email;
     @FXML
