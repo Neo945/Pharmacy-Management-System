@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 import sample.model.Medicines;
 
@@ -50,7 +51,7 @@ public class FXMLDocumentControllerFinalBill {
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
         ObservableList<Medicines> list = FXCollections.observableArrayList();
-        DataSource.MedNameHashMap.forEach((k,v)-> {
+        AppData.MedNameHashMap.forEach((k, v)-> {
             if(v.getQuant()>0) {
                 list.add(v);
             }
@@ -60,7 +61,7 @@ public class FXMLDocumentControllerFinalBill {
         quant.setCellValueFactory(new PropertyValueFactory<>("quant"));
         medicinesTableView.setItems(list);
         Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
-        price.setText("Total - " + indiaCurrency.getSymbol() + " " + (DataSource.amount));
+        price.setText("Total - " + indiaCurrency.getSymbol() + " " + (AppData.amount));
         price.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 
 //        medicinesTableView.getColumns().addAll(name,med_price);
@@ -81,8 +82,8 @@ public class FXMLDocumentControllerFinalBill {
             dataSource.addToBill();
             dataSource.connectionClose();
             TimeUnit.SECONDS.sleep(2);
-            if(DataSource.notificationList.get(0).getText().equals("No Notification")) DataSource.notificationList.clear();
-            DataSource.notificationList.add(new Label(DataSource.selectedPatient.getPat_name() + "\t" + DataSource.amount + "\t" +  "Bill Generated!!"));
+            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
+            AppData.notificationList.add(new Label(AppData.selectedPatient.getPat_name() + "\t" + AppData.amount + "\t" +  "Bill Generated!!"));
             System.out.println("Saved Successfully");
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));

@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 import sample.model.Medicines;
 import sample.model.UserData;
@@ -38,8 +39,8 @@ public class FXMLDocumentControllerAddMedicine {
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.MedNameHashMap.isEmpty()) dataSource.createMedicineList();
-            DataSource.MedNameHashMap.forEach((k,v)-> {
+            if(AppData.MedNameHashMap.isEmpty()) dataSource.createMedicineList();
+            AppData.MedNameHashMap.forEach((k,v)-> {
                 medicinesListView.getItems().add(v);
             });
             dataSource.connectionClose();
@@ -52,7 +53,7 @@ public class FXMLDocumentControllerAddMedicine {
             medicinesListView.getItems().clear();
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
-            DataSource.MedNameHashMap.forEach((k,v)-> {
+            AppData.MedNameHashMap.forEach((k,v)-> {
                 if(k.contains(search)){
                     medicinesListView.getItems().add(v);
                 }
@@ -80,20 +81,20 @@ public class FXMLDocumentControllerAddMedicine {
             dataSource.connectionOpen();
             Medicines selectedItemsMedicine = medicinesListView.getSelectionModel().getSelectedItem();
             if(selectedItemsMedicine!=null){
-                DataSource.selectedMedicine = selectedItemsMedicine;
-                DataSource.selectedMedicine.setQuantity(Integer.parseInt(quantity.getText()));
+                AppData.selectedMedicine = selectedItemsMedicine;
+                AppData.selectedMedicine.setQuantity(Integer.parseInt(quantity.getText()));
             }else {
                 newMed.setName(med_name.getText());
                 newMed.setQuantity(Integer.parseInt(quantity.getText()));
                 newMed.setMed_price(Double.parseDouble(price.getText()));
                 newMed.setCompany(company_name.getText());
-                DataSource.selectedMedicine = newMed;
+                AppData.selectedMedicine = newMed;
             }
             dataSource.addMedicine();
 
             TimeUnit.SECONDS.sleep(2);
-            if(DataSource.notificationList.get(0).getText().equals("No Notification")) DataSource.notificationList.clear();
-            DataSource.notificationList.add(new Label(DataSource.selectedMedicine.getName() + "\t Added!!"));
+            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
+            AppData.notificationList.add(new Label(AppData.selectedMedicine.getName() + "\t Added!!"));
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
             primaryStage.setTitle("Hello ");

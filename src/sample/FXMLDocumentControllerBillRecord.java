@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.Bill;
 import sample.model.DataSource;
 import sample.model.Medicines;
@@ -42,15 +43,15 @@ public class FXMLDocumentControllerBillRecord {
     public void initialize(){
         try{
             ObservableList<Medicines> list = FXCollections.observableArrayList();
-            list.addAll(DataSource.bill.getMed_id());
+            list.addAll(AppData.bill.getMed_id());
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
             med_price.setCellValueFactory(new PropertyValueFactory<>("med_price"));
             quant.setCellValueFactory(new PropertyValueFactory<>("quant"));
             medicinesTableView.setItems(list);
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
-            price.setText("Total - " + indiaCurrency.getSymbol() + " " + (DataSource.bill.getBill_amount()));
+            price.setText("Total - " + indiaCurrency.getSymbol() + " " + (AppData.bill.getBill_amount()));
             price.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-            pat_name.setText(DataSource.bill.getPat_name());
+            pat_name.setText(AppData.bill.getPat_name());
 
         }catch (Exception e){
             System.out.println("initialize");

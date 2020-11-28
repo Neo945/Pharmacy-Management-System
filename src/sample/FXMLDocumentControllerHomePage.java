@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 
 import java.io.IOException;
@@ -43,18 +44,18 @@ public class FXMLDocumentControllerHomePage {
     private final ListView<Label> stringListView = new ListView<>();
     public void initialize(){
         try{
-            name.setText(DataSource.loginBoy.getEmp_name());
+            name.setText(AppData.loginBoy.getEmp_name());
             name.setTextFill(Color.WHITE);
             name.setTextAlignment(TextAlignment.CENTER);
-            email.setText(DataSource.loginBoy.getEmail());
+            email.setText(AppData.loginBoy.getEmail());
             email.setTextFill(Color.WHITE);
             email.setTextAlignment(TextAlignment.CENTER);
-            if(DataSource.notificationList.isEmpty()) notiNo.setVisible(false);
-            else notiNo.setText(DataSource.notificationList.size() + "");
-            details.setText(DataSource.loginBoy.getEmp_role() + " Details");
-            if(DataSource.loginBoy.getEmp_role().equals("Pharmacist")){
+            if(AppData.notificationList.isEmpty()) notiNo.setVisible(false);
+            else notiNo.setText(AppData.notificationList.size() + "");
+            details.setText(AppData.loginBoy.getEmp_role() + " Details");
+            if(AppData.loginBoy.getEmp_role().equals("Pharmacist")){
                 searchMed.setVisible(false);
-            }else if (DataSource.loginBoy.getEmp_role().equals("Cashier")){
+            }else if (AppData.loginBoy.getEmp_role().equals("Cashier")){
                 AddMed.setVisible(false);
             }
         }catch (Exception e){
@@ -64,11 +65,11 @@ public class FXMLDocumentControllerHomePage {
     public void onLogOutClicked(ActionEvent actionEvent){
         try{
             try{
-                DataSource.loginBoy = null;
-                DataSource.employees.clear();
-                DataSource.selectedPatient = null;
-                DataSource.MedNameHashMap.clear();
-                DataSource.amount = -1;
+                AppData.loginBoy = null;
+                AppData.employees.clear();
+                AppData.selectedPatient = null;
+                AppData.MedNameHashMap.clear();
+                AppData.amount = -1;
                 Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
                 Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
                 primaryStage.setTitle("Hello ");
@@ -103,8 +104,8 @@ public class FXMLDocumentControllerHomePage {
             BorderPane bp = new BorderPane();
             Button clear = new Button("Clear All notification");
             clear.setOnAction(this::onClearClicked);
-            if(DataSource.notificationList.isEmpty()) DataSource.notificationList.add(new Label("No Notification"));
-            stringListView.getItems().addAll(DataSource.notificationList);
+            if(AppData.notificationList.isEmpty()) AppData.notificationList.add(new Label("No Notification"));
+            stringListView.getItems().addAll(AppData.notificationList);
             bp.setBottom(clear);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
@@ -116,7 +117,7 @@ public class FXMLDocumentControllerHomePage {
     }
 
     private void onClearClicked(ActionEvent actionEvent) {
-        DataSource.notificationList.clear();
+        AppData.notificationList.clear();
         stringListView.getItems().clear();
         notiNo.setVisible(false);
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();

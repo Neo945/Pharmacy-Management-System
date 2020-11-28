@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.Bill;
 import sample.model.DataSource;
 
@@ -34,7 +35,7 @@ public class FXMLDocumentControllerRecordHistory {
         dataSource.generateBillList();
         dataSource.connectionClose();
         ObservableList<Bill> list = FXCollections.observableArrayList();
-        list.addAll(DataSource.bills);
+        list.addAll(AppData.bills);
         pat_name.setCellValueFactory(new PropertyValueFactory<>("pat_name"));
         bill_amount.setCellValueFactory(new PropertyValueFactory<>("bill_amount"));
         bill_Date.setCellValueFactory(new PropertyValueFactory<>("bill_date"));
@@ -43,7 +44,7 @@ public class FXMLDocumentControllerRecordHistory {
     }
     public void showBill(MouseEvent actionEvent){
         try {
-        DataSource.bill = record.getSelectionModel().getSelectedItem();
+            AppData.bill = record.getSelectionModel().getSelectedItem();
 //        DataSource.caller = "record";
         Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
         Parent root = FXMLLoader.load(getClass().getResource("billRecord.fxml"));
