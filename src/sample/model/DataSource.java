@@ -8,16 +8,6 @@ import java.util.Random;
 
 
 public class DataSource {
-    private static final String medSearch = "SELECT * FROM " + UserData.DB_MED_NAME + " WHERE " + UserData.DB_MED_MED_NAME + " LIKE ?";
-    private static final String patSearch = "SELECT * FROM " + UserData.DB_PAT_NAME + " WHERE " + UserData.DB_PAT_PAT_NAME + " LIKE ?";
-    private static final String addMedicine = "INSERT INTO " + UserData.DB_MED_NAME + "(" + UserData.DB_MED_MED_NAME +"," + UserData.DB_MED_MED_ID + ","  + UserData.DB_MED_PRICE + ","
-            + "," + UserData.DB_MED_MFG_DATE + "," + UserData.DB_MED_EXP_DATE + "," + UserData.DB_MED_QUANTITY + "," + UserData.DB_MED_COM_ID + ") " +
-            "VALUES(?,?,?,?,?,?);";
-    private static final String getPriceSQL = "SELECT " + UserData.DB_MED_PRICE + " FROM " + UserData.DB_MED_NAME
-            + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
-    private static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
-    private static final String buyMed = "UPDATE " + UserData.DB_MED_NAME + " SET " + UserData.DB_MED_QUANTITY + " = " + UserData.DB_MED_QUANTITY + " - 1 WHERE "
-            + UserData.DB_MED_MED_NAME + " = ?";
 
     private static final String getEmpIdSQL = "Select max(" + UserData.DB_EMP_EMP_ID + ") from "
             + UserData.DB_EMP_NAME + ";";
@@ -26,11 +16,26 @@ public class DataSource {
     private static final String register = "INSERT INTO "  + UserData.DB_EMP_NAME + " (" + UserData.DB_EMP_EMP_ID +
                                             "," + UserData.DB_EMP_EMP_NAME + "," + UserData.DB_EMP_EMAIL + "," + UserData.DB_EMP_PASS + "," + UserData.DB_EMP_ADD +
                                             "," + UserData.DB_EMP_ROLE + ") VALUES(?,?,?,?,?,?);";
+//    private  static final String updateEmpSelectQuery = "Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
+//            + " = ?;";
     private static final String LoginSearchQ = "SELECT " + UserData.DB_EMP_PASS + " FROM " + UserData.DB_EMP_NAME + " WHERE " + UserData.DB_EMP_EMAIL + " =?";
-
+    private static final String selectEmployee = "Select * from employee;";
+    private static final String selectMed = "SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.com_id = medicine.com_id;";
+    private static final String insertBill = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(?,?,?,?);";
+    private static final String insertMedInBill = "Insert into med_in_bill values(?,?,?);";
+    private static final String decrementQuant = "Update " + UserData.DB_MED_NAME + " set " + UserData.DB_MED_QUANTITY
+            + " = " + UserData.DB_MED_QUANTITY + " - ? where " + UserData.DB_MED_MED_ID + " = ?;";
+    private static final String insertPatient = "Insert into " + UserData.DB_PAT_NAME + "(" + UserData.DB_PAT_ADD + "," + UserData.DB_PAT_PAT_NAME + "," +
+            UserData.DB_PAT_AGE + "," + UserData.DB_PAT_GENDER + "," + UserData.DB_PAT_PAT_ID + ") values(?,?,?,?,?);";
+    private static final String insertMed = "insert into " + UserData.DB_MED_NAME + "(" + UserData.DB_MED_MED_NAME +
+            ","+ UserData.DB_MED_MED_ID +"," + UserData.DB_MED_PRICE + "," + UserData.DB_MED_EXP_DATE +
+            "," + UserData.DB_MED_MFG_DATE + ","  + UserData.DB_MED_QUANTITY + "," + UserData.DB_MED_COM_ID + ") " +
+            "values(?,?,?,?,?,?,?);";
     private PreparedStatement preparedStatement;
     private Connection conn;
     private Statement statement;
+
+
 
     public boolean connectionOpen() {
         try {
@@ -50,7 +55,7 @@ public class DataSource {
             System.out.println("Exception: (connectionOpen)" + sqlException);
         }
     }//done
-    private String selectEmployee = "Select * from employee;";
+
     public void createEmployeeList(){
         try {
             statement = conn.createStatement();
@@ -70,6 +75,7 @@ public class DataSource {
             System.out.println("Exception:(createEmployeeList) " + e.getMessage());
         }
     }
+
     private void insertContact(Employee e){
         try {
             statement = conn.createStatement();
@@ -109,7 +115,6 @@ public class DataSource {
             System.out.println("Exception: (Registration)" + e);
         }
     }//done
-
     private void addRole(String role,String emp){
         String role1;
         try{
@@ -127,7 +132,6 @@ public class DataSource {
             System.out.println("Exception: (addRole)" + e);
         }
     }//done
-
     private String getEmpId(){
         try{
             statement = conn.createStatement();
@@ -180,7 +184,7 @@ public class DataSource {
         }
         return false;
     }//done
-    private String selectMed = "SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.com_id = medicine.com_id;";
+
     public void createMedicineList(){
         try{
             preparedStatement = conn.prepareStatement(selectMed);
@@ -202,7 +206,6 @@ public class DataSource {
             System.out.println("Exception: " + e.getMessage());
         }
     }//done
-
     public Medicines getMed(String name)  {
         try{
             return AppData.MedNameHashMap.get(name);
@@ -211,7 +214,6 @@ public class DataSource {
             return null;
         }
     }//done
-
     public void searchPat(){
         try{
             preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_PAT_NAME  + ";");
@@ -232,18 +234,12 @@ public class DataSource {
         }
     }//later
 
-    private String insertPatient = "Insert into " + UserData.DB_PAT_NAME + "(" + UserData.DB_PAT_ADD + "," + UserData.DB_PAT_PAT_NAME + "," +
-                         UserData.DB_PAT_AGE + "," + UserData.DB_PAT_GENDER + "," + UserData.DB_PAT_PAT_ID + ") values(?,?,?,?,?);";
 
-    //            String sql = "Insert into patient(pat_num,pat_name,pat_age,pat_gender,pat_id) values('"
-//                    + newPat.getPat_num() + "','" + newPat.getPat_name() + "'," + newPat.getPat_age() + ",'" + newPat.getPat_gender()
-//                    + "','" + patId + "');";
-    public void addPatient(Patient newPat, String pharma){
+    public void addPatient(Patient newPat){
         try {
             statement = conn.createStatement();
             String patId = generatePatID();
             newPat.setPat_id(patId);
-
             preparedStatement = conn.prepareStatement(insertPatient);
             preparedStatement.setString(1,newPat.getPat_num());
             preparedStatement.setString(2,newPat.getPat_name());
@@ -276,11 +272,6 @@ public class DataSource {
         }
         return null;
     }
-    String insertBill = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(?,?,?,?);";
-    String insertMedInBill = "Insert into med_in_bill values(?,?,?);";
-    String decrementQuant = "Update " + UserData.DB_MED_NAME + " set " + UserData.DB_MED_QUANTITY
-            + " = " + UserData.DB_MED_QUANTITY + " - ? where " + UserData.DB_MED_MED_ID + " = ?;";
-
     //            String query = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
 //                    dtf.format(now) + "','" + id + "','" + AppData.selectedPatient.getPat_id() + "'," + AppData.amount + ");";
 //            System.out.println(query);
@@ -288,6 +279,7 @@ public class DataSource {
 //                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + " where med_id = '" + v.getMed_id() + "';");
 //                        statement.execute("Insert into med_in_bill values('" + id + "','" + v.getMed_id() +
 //                                "'," + v.getQuant() + ");");
+
     public void addToBill(){
         try{
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -345,9 +337,6 @@ public class DataSource {
         }
         return null;
     }
-
-    private  static final String updateEmpSelectQuery = "Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
-            + " = ?;";
     public void updateValue() {
         try{
             statement = conn.createStatement();
@@ -423,10 +412,7 @@ public class DataSource {
             bill.getMed_id().add(medicines);
         }
     }
-private static final String insertMed = "insert into " + UserData.DB_MED_NAME + "(" + UserData.DB_MED_MED_NAME +
-        ","+ UserData.DB_MED_MED_ID +"," + UserData.DB_MED_PRICE + "," + UserData.DB_MED_EXP_DATE +
-        "," + UserData.DB_MED_MFG_DATE + ","  + UserData.DB_MED_QUANTITY + "," + UserData.DB_MED_COM_ID + ") " +
-            "values(?,?,?,?,?,?,?);";
+
     public void addMedicine() {
         try{
             statement = conn.createStatement();
@@ -436,11 +422,9 @@ private static final String insertMed = "insert into " + UserData.DB_MED_NAME + 
                 ResultSet resultSet = statement.executeQuery("select * from company where " +
                         "comp_name like '" + AppData.selectedMedicine.getCompany() + "';");
                 if(resultSet.next()){
-//                    AppData.selectedMedicine.setCompany(resultSet.getString("com_id"));
                     comp_id = resultSet.getString("com_id");
                 }else {
                     comp_id = generateCompId();
-//                    AppData.selectedMedicine.setCompany(comp_id);
                     statement.execute("insert into company(com_id,comp_name) " +
                             "values ('" + comp_id + "','" + AppData.selectedMedicine.getCompany() + "');");
                 }
@@ -455,10 +439,6 @@ private static final String insertMed = "insert into " + UserData.DB_MED_NAME + 
                 AppData.selectedMedicine.setExp_date(year + "-" + arrStr[1] + "-" + arrStr[2]);
                 AppData.selectedMedicine.setMed_id(generateMedId());
                 AppData.MedNameHashMap.put(AppData.selectedMedicine.getName(),AppData.selectedMedicine);
-//                statement.execute("insert into medicine(med_name,med_id,med_price,med_expdate,med_mfg,quant_med,com_id) " +
-//                        "values('" + AppData.selectedMedicine.getName() + "','" + AppData.selectedMedicine.getMed_id() + "','" +
-//                        AppData.selectedMedicine.getMed_price() + "','" + AppData.selectedMedicine.getExp_date()
-//                + "','" + AppData.selectedMedicine.getMfg_date() + "','" + AppData.selectedMedicine.getQuantity() + "','" + AppData.selectedMedicine.getCompany() + "');");
                 preparedStatement = conn.prepareStatement(insertMed);
                 preparedStatement.setString(1,AppData.selectedMedicine.getName());
                 preparedStatement.setString(2,AppData.selectedMedicine.getMed_id());

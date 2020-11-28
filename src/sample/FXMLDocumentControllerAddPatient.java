@@ -85,7 +85,7 @@ public class FXMLDocumentControllerAddPatient {
         }
     }
 
-    public void onSearchClick(ActionEvent actionEvent){
+    public void onSearchClick(){
         try{
             searchList.getItems().clear();
             String searchString = searchPatient.getText().strip();
@@ -137,7 +137,7 @@ public class FXMLDocumentControllerAddPatient {
                 if(female.isSelected()) newPat.setPat_gender("f");
                 else if(male.isSelected()) newPat.setPat_gender("m");
                 else newPat.setPat_gender("o");
-                dataSource.addPatient(newPat,AppData.pharmacist);
+                dataSource.addPatient(newPat);
                 AppData.selectedPatient = newPat;
             }
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
