@@ -70,19 +70,12 @@ public class FXMLDocumentControllerFinalBill {
     public void onSaveClicked(ActionEvent actionEvent){
         try {
             tick.setVisible(true);
-//            fitHeight="38.0" fitWidth="42.0" layoutX="705.0" layoutY="527.0"
-//            ImageView tick = new ImageView();
-//            tick.setImage(new Image(new FileInputStream("C:\\Users\\91937\\IntelliJIDEAProjects\\PharmManagementSystem\\src\\Images\\tick-icon.png")));
-//            tick.setFitHeight(38.0);
-//            tick.setFitWidth(42.0);
-//            tick.setLayoutX(705.0);
-//            tick.setLayoutY(527.0);
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             dataSource.addToBill();
             dataSource.connectionClose();
             TimeUnit.SECONDS.sleep(2);
-            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
+//            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
             AppData.notificationList.add(new Label(AppData.selectedPatient.getPat_name() + "\t" + AppData.amount + "\t" +  "Bill Generated!!"));
             System.out.println("Saved Successfully");
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());

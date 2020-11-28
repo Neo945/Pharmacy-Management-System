@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.model.AppData;
 import sample.model.DataSource;
 
@@ -103,13 +105,16 @@ public class FXMLDocumentControllerHomePage {
             Stage notifyStage = new Stage();
             BorderPane bp = new BorderPane();
             Button clear = new Button("Clear All notification");
+            notifyStage.initStyle(StageStyle.UNDECORATED);
+            clear.setStyle("-fx-background-color: #d73a49; -fx-background-radius: 15;");
             clear.setOnAction(this::onClearClicked);
             if(AppData.notificationList.isEmpty()) AppData.notificationList.add(new Label("No Notification"));
             stringListView.getItems().addAll(AppData.notificationList);
             bp.setBottom(clear);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
-            notifyStage.setScene(new Scene(bp,300, 200));
+            Scene scene = new Scene(bp,300, 200);
+            notifyStage.setScene(scene);
             notifyStage.show();
         }catch (Exception e){
             System.out.println("Exception(onNotificationClicked):" + e.getMessage());

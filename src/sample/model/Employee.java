@@ -9,7 +9,7 @@ public class Employee {
     private  String emp_add;
     private  String emp_pass;
     private  String emp_role;
-    private ArrayList<String> contact;
+    private final ArrayList<String> contact;
 
     public Employee() {
         this.contact = new ArrayList<>();

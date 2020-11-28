@@ -93,7 +93,7 @@ public class FXMLDocumentControllerAddMedicine {
             dataSource.addMedicine();
 
             TimeUnit.SECONDS.sleep(2);
-            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
+//            if(AppData.notificationList.get(0).getText().equals("No Notification")) AppData.notificationList.clear();
             AppData.notificationList.add(new Label(AppData.selectedMedicine.getName() + "\t Added!!"));
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));

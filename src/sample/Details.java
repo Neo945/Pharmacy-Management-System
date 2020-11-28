@@ -28,6 +28,10 @@ public class Details {
             name.setText(AppData.loginBoy.getEmp_name());
             email.setText(AppData.loginBoy.getEmail());
             address.setText(AppData.loginBoy.getEmp_add());
+            for (String m :
+                    AppData.loginBoy.getContact()) {
+                System.out.println(m);
+            }
             number.setText(AppData.loginBoy.getContact().get(0));
         }catch (Exception e){
             System.out.println("Exception:" + e.getMessage());

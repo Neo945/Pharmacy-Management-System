@@ -48,6 +48,10 @@ public class FXMLDocumentControllerLogin {
                     //scene change
                     System.out.println("Login Successful");
                     AppData.loginBoy = dataSource.searchEmp(email_id);
+                    for (String m :
+                            AppData.loginBoy.getContact()) {
+                        System.out.println(m);
+                    }
                     try{
                         Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
                         Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));

@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class FXMLDocumentControllerRegistration {
     public Label label;
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public FXMLDocumentControllerRegistration() {
         this.dataSource = new DataSource();
@@ -86,6 +86,7 @@ public class FXMLDocumentControllerRegistration {
 //                employee.getContact().addAll(Arrays.asList(contArray));
                 for (String s : contArray) {
                     employee.setContact(s);
+                    System.out.println(s);
                 }
                 employee.setEmp_role(this.combobox.getEditor().getText().strip());
 //                Date date = new Date("");
