@@ -14,20 +14,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 import sample.model.Patient;
 
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
 
 public class FXMLDocumentControllerAddPatient {
     @FXML
     private TextField searchPatient;
-//    @FXML
-//    private Button searchButton;
     @FXML
     private ListView<Patient> searchList;
     @FXML
@@ -36,16 +34,10 @@ public class FXMLDocumentControllerAddPatient {
     private TextField patAdd;
     @FXML
     private TextField patAge;
-//    @FXML
-//    private ToggleGroup genderToggle;
     @FXML
     private ListView<BorderPane> medList;
     @FXML
     private CheckBox robotCheck;
-//    @FXML
-//    private Button back;
-//    @FXML
-//    private Button generateBill;
     @FXML
     private RadioButton male;
     @FXML
@@ -60,7 +52,7 @@ public class FXMLDocumentControllerAddPatient {
         try{
             medList.getItems().clear();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
-            DataSource.MedNameHashMap.forEach((k,v)-> {
+            AppData.MedNameHashMap.forEach((k, v)-> {
                 if(v.getQuant()>0){
                     BorderPane bp = new BorderPane();
                     bp.setRight(new Label( indiaCurrency.getSymbol() + " " + v.getMed_price()));
@@ -73,7 +65,7 @@ public class FXMLDocumentControllerAddPatient {
             BorderPane bp = new BorderPane();
             bp.setLeft(new Label("Total"));
             Label labsum = new Label(indiaCurrency.getSymbol() + " " + sum);
-            DataSource.amount = sum;
+            AppData.amount = sum;
             labsum.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
             bp.setRight(labsum);
             medList.getItems().add(bp);
@@ -83,8 +75,8 @@ public class FXMLDocumentControllerAddPatient {
         try{
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.patientArrayList.isEmpty())dataSource.searchPat();
-            for (Patient patient : DataSource.patientArrayList) {
+            if(AppData.patientArrayList.isEmpty())dataSource.searchPat();
+            for (Patient patient : AppData.patientArrayList) {
                 searchList.getItems().add(patient);
             }
             dataSource.connectionClose();
@@ -93,11 +85,11 @@ public class FXMLDocumentControllerAddPatient {
         }
     }
 
-    public void onSearchClick(ActionEvent actionEvent){
+    public void onSearchClick(){
         try{
             searchList.getItems().clear();
-            String searchString = searchPatient.getText();
-            for (Patient patient : DataSource.patientArrayList) {
+            String searchString = searchPatient.getText().strip();
+            for (Patient patient : AppData.patientArrayList) {
                 if(patient.getPat_name().contains(searchString)) searchList.getItems().add(patient);
             }
         }catch (Exception e){
@@ -107,8 +99,8 @@ public class FXMLDocumentControllerAddPatient {
     public void fillData(MouseEvent actionEvent){
 //        try{
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
-            PatientName.setText(selectedItemsPatient.getPat_name());
-            patAdd.setText(selectedItemsPatient.getPat_num());
+            PatientName.setText(selectedItemsPatient.getPat_name().strip());
+            patAdd.setText(selectedItemsPatient.getPat_num().strip());
             patAge.setText("" + selectedItemsPatient.getPat_age());
             String gender = selectedItemsPatient.getPat_gender();
             if(gender.equals("m")){
@@ -136,17 +128,17 @@ public class FXMLDocumentControllerAddPatient {
             Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
             if(selectedItemsPatient!=null){
 //                Patient selectedItemsPatient= searchList.getSelectionModel().getSelectedItem();
-                DataSource.selectedPatient = selectedItemsPatient;
+                AppData.selectedPatient = selectedItemsPatient;
             }else {
                 Patient newPat= new Patient();
-                newPat.setPat_name(PatientName.getText());
-                newPat.setPat_num(patAdd.getText());
-                newPat.setPat_age(Integer.parseInt(patAge.getText()));
+                newPat.setPat_name(PatientName.getText().strip());
+                newPat.setPat_num(patAdd.getText().strip());
+                newPat.setPat_age(Integer.parseInt(patAge.getText().strip()));
                 if(female.isSelected()) newPat.setPat_gender("f");
                 else if(male.isSelected()) newPat.setPat_gender("m");
                 else newPat.setPat_gender("o");
-                dataSource.addPatient(newPat,DataSource.pharmacist);
-                DataSource.selectedPatient = newPat;
+                dataSource.addPatient(newPat);
+                AppData.selectedPatient = newPat;
             }
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("PharmacistBill.fxml"));

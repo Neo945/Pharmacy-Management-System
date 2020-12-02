@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 
 import java.io.IOException;
@@ -34,12 +35,13 @@ public class FXMLDocumentControllerTransaction {
     private double totalCostValue = 0;
     public void initialize(){
         try {
-            MedicineList.getItems().clear();
+//            MedicineList.getItems().clear();
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.MedNameHashMap.isEmpty()) dataSource.createMedicineList();
-            DataSource.MedNameHashMap.forEach((k,v)-> {
+            /*if(DataSource.MedNameHashMap.isEmpty())*/ dataSource.createMedicineList();
+            AppData.MedNameHashMap.forEach((k, v)-> {
+                if(!(v.getQuantity()<1)){
                 BorderPane bp = new BorderPane();
                 HBox hbx = new HBox();
 
@@ -65,6 +67,7 @@ public class FXMLDocumentControllerTransaction {
                 bp.setLeft(medName);
                 bp.setRight(hbx);
                 MedicineList.getItems().add(bp);
+                }
             });
             dataSource.connectionClose();
         } catch (Exception e) {
@@ -76,7 +79,7 @@ public class FXMLDocumentControllerTransaction {
             MedicineList.getItems().clear();
             String search = searchMed.getText();
             DataSource dataSource = new DataSource();
-            DataSource.MedNameHashMap.forEach((k,v)-> {
+            AppData.MedNameHashMap.forEach((k,v)-> {
                 if(k.contains(search)){
                     BorderPane bp = new BorderPane();
                     HBox hbx = new HBox();
@@ -116,16 +119,17 @@ public class FXMLDocumentControllerTransaction {
             String idMedName = actionEvent.getSource().toString().split("=")[1].split(",")[0].split("p")[0];
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
-            if(DataSource.MedNameHashMap.get(idMedName).getQuant()>8) return;
-            if((DataSource.MedNameHashMap.get(idMedName).getQuantity())<(DataSource.MedNameHashMap.get(idMedName).getQuant()))return;
-            totalCostValue += DataSource.MedNameHashMap.get(idMedName).getMed_price();
+            if(AppData.MedNameHashMap.get(idMedName).getQuant()>8) return;
+            if((AppData.MedNameHashMap.get(idMedName).getQuantity())<=(AppData.MedNameHashMap.get(idMedName).getQuant()))return;
+            totalCostValue += AppData.MedNameHashMap.get(idMedName).getMed_price();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
-            int count = DataSource.MedNameHashMap.get(idMedName).getQuant();
-            DataSource.MedNameHashMap.get(idMedName).setQuant(count+1);
+            int count = AppData.MedNameHashMap.get(idMedName).getQuant();
+            AppData.MedNameHashMap.get(idMedName).setQuant(count+1);
             for(int i = 0;i<MedicineList.getItems().size();i++){
                 if(((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1).getId().split("q")[0].equals(idMedName)){
-                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1)).setText(String.format("%2d ",DataSource.MedNameHashMap.get(idMedName).getQuant()));
+                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().
+                            get(1)).setText(String.format("%2d ",AppData.MedNameHashMap.get(idMedName).getQuant()));
                 }
             }
         }catch (Exception e){
@@ -139,17 +143,18 @@ public class FXMLDocumentControllerTransaction {
             dataSource.connectionOpen();
             if(totalCostValue==0)return;
 //            if(DataSource.medicineHashMap.get(idMedName)<1) return;
-            if(DataSource.MedNameHashMap.get(idMedName).getQuant()<1) return;
-            totalCostValue -= DataSource.MedNameHashMap.get(idMedName).getMed_price();
+            if(AppData.MedNameHashMap.get(idMedName).getQuant()<1) return;
+            totalCostValue -= AppData.MedNameHashMap.get(idMedName).getMed_price();
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             totalCost.setText("Total Cost - " + indiaCurrency.getSymbol() + " " + totalCostValue);
 //            dataSource.decrementQuant(idMedName);
 //            list.add(dataSource.getMed(idMedName));
-            int count = DataSource.MedNameHashMap.get(idMedName).getQuant();
-            DataSource.MedNameHashMap.get(idMedName).setQuant(count-1);
+            int count = AppData.MedNameHashMap.get(idMedName).getQuant();
+            AppData.MedNameHashMap.get(idMedName).setQuant(count-1);
             for(int i = 0;i<MedicineList.getItems().size();i++){
                 if(((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1).getId().split("q")[0].equals(idMedName)){
-                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1)).setText(String.format("%2d ",DataSource.MedNameHashMap.get(idMedName).getQuant()));
+                    ((Label)((HBox)(MedicineList.getItems().get(i).getRight())).getChildren().get(1))
+                            .setText(String.format("%2d ",AppData.MedNameHashMap.get(idMedName).getQuant()));
                 }
             }
         }catch (Exception e){

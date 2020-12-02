@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 
 public class Details {
@@ -24,10 +25,14 @@ public class Details {
     private Button back;
     public void initialize(){
         try{
-            name.setText(DataSource.loginBoy.getEmp_name());
-            email.setText(DataSource.loginBoy.getEmail());
-            address.setText(DataSource.loginBoy.getEmp_add());
-            number.setText(DataSource.loginBoy.getContact().get(0));
+            name.setText(AppData.loginBoy.getEmp_name());
+            email.setText(AppData.loginBoy.getEmail());
+            address.setText(AppData.loginBoy.getEmp_add());
+            for (String m :
+                    AppData.loginBoy.getContact()) {
+                System.out.println(m);
+            }
+            number.setText(AppData.loginBoy.getContact().get(0));
         }catch (Exception e){
             System.out.println("Exception:" + e.getMessage());
         }

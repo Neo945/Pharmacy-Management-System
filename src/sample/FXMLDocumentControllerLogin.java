@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 
 import java.io.IOException;
@@ -38,15 +39,19 @@ public class FXMLDocumentControllerLogin {
             allField.setTextFill(Color.WHITE);
             try{
                 //get all the values and insert it into the database
-                String email_id = this.email_id.getText().toLowerCase();
-                String password = this.password.getText();
+                String email_id = this.email_id.getText().toLowerCase().strip();
+                String password = this.password.getText().strip();
                 DataSource dataSource = new DataSource();
                 dataSource.connectionOpen();
                 dataSource.createEmployeeList();
                 if(dataSource.loginSearch(email_id,password)){
                     //scene change
                     System.out.println("Login Successful");
-                    DataSource.loginBoy = dataSource.searchEmp(email_id);
+                    AppData.loginBoy = dataSource.searchEmp(email_id);
+                    for (String m :
+                            AppData.loginBoy.getContact()) {
+                        System.out.println(m);
+                    }
                     try{
                         Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
                         Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
@@ -57,7 +62,7 @@ public class FXMLDocumentControllerLogin {
                         System.out.println("Exception: (login->homePage)" + exception);
                     }
                 }else{
-                    allField.setText("INCORRECT PASSWORD");
+                    allField.setText("INCORRECT PASSWORD OR EMAIL ID");
                     allField.setTextFill(Color.RED);
                 }
                 dataSource.connectionClose();

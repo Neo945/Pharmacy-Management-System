@@ -40,7 +40,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <TableView fx:id="record" layoutX="250.0" layoutY="110.0" opacity="0.7" prefHeight="373.0" prefWidth="400.0">
+      <TableView fx:id="record" layoutX="250.0" layoutY="110.0" opacity="0.7" prefHeight="373.0" prefWidth="400.0" onMouseClicked="#showBill">
         <columns>
           <TableColumn fx:id="pat_name" prefWidth="100.0" text="Patient's Name" />
           <TableColumn fx:id="bill_Date" prefWidth="100.0" text="Billing Date" />

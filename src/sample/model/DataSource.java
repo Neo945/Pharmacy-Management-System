@@ -1,50 +1,40 @@
 package sample.model;
 
 
-import javafx.beans.value.ObservableListValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Random;
 
 
 public class DataSource {
-    public static ObservableList<Label> notificationList = FXCollections.observableArrayList();;
-    public static Medicines selectedMedicine;
-    private Connection conn;
-    private Statement statement;
-    private PreparedStatement preparedStatement;
-    public static String pharmacist;
+
+    private static final String getEmpIdSQL = "Select max(" + UserData.DB_EMP_EMP_ID + ") from "
+            + UserData.DB_EMP_NAME + ";";
+    private static final String regIntoContact = "INSERT INTO " + UserData.DB_EMP_CONTACT_NAME + " VALUES (?,?);";
+
     private static final String register = "INSERT INTO "  + UserData.DB_EMP_NAME + " (" + UserData.DB_EMP_EMP_ID +
                                             "," + UserData.DB_EMP_EMP_NAME + "," + UserData.DB_EMP_EMAIL + "," + UserData.DB_EMP_PASS + "," + UserData.DB_EMP_ADD +
                                             "," + UserData.DB_EMP_ROLE + ") VALUES(?,?,?,?,?,?);";
+//    private  static final String updateEmpSelectQuery = "Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
+//            + " = ?;";
     private static final String LoginSearchQ = "SELECT " + UserData.DB_EMP_PASS + " FROM " + UserData.DB_EMP_NAME + " WHERE " + UserData.DB_EMP_EMAIL + " =?";
-    private static final String medSearch = "SELECT * FROM " + UserData.DB_MED_NAME + " WHERE " + UserData.DB_MED_MED_NAME + " LIKE ?";
-    private static final String patSearch = "SELECT * FROM " + UserData.DB_PAT_NAME + " WHERE " + UserData.DB_PAT_PAT_NAME + " LIKE ?";
-    private static final String regIntoContact = "INSERT INTO " + UserData.DB_EMP_CONTACT_NAME + " VALUES (?,?);";
-    private static final String addMedicine = "INSERT INTO " + UserData.DB_MED_NAME + "(" + UserData.DB_MED_MED_NAME +"," + UserData.DB_MED_MED_ID + ","  + UserData.DB_MED_PRICE + ","
-                                            + "," + UserData.DB_MED_MFG_DATE + "," + UserData.DB_MED_EXP_DATE + "," + UserData.DB_MED_QUANTITY + "," + UserData.DB_MED_COM_ID + ") " +
-                                                "VALUES(?,?,?,?,?,?);";
-    private static final String buyMed = "UPDATE " + UserData.DB_MED_NAME + " SET " + UserData.DB_MED_QUANTITY + " = " + UserData.DB_MED_QUANTITY + " - 1 WHERE "
-                                        + UserData.DB_MED_MED_NAME + " = ?";
-    public static final String getEmpIdSQL = "Select max(" + UserData.DB_EMP_EMP_ID + ") from "
-            + UserData.DB_EMP_NAME + ";";
-    public static final String getPriceSQL = "SELECT " + UserData.DB_MED_PRICE + " FROM " + UserData.DB_MED_NAME
-                                            + " WHERE " + UserData.DB_MED_MED_NAME + " = ?;";
-    public static final String getMedSQL = "SELECT * FROM medicine WHERE med_name = ?;";
+    private static final String selectEmployee = "Select * from employee;";
+    private static final String selectMed = "SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.com_id = medicine.com_id;";
+    private static final String insertBill = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values(?,?,?,?);";
+    private static final String insertMedInBill = "Insert into med_in_bill values(?,?,?);";
+    private static final String decrementQuant = "Update " + UserData.DB_MED_NAME + " set " + UserData.DB_MED_QUANTITY
+            + " = " + UserData.DB_MED_QUANTITY + " - ? where " + UserData.DB_MED_MED_ID + " = ?;";
+    private static final String insertPatient = "Insert into " + UserData.DB_PAT_NAME + "(" + UserData.DB_PAT_ADD + "," + UserData.DB_PAT_PAT_NAME + "," +
+            UserData.DB_PAT_AGE + "," + UserData.DB_PAT_GENDER + "," + UserData.DB_PAT_PAT_ID + ") values(?,?,?,?,?);";
+    private static final String insertMed = "insert into " + UserData.DB_MED_NAME + "(" + UserData.DB_MED_MED_NAME +
+            ","+ UserData.DB_MED_MED_ID +"," + UserData.DB_MED_PRICE + "," + UserData.DB_MED_EXP_DATE +
+            "," + UserData.DB_MED_MFG_DATE + ","  + UserData.DB_MED_QUANTITY + "," + UserData.DB_MED_COM_ID + ") " +
+            "values(?,?,?,?,?,?,?);";
+    private PreparedStatement preparedStatement;
+    private Connection conn;
+    private Statement statement;
 
-    public static Employee loginBoy;
-    public static Patient selectedPatient;
-    public static ArrayList<Patient> patientArrayList = new ArrayList<>();
-    public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
-    public static ArrayList<Employee> employees = new ArrayList<>();
-    public static ArrayList<Bill> bills = new ArrayList<>();
-    public static double amount;
 
 
     public boolean connectionOpen() {
@@ -56,6 +46,7 @@ public class DataSource {
             return false;
         }
     }//done
+
     public void connectionClose() {
         try {
             if(conn!=null)
@@ -65,29 +56,41 @@ public class DataSource {
         }
     }//done
 
-
-
     public void createEmployeeList(){
         try {
             statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("Select * from employee;");
+            ResultSet resultSet = statement.executeQuery(selectEmployee);
             while (resultSet.next()){
                 Employee employee = new Employee();
-                employee.setEmp_pass(resultSet.getString("emp_pass"));
-                employee.setEmp_role(resultSet.getString("emp_role"));
-                employee.setEmp_id(resultSet.getString("emp_id"));
-                employee.setEmp_add(resultSet.getString("emp_add"));
-                employee.setEmail(resultSet.getString("emp_email"));
-                employee.setEmp_name(resultSet.getString("emp_name"));
-                employees.add(employee);
+                employee.setEmp_pass(resultSet.getString(UserData.DB_EMP_PASS));
+                employee.setEmp_role(resultSet.getString(UserData.DB_EMP_ROLE));
+                employee.setEmp_id(resultSet.getString(UserData.DB_EMP_EMP_ID));
+                employee.setEmp_add(resultSet.getString(UserData.DB_EMP_ADD));
+                employee.setEmail(resultSet.getString(UserData.DB_EMP_EMAIL));
+                employee.setEmp_name(resultSet.getString(UserData.DB_EMP_EMP_NAME));
+                insertContact(employee);
+                AppData.employees.add(employee);
             }
         }catch (SQLException e){
             System.out.println("Exception:(createEmployeeList) " + e.getMessage());
         }
     }
+
+    private void insertContact(Employee e){
+        try {
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from employee_num where emp_id ='"  + e.getEmp_id() + "';");
+            while (resultSet.next()){
+                e.setContact(resultSet.getString("emp_num"));
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
+
     public Employee searchEmp(String email){
         for (Employee e:
-             employees) {
+                AppData.employees) {
             if(e.getEmail().equals(email)) return e;
         }
         return null;
@@ -107,11 +110,12 @@ public class DataSource {
             preparedStatement.execute();
             addRole(employee.getEmp_role(),emp);
             addContact(employee);
-            employees.add(employee);
+            AppData.employees.add(employee);
         }catch (SQLException e){
             System.out.println("Exception: (Registration)" + e);
         }
     }//done
+//    public Patient
     private void addRole(String role,String emp){
         String role1;
         try{
@@ -120,7 +124,8 @@ public class DataSource {
             } else {
                 role1 = UserData.DB_EMP_CEMP_ID;
             }
-            preparedStatement = conn.prepareStatement("INSERT INTO " + role + "(" + role1 + ") values(?);");
+            String insertRole = "INSERT INTO " + role + "(" + role1 + ") values(?);";
+            preparedStatement = conn.prepareStatement(insertRole);
             preparedStatement.setString(1,emp);
             preparedStatement.execute();
             preparedStatement.close();
@@ -148,6 +153,7 @@ public class DataSource {
         }
         return null;
     }//done
+
     private void addContact(Employee employee){
         try{
             preparedStatement = conn.prepareStatement(regIntoContact);
@@ -163,9 +169,6 @@ public class DataSource {
             System.out.println("Exception: (addContact)" + e);
         }
     }//done
-
-
-
 
     public boolean loginSearch(String email,String pass){
         try{
@@ -183,13 +186,11 @@ public class DataSource {
         return false;
     }//done
 
-
     public void createMedicineList(){
         try{
-            preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_MED_NAME + " join company on company.comp_id = medicine.comp_id;");
+            preparedStatement = conn.prepareStatement(selectMed);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                if(resultSet.getInt(UserData.DB_MED_QUANTITY)<1) continue;
                 Medicines medicines = new Medicines();
                 medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
                 medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
@@ -198,7 +199,7 @@ public class DataSource {
                 medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
                 medicines.setQuantity(resultSet.getInt(UserData.DB_MED_QUANTITY));
                 medicines.setCompany(resultSet.getString("comp_name"));
-                MedNameHashMap.put(medicines.getName(),medicines);
+                AppData.MedNameHashMap.put(medicines.getName(),medicines);
             }
             resultSet.close();
             preparedStatement.close();
@@ -206,31 +207,14 @@ public class DataSource {
             System.out.println("Exception: " + e.getMessage());
         }
     }//done
-
-
-
     public Medicines getMed(String name)  {
         try{
-            return MedNameHashMap.get(name);
+            return AppData.MedNameHashMap.get(name);
         }catch (Exception e){
             System.out.println("Exception:(getMed) " + e.getMessage());
             return null;
         }
-
     }//done
-
-    public boolean existsDB(Patient patient){
-        try {
-            statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM patient WHERE pat_id=" + patient.getPat_id());
-            resultSet.next();
-            return resultSet.next();
-        }catch (SQLException e){
-            System.out.println("Exception:(existDB) " + e.getMessage());
-            return false;
-        }
-    }
-
     public void searchPat(){
         try{
             preparedStatement = conn.prepareStatement("SELECT * FROM " + UserData.DB_PAT_NAME  + ";");
@@ -241,9 +225,8 @@ public class DataSource {
                 patient.setPat_id(resultSet.getString(UserData.DB_PAT_PAT_ID));
                 patient.setPat_num(resultSet.getString(UserData.DB_PAT_ADD));
                 patient.setPat_age(resultSet.getInt(UserData.DB_PAT_AGE));
-                patient.setPemp_id(resultSet.getString(UserData.DB_PAT_PEMP_ID));
                 patient.setPat_gender(resultSet.getString(UserData.DB_PAT_GENDER));
-                patientArrayList.add(patient);
+                AppData.patientArrayList.add(patient);
             }
             resultSet.close();
             preparedStatement.close();
@@ -252,24 +235,29 @@ public class DataSource {
         }
     }//later
 
-    public void addPatient(Patient newPat, String pharma){
+
+    public void addPatient(Patient newPat){
         try {
             statement = conn.createStatement();
             String patId = generatePatID();
             newPat.setPat_id(patId);
-            String sql = "Insert into patient(pat_num,pat_name,pat_age,pat_gender,pat_id) values('"
-                    + newPat.getPat_num() + "','" + newPat.getPat_name() + "'," + newPat.getPat_age() + ",'" + newPat.getPat_gender()
-                    + "','" + patId + "');";
-            System.out.println(sql);
-            statement.execute(sql);
+            preparedStatement = conn.prepareStatement(insertPatient);
+            preparedStatement.setString(1,newPat.getPat_num());
+            preparedStatement.setString(2,newPat.getPat_name());
+            preparedStatement.setInt(3,newPat.getPat_age());
+            preparedStatement.setString(4,newPat.getPat_gender());
+            preparedStatement.setString(5,patId);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.execute();
         }catch (SQLException e){
             System.out.println("Exception:(addPatient) " + e.getMessage());
         }
     }//done
+
     public String generatePatID(){
         try{
             statement = conn.createStatement();
-            ResultSet result = statement.executeQuery("select max(pat_id) from patient;");
+            ResultSet result = statement.executeQuery("select max(" + UserData.DB_PAT_PAT_ID + ") from " + UserData.DB_PAT_NAME + ";");
             result.next();
             String patID = result.getString("max(" + UserData.DB_PAT_PAT_ID + ")");
             if(patID==null){
@@ -285,6 +273,13 @@ public class DataSource {
         }
         return null;
     }
+    //            String query = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
+//                    dtf.format(now) + "','" + id + "','" + AppData.selectedPatient.getPat_id() + "'," + AppData.amount + ");";
+//            System.out.println(query);
+//            statement.execute(query);
+//                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + " where med_id = '" + v.getMed_id() + "';");
+//                        statement.execute("Insert into med_in_bill values('" + id + "','" + v.getMed_id() +
+//                                "'," + v.getQuant() + ");");
 
     public void addToBill(){
         try{
@@ -292,20 +287,29 @@ public class DataSource {
             LocalDateTime now = LocalDateTime.now();
             statement = conn.createStatement();
             String id = getBillId();
-//            selectedPatient.setPat_id();
-            String query = "Insert into bill(bill_date,bill_id,pat_id,bill_amount) values('" +
-                    dtf.format(now) + "','" + id + "','" + selectedPatient.getPat_id() + "'," + amount + ");";
-            System.out.println(query);
-            statement.execute(query);
-            MedNameHashMap.forEach((k,v)->{
-                if(v.getQuantity()>0){
+            preparedStatement = conn.prepareStatement(insertBill);
+            preparedStatement.setString(1,dtf.format(now));
+            preparedStatement.setString(2,id);
+            preparedStatement.setString(3,AppData.selectedPatient.getPat_id());
+            preparedStatement.setDouble(4,AppData.amount);
+            preparedStatement.execute();
+            AppData.MedNameHashMap.forEach((k,v)->{
+                if(v.getQuant()>0){
                     try {
-                        statement.execute("Insert into med_in_bill values('" + id + "','" + v.getMed_id() +
-                                "'," + v.getQuant() + ");");
-                        statement.execute("Update medicine set quant_med = quant_med - " + v.getQuant() + " where med_id = '" + v.getMed_id() + "';");
+                        preparedStatement = conn.prepareStatement(insertMedInBill);
+                        preparedStatement.setString(1,id);
+                        preparedStatement.setString(2,v.getMed_id());
+                        preparedStatement.setInt(3,v.getQuant());
+                        System.out.println(preparedStatement.toString());
+                        preparedStatement.execute();
+                        preparedStatement = conn.prepareStatement(decrementQuant);
+                        preparedStatement.setInt(1,v.getQuant());
+                        preparedStatement.setString(2,v.getMed_id());
+                        System.out.println(preparedStatement.toString());
+                        preparedStatement.execute();
                         v.setQuantity(v.getQuantity()-v.getQuant());
                     } catch (SQLException sqlException) {
-                        System.out.println("Exception:(addToBill) " + sqlException.getMessage());
+                        System.out.println("Exception:(addToBil  l) " + sqlException.getMessage());
                     }
                 }
             });
@@ -313,63 +317,69 @@ public class DataSource {
             System.out.println("Exception:(addToBill) " + e.getMessage());
         }
     }
-        private String getBillId(){
-            try{
-                statement = conn.createStatement();
-                ResultSet result = statement.executeQuery("Select max(bill_id) from bill;");
-                result.next();
-                String emp = result.getString("max(bill_id)");
-                System.out.println(emp);
-                if(emp==null){
-                    emp = "B0";
-                }
-                String[] val = emp.split("B");//{0112}
-                int emp_id = Integer.parseInt(val[1]);
-                emp_id++;
-                emp = "B" + emp_id;
-                return emp;
-            }catch (SQLException e){
-                System.out.println("Exception: (getEmpId)"  + e);
-            }
-            return null;
-        }
 
+    private String getBillId(){
+        try{
+            statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("Select max(bill_id) from bill;");
+            result.next();
+            String emp = result.getString("max(bill_id)");
+            System.out.println(emp);
+            if(emp==null){
+                emp = "B0";
+            }
+            String[] val = emp.split("B");//{0112}
+            int emp_id = Integer.parseInt(val[1]);
+            emp_id++;
+            emp = "B" + emp_id;
+            return emp;
+        }catch (SQLException e){
+            System.out.println("Exception: (getEmpId)"  + e);
+        }
+        return null;
+    }
     public void updateValue() {
         try{
-            String updateEmpSelectQuery = "Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';";
             statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(updateEmpSelectQuery);
+//            preparedStatement.setString(1,AppData.loginBoy.getEmp_id());
+            ResultSet resultSet = statement.executeQuery("Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
+                    + " = '" + AppData.loginBoy.getEmp_id() + "';");
             resultSet.next();
-            if((!resultSet.getString("emp_email").equals(loginBoy.getEmail()))){
-                statement.execute("Update employee set emp_email = '" +
-                        loginBoy.getEmail() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            if((!resultSet.getString(UserData.DB_EMP_EMAIL).equals(AppData.loginBoy.getEmail()))){
+                statement.execute("Update " + UserData.DB_EMP_NAME + "  set " + UserData.DB_EMP_EMAIL + "  = '" +
+                        AppData.loginBoy.getEmail() + "' where "+ UserData.DB_EMP_EMP_ID +
+                        " = '" + AppData.loginBoy.getEmp_id() + "';");
             }
-            resultSet = statement.executeQuery(updateEmpSelectQuery);
+            resultSet = statement.executeQuery("Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
+                    + " = '" + AppData.loginBoy.getEmp_id() + "';");
             resultSet.next();
-            if(!(resultSet.getString("emp_add").equals(loginBoy.getEmp_add()))){
-                statement.execute("Update employee set emp_add = '" +
-                        loginBoy.getEmp_add() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            if(!(resultSet.getString(UserData.DB_EMP_ADD).equals(AppData.loginBoy.getEmp_add()))){
+                statement.execute("Update " + UserData.DB_EMP_NAME + " set " + UserData.DB_EMP_ADD + " = '" +
+                        AppData.loginBoy.getEmp_add() + "' where "+ UserData.DB_EMP_EMP_ID +
+                        " = '" + AppData.loginBoy.getEmp_id() + "';");
             }
-            resultSet = statement.executeQuery(updateEmpSelectQuery);
+            resultSet = statement.executeQuery("Select * from " + UserData.DB_EMP_NAME + " where "+ UserData.DB_EMP_EMP_ID
+                    + " = '" + AppData.loginBoy.getEmp_id() + "';");
             resultSet.next();
-            if(!(resultSet.getString("emp_pass").equals(loginBoy.getEmp_pass()))){
-                statement.execute("Update employee set emp_pass = '" +
-                        loginBoy.getEmp_pass() + "' where emp_id = '" + loginBoy.getEmp_id() + "';");
+            if(!(resultSet.getString(UserData.DB_EMP_PASS).equals(AppData.loginBoy.getEmp_pass()))){
+                statement.execute("Update " + UserData.DB_EMP_NAME + " set " + UserData.DB_EMP_PASS + " = '" +
+                        AppData.loginBoy.getEmp_pass() + "' where "+ UserData.DB_EMP_EMP_ID +
+                        " = '" + AppData.loginBoy.getEmp_id() + "';");
             }
-            statement.execute("delete from employee_num where emp_id = '" + loginBoy.getEmp_id() + "';");
-//            resultSet = statement.executeQuery("Select * from employee where emp_id = '" + loginBoy.getEmp_id() + "';");
-//            resultSet.next();
+            statement.execute("delete from employee_num where " + UserData.DB_EMP_EMP_ID
+                    + " = '" + AppData.loginBoy.getEmp_id() + "';");
             for (String s :
-                    loginBoy.getContact()) {
-                statement.execute("insert into employee_num values('" + loginBoy.getEmp_id() + "','" + s + "');");
+                    AppData.loginBoy.getContact()) {
+                statement.execute("insert into employee_num values('" + AppData.loginBoy.getEmp_id() + "','" + s + "');");
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public void generateBillList(){
         try {
-            bills.clear();
+            AppData.bills.clear();
             statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("Select * from bill join patient on patient.pat_id = bill.pat_id;");
             while (resultSet.next()){
@@ -378,21 +388,117 @@ public class DataSource {
                 bill.setBill_id(resultSet.getString("bill_id"));
                 bill.setPat_name(resultSet.getString("pat_name"));
                 bill.setBill_amount(resultSet.getDouble("bill_amount"));
-//                resultSet = statement.executeQuery("select * from med_in_bill where bill_id = '" + bill.getBill_id() + "';");
-//                while (resultSet.next()){
-//                    MedicineInBill medicineInBill = new MedicineInBill();
-//                    medicineInBill.setMed_id(resultSet.getString("med_id"));
-//                    medicineInBill.setQuant(resultSet.getInt("quantity"));
-//                    bill.getMed_id().add(medicineInBill);
-//                }
-                bills.add(bill);
+                System.out.println(bill.getPat_name());
+                insertMed(bill);
+                AppData.bills.add(bill);
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
     }
+    private void insertMed(Bill bill) throws SQLException {
+        statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from med_in_bill " +
+                "join medicine on medicine.med_id = med_in_bill.med_id " +
+                "where bill_id = '" + bill.getBill_id() + "';");
+        while(resultSet.next()){
+            Medicines medicines = new Medicines();
+            medicines.setName(resultSet.getString(UserData.DB_MED_MED_NAME));
+            medicines.setMed_id(resultSet.getString(UserData.DB_MED_MED_ID));
+            medicines.setExp_date(resultSet.getString(UserData.DB_MED_EXP_DATE));
+            medicines.setMed_price(resultSet.getDouble(UserData.DB_MED_PRICE));
+            medicines.setMfg_date(resultSet.getString(UserData.DB_MED_MFG_DATE));
+            medicines.setQuant(resultSet.getInt("quantity"));
+            System.out.println(medicines.getName());
+            bill.getMed_id().add(medicines);
+        }
+    }
 
-    public void addMedicine(Medicines newMed) {
+    public void addMedicine() {
+        try{
+            statement = conn.createStatement();
+            String comp_id;
+            Medicines addMed = AppData.MedNameHashMap.get(AppData.selectedMedicine.getName());
+            if(addMed==null){
+                ResultSet resultSet = statement.executeQuery("select * from company where " +
+                        "comp_name like '" + AppData.selectedMedicine.getCompany() + "';");
+                if(resultSet.next()){
+                    comp_id = resultSet.getString("com_id");
+                }else {
+                    comp_id = generateCompId();
+                    statement.execute("insert into company(com_id,comp_name) " +
+                            "values ('" + comp_id + "','" + AppData.selectedMedicine.getCompany() + "');");
+                }
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDateTime now = LocalDateTime.now();
+                AppData.selectedMedicine.setMfg_date(dtf.format(now));
+                String[] arrStr = AppData.selectedMedicine.getMfg_date().split("-");
+                int year = Integer.parseInt(arrStr[0]);
+                Random random = new Random();
+                int addYear = 1 + random.nextInt(9);
+                year+=addYear;
+                AppData.selectedMedicine.setExp_date(year + "-" + arrStr[1] + "-" + arrStr[2]);
+                AppData.selectedMedicine.setMed_id(generateMedId());
+                AppData.MedNameHashMap.put(AppData.selectedMedicine.getName(),AppData.selectedMedicine);
+                preparedStatement = conn.prepareStatement(insertMed);
+                preparedStatement.setString(1,AppData.selectedMedicine.getName());
+                preparedStatement.setString(2,AppData.selectedMedicine.getMed_id());
+                preparedStatement.setDouble(3,AppData.selectedMedicine.getMed_price());
+                preparedStatement.setString(4,AppData.selectedMedicine.getExp_date());
+                preparedStatement.setString(5,AppData.selectedMedicine.getMfg_date());
+                preparedStatement.setInt(6,AppData.selectedMedicine.getQuantity());
+                preparedStatement.setString(7,comp_id);
+                preparedStatement.execute();
+            }else{
+                System.out.println(AppData.selectedMedicine.getQuantity());
+                System.out.println(AppData.selectedMedicine.getMed_id());
+                statement.execute("Update " + UserData.DB_MED_NAME + " set " + UserData.DB_MED_QUANTITY + " = " + AppData.selectedMedicine.getQuantity()
+                        + " where " + UserData.DB_MED_MED_ID + " = '" + AppData.selectedMedicine.getMed_id() + "';");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    private String generateMedId(){
+        try{
+            statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("Select max(med_id) from medicine;");
+            result.next();
+            String emp = result.getString("max(med_id)");
+            System.out.println(emp);
+            if(emp==null){
+                emp = "M0";
+            }
+            String[] val = emp.split("M");//{0112}
+            int emp_id = Integer.parseInt(val[1]);
+            emp_id++;
+            emp = "M" + emp_id;
+            return emp;
+        }catch (SQLException e){
+            System.out.println("Exception: (getEmpId)"  + e);
+        }
+        return null;
+    }
+
+    private String generateCompId(){
+        try{
+            statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("Select max(com_id) from company;");
+            result.next();
+            String emp = result.getString("max(com_id)");
+            System.out.println(emp);
+            if(emp==null){
+                emp = "C0";
+            }
+            String[] val = emp.split("C");//{0112}
+            int emp_id = Integer.parseInt(val[1]);
+            emp_id++;
+            emp = "C" + emp_id;
+            return emp;
+        }catch (SQLException e){
+            System.out.println("Exception: (getEmpId)"  + e);
+        }
+        return null;
     }
 }

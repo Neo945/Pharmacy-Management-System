@@ -12,13 +12,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.model.AppData;
 import sample.model.DataSource;
 
 import java.io.IOException;
 
 public class FXMLDocumentControllerSetting {
     @FXML
-    private TextField name;
+    private Label name;
     @FXML
     private TextField email;
     @FXML
@@ -36,19 +37,19 @@ public class FXMLDocumentControllerSetting {
     @FXML
     private Label confirmPassLabel;
     public void onSaveClicked(ActionEvent actionEvent){
-        if(!email.getText().isEmpty())DataSource.loginBoy.setEmail(email.getText().toLowerCase());
-        if(!address.getText().isEmpty())DataSource.loginBoy.setEmp_add(address.getText().toLowerCase());
-        if(!number.getText().isEmpty())DataSource.loginBoy.setContact(number.getText());
-        if(!password.getText().isEmpty()){
-            if(!password.getText().equals(this.confirmPassword.getText())){
+        if(!email.getText().isEmpty()) AppData.loginBoy.setEmail(email.getText().toLowerCase().strip());
+        if(!address.getText().isEmpty())AppData.loginBoy.setEmp_add(address.getText().toLowerCase().strip());
+        if(!number.getText().isEmpty())AppData.loginBoy.setContact(number.getText().strip());
+        if(!password.getText().strip().isEmpty()){
+            if(!password.getText().equals(this.confirmPassword.getText().strip())){
                 confirmPassLabel.setText("*Password not matched");
                 confirmPassLabel.setTextFill(Color.RED);
                 return;
             }
-            DataSource.loginBoy.setEmp_pass(password.getText());
+            AppData.loginBoy.setEmp_pass(password.getText().strip());
         }
-        System.out.println(DataSource.loginBoy.getEmp_add());
-        System.out.println(DataSource.loginBoy.getEmail());
+        System.out.println(AppData.loginBoy.getEmp_add());
+        System.out.println(AppData.loginBoy.getEmail());
         DataSource dataSource = new DataSource();
         dataSource.connectionOpen();
         dataSource.updateValue();
