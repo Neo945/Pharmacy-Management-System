@@ -115,6 +115,7 @@ public class DataSource {
             System.out.println("Exception: (Registration)" + e);
         }
     }//done
+//    public Patient
     private void addRole(String role,String emp){
         String role1;
         try{

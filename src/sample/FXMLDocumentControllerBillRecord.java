@@ -40,8 +40,23 @@ public class FXMLDocumentControllerBillRecord {
     private ImageView tick;
     @FXML
     private Label price;
+    @FXML
+    private Label PharmName;
+    @FXML
+    private Label patName;
+    @FXML
+    private Label date;
+    @FXML
+    private Label DocName;
+    @FXML
+    private Label Mobile;
     public void initialize(){
         try{
+            PharmName.setText("Name: " + AppData.PharmName);
+            patName.setText( AppData.bill.getPat_name());
+            date.setText("Date: " + AppData.bill.getBill_date());
+            DocName.setText(AppData.docName);
+//            Mobile.setText();
             ObservableList<Medicines> list = FXCollections.observableArrayList();
             list.addAll(AppData.bill.getMed_id());
             name.setCellValueFactory(new PropertyValueFactory<>("name"));

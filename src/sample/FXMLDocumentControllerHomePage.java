@@ -106,11 +106,15 @@ public class FXMLDocumentControllerHomePage {
             BorderPane bp = new BorderPane();
             Button clear = new Button("Clear All notification");
             notifyStage.initStyle(StageStyle.UNDECORATED);
+            Button back = new Button("Close");
+//            back.setStyle("-fx-background-color: #d73a49; -fx-background-radius: 15;");
             clear.setStyle("-fx-background-color: #d73a49; -fx-background-radius: 15;");
             clear.setOnAction(this::onClearClicked);
+//            back.setOnAction(this::onBack);
             if(AppData.notificationList.isEmpty()) AppData.notificationList.add(new Label("No Notification"));
             stringListView.getItems().addAll(AppData.notificationList);
-            bp.setBottom(clear);
+            bp.setBottom(back);
+//            bp.setBottom(clear);
             bp.setCenter(stringListView);
             notifyStage.setTitle("Hello ");
             Scene scene = new Scene(bp,300, 200);
@@ -125,6 +129,9 @@ public class FXMLDocumentControllerHomePage {
         AppData.notificationList.clear();
         stringListView.getItems().clear();
         notiNo.setVisible(false);
+        ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
+    }
+    private void onBack(ActionEvent actionEvent){
         ((Stage) (((Node) actionEvent.getSource()).getScene().getWindow())).close();
     }
 

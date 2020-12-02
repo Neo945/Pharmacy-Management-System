@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerSetting">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerSetting">
    <children>
       <ImageView fitHeight="600.0" fitWidth="750.0" opacity="0.7">
          <image>
@@ -63,9 +59,9 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <PasswordField fx:id="password" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="number" layoutX="471.0" layoutY="247.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="address" layoutX="471.0" layoutY="345.0" prefHeight="95.0" prefWidth="250.0" />
+      <PasswordField fx:id="password" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <TextField fx:id="number" layoutX="471.0" layoutY="247.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <TextField fx:id="address" layoutX="471.0" layoutY="345.0" prefHeight="95.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
       <Label layoutX="204.0" layoutY="383.0" text="Address">
          <font>
             <Font name="Verdana" size="15.0" />
@@ -82,7 +78,7 @@
          </font>
       </Label>
       <Line endX="-100.0" endY="323.0" layoutX="501.0" layoutY="134.0" opacity="0.3" startX="-100.0" />
-      <TextField fx:id="email" layoutX="471.0" layoutY="300.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="email" layoutX="471.0" layoutY="300.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
       <Label layoutX="202.0" layoutY="303.0" text="Email ID">
          <font>
             <Font name="Verdana" size="15.0" />
@@ -99,8 +95,8 @@
          </font>
       </Label>
       <Line endX="500.0" layoutX="250.0" layoutY="115.0" opacity="0.3" startX="-100.0" />
-      <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" />
-      <PasswordField fx:id="confirmPassword" layoutX="471.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" />
+      <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <PasswordField fx:id="confirmPassword" layoutX="471.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
       <Label layoutX="199.0" layoutY="195.0" text="Confirm Password">
          <font>
             <Font name="Verdana" size="15.0" />

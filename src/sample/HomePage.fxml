@@ -40,8 +40,8 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Label fx:id="name" layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" />
-            <Label fx:id="email" layoutX="8.0" layoutY="189.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" />
+            <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textAlignment="CENTER" textFill="#fafafa" />
+            <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="189.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textAlignment="CENTER" textFill="#fafafa" />
             <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="13.0" layoutY="14.0">
                <image>
                   <Image url="@../Images/DashboardUserImage.png" />
