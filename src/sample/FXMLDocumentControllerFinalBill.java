@@ -48,8 +48,23 @@ public class FXMLDocumentControllerFinalBill {
     private Button print;
     @FXML
     private Label price;
+    @FXML
+    private Label PharmName;
+    @FXML
+    private Label patName;
+    @FXML
+    private Label date;
+    @FXML
+    private Label DocName;
+    @FXML
+    private Label Mobile;
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
+        PharmName.setText("Name: " + AppData.PharmName);
+        patName.setText( AppData.bill.getPat_name());
+        date.setText("Date: " + AppData.bill.getBill_date());
+        DocName.setText(AppData.docName);
+        Mobile.setText(AppData.selectedPatient.getPat_num());
         ObservableList<Medicines> list = FXCollections.observableArrayList();
         AppData.MedNameHashMap.forEach((k, v)-> {
             if(v.getQuant()>0) {

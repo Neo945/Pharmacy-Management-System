@@ -501,4 +501,12 @@ public class DataSource {
         }
         return null;
     }
+
+    public String findPatnum(String pat_name) {
+        for (Patient p :
+                AppData.patientArrayList) {
+            if(p.getPat_name().equals(pat_name)) return p.getPat_num();
+        }
+        return null;
+    }
 }
