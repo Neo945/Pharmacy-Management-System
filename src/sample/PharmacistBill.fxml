@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerFinalBill">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerFinalBill">
    <children>
       <ImageView fitHeight="600.0" fitWidth="750.0">
          <image>
@@ -16,7 +20,7 @@
       </ImageView>
       <AnchorPane layoutX="218.0" layoutY="6.0" prefHeight="510.0" prefWidth="468.0">
          <children>
-            <TableView fx:id="medicinesTableView" layoutX="40.0" layoutY="170.0" prefHeight="286.0" prefWidth="390.0">
+            <TableView fx:id="medicinesTableView" layoutX="40.0" layoutY="170.0" opacity="0.7" prefHeight="286.0" prefWidth="390.0">
                <columns>
                   <TableColumn fx:id="name" prefWidth="130.0" text="Products" />
                   <TableColumn fx:id="quant" prefWidth="130.0" text="Quantity" />
@@ -28,8 +32,11 @@
             </TableView>
             <Label fx:id="patName" alignment="CENTER" layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana" size="15.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
             <Label fx:id="price" layoutX="294.0" layoutY="465.0" prefHeight="38.0" prefWidth="135.0" text="Total -">
                <font>
@@ -46,22 +53,28 @@
             </Label>
             <Label fx:id="Mobile" alignment="CENTER" layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="DocName" alignment="CENTER" layoutX="294.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label alignment="CENTER_RIGHT" layoutX="294.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana" size="15.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
-            <Label fx:id="PharmName" alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label fx:id="PharmName" alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" text="LABEL">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana Bold" size="25.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
-            <Label fx:id="date" alignment="CENTER" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Verdana" size="15.0" />
                </font>
             </Label>
             <Label layoutX="108.0" layoutY="465.0" prefHeight="38.0" prefWidth="42.0" text="Paid">

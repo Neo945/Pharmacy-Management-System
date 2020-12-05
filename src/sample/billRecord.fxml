@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerBillRecord">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerBillRecord">
     <children>
         <ImageView fitHeight="600.0" fitWidth="750.0">
             <image>
@@ -69,6 +73,40 @@
                         <Font name="Verdana Bold" size="15.0" />
                     </font>
                 </Label>
+            <Label layoutX="39.0" layoutY="60.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+            </Label>
+            <Label layoutX="39.0" layoutY="113.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="294.0" layoutY="60.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+            </Label>
+            <Label alignment="CENTER" layoutX="167.0" layoutY="4.0" prefHeight="38.0" prefWidth="135.0" text="LABEL">
+               <font>
+                  <Font name="Verdana Bold" size="25.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="294.0" layoutY="113.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
         <Button fx:id="back" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#onBackClicked" prefHeight="32.0" prefWidth="68.0" style="-fx-background-color: #d73a49; -fx-background-radius: 15;" text="Back" textFill="WHITE">
