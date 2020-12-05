@@ -24,6 +24,8 @@ import sample.model.Medicines;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
@@ -48,8 +50,25 @@ public class FXMLDocumentControllerFinalBill {
     private Button print;
     @FXML
     private Label price;
+    @FXML
+    private Label PharmName;
+    @FXML
+    private Label patName;
+    @FXML
+    private Label date;
+    @FXML
+    private Label DocName;
+    @FXML
+    private Label Mobile;
     public void initialize() {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        PharmName.setText("Name: " + AppData.PharmName);
+        patName.setText( AppData.selectedPatient.getPat_name());
+        date.setText("Date: " + dtf.format(now));
+        DocName.setText(AppData.docName);
+        Mobile.setText(AppData.selectedPatient.getPat_num());
         ObservableList<Medicines> list = FXCollections.observableArrayList();
         AppData.MedNameHashMap.forEach((k, v)-> {
             if(v.getQuant()>0) {

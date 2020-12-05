@@ -30,7 +30,7 @@
                   <Insets bottom="2.0" left="2.0" right="1.0" top="1.0" />
                </opaqueInsets>
             </TableView>
-            <Label layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label fx:id="patName" alignment="CENTER" layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Font name="Verdana" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label fx:id="Mobile" alignment="CENTER" layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
@@ -64,7 +64,7 @@
                   <Glow level="0.5" />
                </effect>
             </Label>
-            <Label alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" text="LABEL">
+            <Label fx:id="PharmName" alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" text="LABEL">
                <font>
                   <Font name="Verdana Bold" size="25.0" />
                </font>
@@ -72,7 +72,7 @@
                   <Glow level="0.5" />
                </effect>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+            <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>

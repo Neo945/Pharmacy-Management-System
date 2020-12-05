@@ -16,6 +16,7 @@ import sample.model.DataSource;
 import sample.model.Medicines;
 import sample.model.UserData;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class FXMLDocumentControllerAddMedicine {
@@ -113,6 +114,28 @@ public class FXMLDocumentControllerAddMedicine {
             primaryStage.show();
         }catch (Exception e){
             System.out.println("Exception:" + e.getMessage());
+        }
+    }
+    public void onTransactionCLicked(ActionEvent event){
+        try{
+            Stage primaryStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("recordhistory.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+    }
+    public void onDetailsClicked(ActionEvent event){
+        try{
+            Stage primaryStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("details.fxml"));
+            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }

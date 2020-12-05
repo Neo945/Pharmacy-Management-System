@@ -52,11 +52,17 @@ public class FXMLDocumentControllerBillRecord {
     private Label Mobile;
     public void initialize(){
         try{
+            DataSource dataSource = new DataSource();
+            dataSource.connectionOpen();
+            dataSource.searchPat();
+            Mobile.setText(dataSource.findPatnum(AppData.bill.getPat_name()));
+            dataSource.connectionClose();
             PharmName.setText("Name: " + AppData.PharmName);
             patName.setText( AppData.bill.getPat_name());
             date.setText("Date: " + AppData.bill.getBill_date());
             DocName.setText(AppData.docName);
-//            Mobile.setText();
+            Mobile.setText(AppData.selectedPatient.getPat_num());
+
             ObservableList<Medicines> list = FXCollections.observableArrayList();
             list.addAll(AppData.bill.getMed_id());
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -66,8 +72,7 @@ public class FXMLDocumentControllerBillRecord {
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             price.setText("Total - " + indiaCurrency.getSymbol() + " " + (AppData.bill.getBill_amount()));
             price.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-            pat_name.setText(AppData.bill.getPat_name());
-
+//            pat_name.setText(AppData.bill.getPat_name());
         }catch (Exception e){
             System.out.println("initialize");
             e.printStackTrace();

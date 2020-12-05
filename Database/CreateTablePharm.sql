@@ -62,9 +62,7 @@ pat_num varchar(20) not null,
 pat_name varchar(50),
 pat_age integer not null,
 pat_gender char(1) check(pat_gender in('f','m')),
-pat_id char(6) primary key check(pat_id like 'P%'),
-pemp_id char(6),
-foreign key(pemp_id) references pharmacist(pemp_id)
+pat_id char(6) primary key check(pat_id like 'P%')
 );
 
 create table company(
