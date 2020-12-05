@@ -72,7 +72,7 @@ public class FXMLDocumentControllerBillRecord {
             Currency indiaCurrency = Currency.getInstance(new Locale("en","IN"));
             price.setText("Total - " + indiaCurrency.getSymbol() + " " + (AppData.bill.getBill_amount()));
             price.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-            pat_name.setText(AppData.bill.getPat_name());
+//            pat_name.setText(AppData.bill.getPat_name());
         }catch (Exception e){
             System.out.println("initialize");
             e.printStackTrace();
