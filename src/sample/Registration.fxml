@@ -32,7 +32,6 @@
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Pharmacist" />
                             <String fx:value="Cashier" />
-                            <String fx:value="Owner" />
                         </FXCollections>
                     </items>
 <!--                    <value>-->

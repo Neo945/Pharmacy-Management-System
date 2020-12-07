@@ -11,7 +11,7 @@ public class AppData {
     public static Employee loginBoy;
     public static Patient selectedPatient;
     public static ArrayList<Patient> patientArrayList = new ArrayList<>();
-    public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();
+    public static HashMap<String,Medicines> MedNameHashMap = new HashMap<>();//['K1':'V1' , 'K2':'V2' , 'K3':'V3']
     public static ArrayList<Employee> employees = new ArrayList<>();
     public static ArrayList<Bill> bills = new ArrayList<>();
     public static double amount;

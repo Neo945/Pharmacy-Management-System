@@ -39,8 +39,9 @@ public class DataSource {
 
     public boolean connectionOpen() {
         try {
+//            conn = DriverManager.getConnection(UserData.getCONNECTION(),UserData.getUserName(),UserData.getPassword());
             conn = DriverManager.getConnection(UserData.getCONNECTION(),UserData.getUserName(),UserData.getPassword());
-            return true;
+            return  true;
         }catch (SQLException sqlException){
             System.out.println("Exception: (connectionOpen)" + sqlException);
             return false;
@@ -108,6 +109,7 @@ public class DataSource {
             preparedStatement.setString(5,employee.getEmp_add());
             preparedStatement.setString(6,employee.getEmp_role());
             preparedStatement.execute();
+            System.out.println(preparedStatement);
             addRole(employee.getEmp_role(),emp);
             addContact(employee);
             AppData.employees.add(employee);
@@ -143,11 +145,11 @@ public class DataSource {
             if(emp==null){
                 emp = "E0";
             }
-            String[] val = emp.split("E");//{0112}
+            String[] val = emp.split("E");//{0112}//E1//[,1]
             int emp_id = Integer.parseInt(val[1]);
             emp_id++;
             emp = "E" + emp_id;
-            return emp;
+            return emp;//1:2:3 == ['1','2','3']
         }catch (SQLException e){
             System.out.println("Exception: (getEmpId)"  + e);
         }
@@ -293,6 +295,9 @@ public class DataSource {
             preparedStatement.setString(3,AppData.selectedPatient.getPat_id());
             preparedStatement.setDouble(4,AppData.amount);
             preparedStatement.execute();
+//            for (:) {
+//
+//            }
             AppData.MedNameHashMap.forEach((k,v)->{
                 if(v.getQuant()>0){
                     try {
