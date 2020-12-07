@@ -67,7 +67,7 @@
       <AnchorPane layoutX="187.0" layoutY="279.0" prefHeight="208.0" prefWidth="298.0" style="-fx-background-color: #ffffff; -fx-border-color: #bfbfbf;">
          <children>
             <TextField fx:id="PatientName" layoutX="26.0" layoutY="22.0" prefHeight="26.0" prefWidth="179.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
-            <TextField fx:id="patAdd" layoutX="25.0" layoutY="70.0" prefHeight="26.0" prefWidth="251.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
+            <TextField fx:id="patAdd" layoutX="25.0" layoutY="70.0" prefHeight="26.0" prefWidth="251.0" promptText="Phone No." style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
             <TextField fx:id="patAge" layoutX="228.0" layoutY="22.0" prefHeight="26.0" prefWidth="48.0" promptText="Age" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1 0;" />
 
 

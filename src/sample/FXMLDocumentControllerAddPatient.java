@@ -102,6 +102,9 @@ public class FXMLDocumentControllerAddPatient {
             PatientName.setText(selectedItemsPatient.getPat_name().strip());
             patAdd.setText(selectedItemsPatient.getPat_num().strip());
             patAge.setText("" + selectedItemsPatient.getPat_age());
+            PatientName.setEditable(false);
+            patAdd.setEditable(false);
+            patAge.setEditable(false);
             String gender = selectedItemsPatient.getPat_gender();
             if(gender.equals("m")){
                 male.selectedProperty().set(true);

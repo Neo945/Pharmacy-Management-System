@@ -71,6 +71,9 @@ public class FXMLDocumentControllerAddMedicine {
             company_name.setText(selectedItemsMedicine.getCompany());
             quantity.setText(String.format("%d",selectedItemsMedicine.getQuantity()));
             price.setText(String.format("%f",selectedItemsMedicine.getMed_price()));
+            med_name.setEditable(false);
+            company_name.setEditable(false);
+            price.setEditable(false);
         }catch (Exception e){
             e.printStackTrace();
         }
