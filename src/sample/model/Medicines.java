@@ -3,13 +3,22 @@ package sample.model;
 import javafx.collections.ObservableArray;
 
 public class Medicines  {
-    private  String name;
+    public   String name;
     private  String med_id;
-    private  String med_price;
+    public   double med_price;
     private  String exp_date;
-    private  String quantity;
+    private  int quantity;
     private  String mfg_date;
     private  String company;
+    private int quant;
+
+    public int getQuant() {
+        return quant;
+    }
+
+    public void setQuant(int quant) {
+        this.quant = quant;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -19,7 +28,7 @@ public class Medicines  {
         this.med_id = med_id;
     }
 
-    public void setMed_price(String med_price) {
+    public void setMed_price(double med_price) {
         this.med_price = med_price;
     }
 
@@ -27,7 +36,7 @@ public class Medicines  {
         this.exp_date = exp_date;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -48,7 +57,7 @@ public class Medicines  {
         return med_id;
     }
 
-    public String getMed_price() {
+    public double getMed_price() {
         return med_price;
     }
 
@@ -56,7 +65,7 @@ public class Medicines  {
         return exp_date;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -66,5 +75,10 @@ public class Medicines  {
 
     public String getCompany() {
         return company;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

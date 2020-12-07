@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerSetting">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="750.0" opacity="0.7">
+         <image>
+            <Image url="@../Images/medicine-science-concept-background.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;">
+         <children>
+            <Button layoutY="252.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Cashier Details" textFill="#dddddd">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="290.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Transaction Details" textFill="#dddddd">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Search Patient" textFill="#dddddd">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutY="373.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Add Medicine" textFill="#dddddd">
+               <font>
+                  <Font name="Verdana" size="16.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="124.0" fitWidth="124.0" layoutX="13.0" layoutY="14.0">
+               <image>
+                  <Image url="@../Images/DashboardUserImage.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="138.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="email1" alignment="CENTER" layoutX="8.0" layoutY="180.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <Button fx:id="back" layoutX="369.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="save" layoutX="449.0" layoutY="535.0" mnemonicParsing="false" onAction="#onSaveClicked" style="-fx-background-color: #00ca4e; -fx-background-radius: 15; -fx-border-radius: 15;" text="Save Changes" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <PasswordField fx:id="password" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <TextField fx:id="number" layoutX="471.0" layoutY="247.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <TextField fx:id="address" layoutX="471.0" layoutY="345.0" prefHeight="95.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <Label layoutX="204.0" layoutY="383.0" text="Address">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="200.0" layoutY="250.0" text="Mobile No.">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="204.0" layoutY="149.0" text="Password">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Line endX="-100.0" endY="323.0" layoutX="501.0" layoutY="134.0" opacity="0.3" startX="-100.0" />
+      <TextField fx:id="email" layoutX="471.0" layoutY="300.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <Label layoutX="202.0" layoutY="303.0" text="Email ID">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="176.0" layoutY="26.0" text="Settings">
+         <font>
+            <Font name="Arial Black" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="176.0" layoutY="86.0" text="Personal Information">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Line endX="500.0" layoutX="250.0" layoutY="115.0" opacity="0.3" startX="-100.0" />
+      <Line endX="500.0" layoutX="250.0" layoutY="476.0" opacity="0.3" startX="-100.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <PasswordField fx:id="confirmPassword" layoutX="471.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+      <Label layoutX="199.0" layoutY="195.0" text="Confirm Password">
+         <font>
+            <Font name="Verdana" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="confirmPassLabel" layoutX="471.0" layoutY="218.0" prefHeight="18.0" prefWidth="250.0" />
+   </children>
+</AnchorPane>

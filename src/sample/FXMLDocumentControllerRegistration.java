@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 public class FXMLDocumentControllerRegistration {
     public Label label;
-    DataSource dataSource;
+    private DataSource dataSource;
 
     public FXMLDocumentControllerRegistration() {
         this.dataSource = new DataSource();
@@ -72,10 +72,10 @@ public class FXMLDocumentControllerRegistration {
                 //get all the values and insert it into the database
                 Employee employee = new Employee();
                 employee.setEmp_name(this.name.getText());
-                employee.setEmail(this.emailID.getText());
-                employee.setEmp_add(this.address.getText());
-                String password = this.password.getText();
-                if(!password.equals(this.confirmPassword.getText())){
+                employee.setEmail(this.emailID.getText().toLowerCase().strip());
+                employee.setEmp_add(this.address.getText().toLowerCase().strip());
+                String password = this.password.getText().strip();
+                if(!password.equals(this.confirmPassword.getText().strip())){
                     confirmPassLabel.setText("*Password not matched");
                     confirmPassLabel.setTextFill(Color.RED);
                     return;
@@ -85,11 +85,12 @@ public class FXMLDocumentControllerRegistration {
                 String[] contArray = this.contact.getText().split(";");
 //                employee.getContact().addAll(Arrays.asList(contArray));
                 for (String s : contArray) {
-                    employee.getContact().add(s);
+                    employee.setContact(s);
+                    System.out.println(s);
                 }
-                employee.setEmp_role(this.combobox.getEditor().getText());
+                employee.setEmp_role(this.combobox.getEditor().getText().strip());
 //                Date date = new Date("");
-                String date = this.datePicker.getEditor().getText();
+                String date = this.datePicker.getEditor().getText().strip();
                 DataSource dataSource = new DataSource();
                 dataSource.connectionOpen();
                 dataSource.Registration(employee);

@@ -9,7 +9,7 @@ public class Employee {
     private  String emp_add;
     private  String emp_pass;
     private  String emp_role;
-    private ArrayList<String> contact;
+    private final ArrayList<String> contact;
 
     public Employee() {
         this.contact = new ArrayList<>();
@@ -19,8 +19,8 @@ public class Employee {
         return contact;
     }
 
-    public void setContact(ArrayList<String> contact) {
-        this.contact = contact;
+    public void setContact(String contact) {
+        this.contact.add(contact);
     }
 
     public String getEmp_id() {

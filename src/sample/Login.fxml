@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -24,26 +22,14 @@
                     </font>
                 </Label>
                 <TextField fx:id="email_id" layoutX="296.0" layoutY="127.0" promptText="Email ID" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <ComboBox editable="true" layoutX="295.0" layoutY="227.0" prefWidth="150.0" promptText="Job">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Pharmacist" />
-                            <String fx:value="Cashier" />
-                            <String fx:value="Owner" />
-                        </FXCollections>
-                    </items>
-                    <!--                    <value>-->
-                    <!--                        <String fx:value="Default"/>-->
-                    <!--                    </value>-->
-                </ComboBox>
-                <PasswordField fx:id="password" layoutX="296.0" layoutY="170.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
-                <Button fx:id="login" layoutX="208.0" layoutY="322.0" mnemonicParsing="false" onAction="#onButtonCLicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #00cc00;" text="Login">
+                <PasswordField fx:id="password" layoutX="296.0" layoutY="208.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
+                <Button fx:id="login" layoutX="208.0" layoutY="307.0" mnemonicParsing="false" onAction="#onButtonCLicked" prefHeight="32.0" prefWidth="80.0" style="-fx-background-color: #00cc00;" text="Login">
                     <font>
                         <Font name="Arial Unicode MS" size="14.0" />
                     </font>
                 </Button>
-                <Hyperlink layoutX="155.0" layoutY="360.0" text="Forgot your username/password?" underline="true" />
-                <Line endX="-100.0" endY="186.0" layoutX="327.0" layoutY="112.0" startX="-100.0" startY="-12.0" strokeWidth="2.0" />
+                <Hyperlink layoutX="155.0" layoutY="339.0" text="Forgot your username/password?" underline="true" />
+                <Line endX="-100.00003051757812" endY="164.39999389648438" layoutX="327.0" layoutY="112.0" startX="-100.0" startY="-12.0" strokeWidth="2.0" />
                 <ImageView fitHeight="200.0" fitWidth="211.0" layoutY="99.0">
                     <image>
                         <Image url="@../Images/LeftUserImage.jpg" />
@@ -54,19 +40,15 @@
                         <Image url="@../Images/BlackEmailImage.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="170.0">
+                <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="208.0">
                     <image>
                         <Image url="@../Images/BlackKeyImage.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="261.0" layoutY="226.0">
-                    <image>
-                        <Image url="@../Images/FindJob.png" />
-                    </image>
-                </ImageView>
             <Label fx:id="email_idLabel" layoutX="295.0" layoutY="154.0" prefHeight="18.0" prefWidth="150.0" />
             <Label fx:id="passwordLabel" layoutX="295.0" layoutY="199.0" prefHeight="18.0" prefWidth="150.0" />
-            <Label fx:id="allField" layoutX="173.0" layoutY="303.0" prefHeight="18.0" prefWidth="150.0" />
+            <Label fx:id="allField" layoutX="173.0" layoutY="289.0" prefHeight="18.0" prefWidth="150.0" />
+            <Hyperlink layoutX="224.0" layoutY="362.0" onAction="#signup" text="SignUp" />
             </children>
         </AnchorPane>
     </children>

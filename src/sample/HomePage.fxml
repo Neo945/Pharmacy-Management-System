@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FXMLDocumentControllerHomePage">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="750.0">
+         <image>
+            <Image url="@../Images/medicine-science-concept-background.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="details" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="118.0" mnemonicParsing="false" onAction="#onDetailsClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #cc99cc;" text="Cashier Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Verdana Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="transactionDetails" contentDisplay="CENTER" layoutX="361.0" layoutY="118.0" mnemonicParsing="false" onAction="#onTransactionClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #98fb98;" text="Transaction Details" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Verdana Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="searchMed" alignment="CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="118.0" mnemonicParsing="false" onAction="#onSearchClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #00bfff;" text="Search Patient/Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Verdana Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="AddMed" alignment="CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="118.0" mnemonicParsing="false" onAction="#onAddMedicineClicked" prefHeight="59.0" prefWidth="183.0" style="-fx-background-color: #ff6347;" text="Add Medicine" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Verdana Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView accessibleRole="HYPERLINK" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;">
+         <children>
+            <Button fx:id="logout" layoutX="46.0" layoutY="546.0" mnemonicParsing="false" onAction="#onLogOutClicked" style="-fx-background-color: #00688b; -fx-background-radius: 15;" text="Logout" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="147.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textAlignment="CENTER" textFill="#fafafa" />
+            <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="189.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textAlignment="CENTER" textFill="#fafafa" />
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="13.0" layoutY="14.0">
+               <image>
+                  <Image url="@../Images/DashboardUserImage.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <Label layoutX="178.0" layoutY="17.0" text="Dashboard">
+         <font>
+            <Font name="Arial Black" size="27.0" />
+         </font>
+      </Label>
+      <HBox layoutX="633.0" prefHeight="16.0" prefWidth="70.0" spacing="2.0" />
+      <Accordion prefHeight="40.0" prefWidth="84.0" />
+      <Button layoutX="632.0" layoutY="13.0" mnemonicParsing="false" onAction="#onSettingCLicked" style="-fx-background-radius: 0; -fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="notify" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/SettingsIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="684.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNotificationClicked" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="setting" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT">
+               <image>
+                  <Image url="@../Images/NotificationImage.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="notiNo" alignment="CENTER" contentDisplay="CENTER" layoutX="710.0" layoutY="7.0" prefHeight="18.0" prefWidth="15.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="0" textAlignment="CENTER" textFill="WHITE" />
+   </children>
+</AnchorPane>
