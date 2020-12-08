@@ -151,7 +151,7 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("RecordHistory.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
