@@ -15,41 +15,26 @@
       </ImageView>
       <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;">
          <children>
-            <Button layoutY="252.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Cashier Details" textFill="#dddddd">
+            <Button layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Cashier Details" textFill="#dddddd">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
             </Button>
-            <Button layoutY="290.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Transaction Details" textFill="#dddddd">
+            <Button layoutY="185.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Transaction Details" textFill="#dddddd">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
             </Button>
-            <Button layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Search Patient" textFill="#dddddd">
+            <Button layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Search Patient" textFill="#dddddd">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
             </Button>
-            <Button layoutY="373.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Add Medicine" textFill="#dddddd">
+            <Button layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #8fbac2;" text="Add Medicine" textFill="#dddddd">
                <font>
                   <Font name="Verdana" size="16.0" />
                </font>
             </Button>
-            <ImageView fitHeight="124.0" fitWidth="124.0" layoutX="13.0" layoutY="14.0">
-               <image>
-                  <Image url="@../Images/DashboardUserImage.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="138.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textFill="WHITE">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="email1" alignment="CENTER" layoutX="8.0" layoutY="180.0" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #addbe7; -fx-border-width: 0 0 1 0;" textFill="WHITE">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Label>
          </children></AnchorPane>
       <Button fx:id="back" layoutX="369.0" layoutY="535.0" mnemonicParsing="false" onAction="#onBackClicked" style="-fx-background-color: #ff605c; -fx-background-radius: 15; -fx-border-radius: 15;" text="Cancel" textFill="WHITE">
          <font>

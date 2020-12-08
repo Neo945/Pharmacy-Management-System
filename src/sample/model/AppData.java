@@ -23,6 +23,6 @@ public class AppData {
     public static final String PharmName = "Pharmacy Store";
     public static Label pat_name = new Label();
     public static Label contact = new Label();
-    public static String docName ="Something Sharma";
+    public static String docName ="Dr. Sharma";
     public static Label date = new Label();
 }

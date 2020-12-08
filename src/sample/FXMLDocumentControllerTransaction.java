@@ -166,7 +166,7 @@ public class FXMLDocumentControllerTransaction {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Add Patient.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (IOException exception){
@@ -177,7 +177,7 @@ public class FXMLDocumentControllerTransaction {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (IOException exception){

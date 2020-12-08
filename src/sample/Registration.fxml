@@ -34,9 +34,6 @@
                             <String fx:value="Cashier" />
                         </FXCollections>
                     </items>
-<!--                    <value>-->
-<!--                        <String fx:value="Default"/>-->
-<!--                    </value>-->
                 </ComboBox>
                 <TextField fx:id="address" layoutX="439.0" layoutY="204.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 2 0;" />
                 <AnchorPane prefHeight="434.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 50  0 0 50;">

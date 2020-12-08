@@ -26,7 +26,7 @@
                         <Insets bottom="2.0" left="2.0" right="1.0" top="1.0" />
                     </opaqueInsets>
                 </TableView>
-                <Label fx:id="patName" layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+                <Label fx:id="patName" layoutX="39.0" layoutY="70.0" prefHeight="38.0" prefWidth="162.0" text="Label">
                     <font>
                         <Font name="Verdana" size="15.0" />
                     </font>
@@ -47,12 +47,12 @@
                         <Font name="Verdana" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="Mobile" layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+                <Label fx:id="Mobile" layoutX="39.0" layoutY="123.0" prefHeight="38.0" prefWidth="162.0" text="Label">
                     <font>
                         <Font name="Verdana" size="15.0" />
                     </font>
                 </Label>
-                <Label fx:id="DocName" alignment="CENTER_RIGHT" layoutX="294.0" layoutY="70.0" prefHeight="38.0" prefWidth="135.0" text="Label" textAlignment="RIGHT">
+                <Label fx:id="DocName" alignment="CENTER_RIGHT" layoutX="268.0" layoutY="70.0" prefHeight="38.0" prefWidth="161.0" text="Label" textAlignment="RIGHT">
                     <font>
                         <Font name="Verdana" size="15.0" />
                     </font>
@@ -60,7 +60,7 @@
                   <Glow level="0.5" />
                </effect>
                 </Label>
-                <Label fx:id="PharmName" alignment="CENTER" layoutX="167.0" layoutY="14.0" prefHeight="38.0" prefWidth="135.0" text="Label">
+                <Label fx:id="PharmName" alignment="CENTER" layoutX="33.0" layoutY="14.0" prefHeight="38.0" prefWidth="390.0" text="Label">
                     <font>
                         <Font name="Verdana Bold" size="25.0" />
                     </font>
@@ -68,7 +68,7 @@
                   <Glow level="0.5" />
                </effect>
                 </Label>
-                <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="294.0" layoutY="123.0" prefHeight="38.0" prefWidth="135.0" text="Label" textAlignment="RIGHT">
+                <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="267.0" layoutY="123.0" prefHeight="38.0" prefWidth="162.0" text="Label" textAlignment="RIGHT">
                     <font>
                         <Font name="Verdana" size="15.0" />
                     </font>

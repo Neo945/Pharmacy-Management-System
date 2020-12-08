@@ -17,10 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import sample.model.AppData;
-import sample.model.Bill;
-import sample.model.DataSource;
-import sample.model.Medicines;
+import sample.model.*;
 
 import java.util.Currency;
 import java.util.Locale;
@@ -55,13 +52,12 @@ public class FXMLDocumentControllerBillRecord {
             DataSource dataSource = new DataSource();
             dataSource.connectionOpen();
             dataSource.searchPat();
-            Mobile.setText(dataSource.findPatnum(AppData.bill.getPat_name()));
+            Mobile.setText("MOB: " + dataSource.findPatnum(AppData.bill.getPat_name()));
             dataSource.connectionClose();
-            PharmName.setText("Name: " + AppData.PharmName);
-            patName.setText( AppData.bill.getPat_name());
+            PharmName.setText(AppData.PharmName);
+            patName.setText("Name: " + AppData.bill.getPat_name());
             date.setText("Date: " + AppData.bill.getBill_date());
             DocName.setText(AppData.docName);
-            Mobile.setText(AppData.selectedPatient.getPat_num());
 
             ObservableList<Medicines> list = FXCollections.observableArrayList();
             list.addAll(AppData.bill.getMed_id());
@@ -82,7 +78,7 @@ public class FXMLDocumentControllerBillRecord {
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("RecordHistory.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){

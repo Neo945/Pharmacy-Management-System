@@ -101,7 +101,7 @@ public class FXMLDocumentControllerAddMedicine {
             AppData.notificationList.add(new Label(AppData.selectedMedicine.getName() + "\t Added!!"));
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
@@ -112,7 +112,7 @@ public class FXMLDocumentControllerAddMedicine {
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
@@ -123,7 +123,7 @@ public class FXMLDocumentControllerAddMedicine {
         try{
             Stage primaryStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("recordhistory.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         } catch (IOException exception) {
@@ -134,7 +134,7 @@ public class FXMLDocumentControllerAddMedicine {
         try{
             Stage primaryStage = (Stage) (((Node) event.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("details.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         } catch (IOException exception) {

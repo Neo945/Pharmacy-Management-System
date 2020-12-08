@@ -74,7 +74,7 @@ public class FXMLDocumentControllerHomePage {
                 AppData.amount = -1;
                 Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
                 Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
-                primaryStage.setTitle("Hello ");
+//                primaryStage.setTitle("Hello ");
                 primaryStage.setScene(new Scene(root, 750, 600));
                 primaryStage.show();
             }catch (IOException exception){
@@ -89,7 +89,7 @@ public class FXMLDocumentControllerHomePage {
             try{
                 Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
                 Parent root = FXMLLoader.load(getClass().getResource("SettingsPage.fxml"));
-                primaryStage.setTitle("Hello ");
+//                primaryStage.setTitle("Hello ");
                 primaryStage.setScene(new Scene(root, 750, 600));
                 primaryStage.show();
             }catch (IOException exception){
@@ -109,6 +109,7 @@ public class FXMLDocumentControllerHomePage {
 //            Button back = new Button("Close");
 //            back.setStyle("-fx-background-color: #d73a49; -fx-background-radius: 15;");
             clear.setStyle("-fx-background-color: #d73a49; -fx-background-radius: 15;");
+            clear.setTextFill(Color.WHITE);
             clear.setOnAction(this::onClearClicked);
 //            back.setOnAction(this::onBack);
             if(AppData.notificationList.isEmpty()) AppData.notificationList.add(new Label("No Notification"));
@@ -116,7 +117,7 @@ public class FXMLDocumentControllerHomePage {
             bp.setBottom(clear);
 //            bp.setBottom(clear);
             bp.setCenter(stringListView);
-            notifyStage.setTitle("Hello ");
+//            notifyStage.setTitle("Hello ");
             Scene scene = new Scene(bp,300, 200);
             notifyStage.setScene(scene);
             notifyStage.show();
@@ -139,7 +140,7 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Details.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
@@ -161,7 +162,7 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("PharmacistAddMedicine.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
@@ -172,7 +173,7 @@ public class FXMLDocumentControllerHomePage {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Transaction.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){

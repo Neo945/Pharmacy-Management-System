@@ -64,9 +64,9 @@ public class FXMLDocumentControllerFinalBill {
 //        ArrayList<Medicines> medicinesArrayList = new ArrayList<>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
-        PharmName.setText("Name: " + AppData.PharmName);
+        PharmName.setText(AppData.PharmName);
         patName.setText( AppData.selectedPatient.getPat_name());
-        date.setText("Date: " + dtf.format(now));
+        date.setText(dtf.format(now));
         DocName.setText(AppData.docName);
         Mobile.setText(AppData.selectedPatient.getPat_num());
         ObservableList<Medicines> list = FXCollections.observableArrayList();
@@ -99,7 +99,7 @@ public class FXMLDocumentControllerFinalBill {
             System.out.println("Saved Successfully");
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
@@ -110,7 +110,7 @@ public class FXMLDocumentControllerFinalBill {
         try{
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Add Patient.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (IOException e){

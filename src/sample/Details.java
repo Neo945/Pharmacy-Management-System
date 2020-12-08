@@ -23,8 +23,15 @@ public class Details {
     private Label number;
     @FXML
     private Button back;
+    @FXML
+    private Button details;
     public void initialize(){
         try{
+            if(AppData.loginBoy.getEmp_role().equals("Pharmacist")){
+                details.setText("Pharmacist Details");
+            }else {
+                details.setText("Cashier Details");
+            }
             name.setText(AppData.loginBoy.getEmp_name());
             email.setText(AppData.loginBoy.getEmail());
             address.setText(AppData.loginBoy.getEmp_add());
@@ -46,6 +53,28 @@ public class Details {
             primaryStage.show();
         }catch (Exception e){
             System.out.println("Exception:" + e.getMessage());
+        }
+    }
+    public void onTransactionClicked(ActionEvent actionEvent){
+        try{
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
+//            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (Exception e){
+            System.out.println("Exception(): " + e.getMessage() );
+        }
+    }
+    public void onSearchClicked(ActionEvent actionEvent){
+        try{
+            Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
+            Parent root = FXMLLoader.load(getClass().getResource("transaction.fxml"));
+//            primaryStage.setTitle("Hello ");
+            primaryStage.setScene(new Scene(root, 750, 600));
+            primaryStage.show();
+        }catch (Exception e){
+            System.out.println("Exception(): " + e.getMessage() );
         }
     }
 }

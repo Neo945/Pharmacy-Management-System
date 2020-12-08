@@ -55,7 +55,7 @@ public class FXMLDocumentControllerRecordHistory {
 //        DataSource.caller = "record";
         Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
         Parent root = FXMLLoader.load(getClass().getResource("billRecord.fxml"));
-        primaryStage.setTitle("Hello ");
+//        primaryStage.setTitle("Hello ");
         primaryStage.setScene(new Scene(root, 750, 600));
         primaryStage.show();
         } catch (Exception exception) {
@@ -67,7 +67,7 @@ public class FXMLDocumentControllerRecordHistory {
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){

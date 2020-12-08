@@ -163,7 +163,7 @@ public class FXMLDocumentControllerRegistration {
         try{
             Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (IOException exception){

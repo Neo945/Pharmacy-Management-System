@@ -55,7 +55,7 @@ public class FXMLDocumentControllerLogin {
                     try{
                         Stage primaryStage = (Stage) (((Node) e.getSource()).getScene().getWindow());
                         Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-                        primaryStage.setTitle("Hello ");
+//                        primaryStage.setTitle("Hello ");
                         primaryStage.setScene(new Scene(root, 750, 600));
                         primaryStage.show();
                     }catch (IOException exception){
@@ -96,7 +96,7 @@ public class FXMLDocumentControllerLogin {
             try{
                 Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
                 Parent root = FXMLLoader.load(getClass().getResource("Registration.fxml"));
-                primaryStage.setTitle("Hello ");
+//                primaryStage.setTitle("Hello ");
                 primaryStage.setScene(new Scene(root, 750, 600));
                 primaryStage.show();
             }catch (IOException exception){

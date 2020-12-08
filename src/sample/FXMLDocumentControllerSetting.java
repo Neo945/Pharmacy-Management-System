@@ -54,11 +54,12 @@ public class FXMLDocumentControllerSetting {
         dataSource.connectionOpen();
         dataSource.updateValue();
         dataSource.connectionClose();
+        AppData.notificationList.add(new Label( "Account Updated!!"));
         System.out.println("Changes saved");
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         } catch (IOException exception) {
@@ -69,7 +70,7 @@ public class FXMLDocumentControllerSetting {
         try {
             Stage primaryStage = (Stage) (((Node) actionEvent.getSource()).getScene().getWindow());
             Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            primaryStage.setTitle("Hello ");
+//            primaryStage.setTitle("Hello ");
             primaryStage.setScene(new Scene(root, 750, 600));
             primaryStage.show();
         }catch (Exception e){
