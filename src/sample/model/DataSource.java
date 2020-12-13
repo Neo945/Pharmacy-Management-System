@@ -4,6 +4,7 @@ package sample.model;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -326,18 +327,17 @@ public class DataSource {
     private String getBillId(){
         try{
             statement = conn.createStatement();
-            ResultSet result = statement.executeQuery("Select max(bill_id) from bill;");
-            result.next();
-            String emp = result.getString("max(bill_id)");
-            System.out.println(emp);
-            if(emp==null){
-                emp = "B0";
+            ResultSet result = statement.executeQuery("Select bill_id from bill;");
+            ArrayList<Integer> billArray = new ArrayList<>();
+            while(result.next()){
+                billArray.add(Integer.parseInt(result.getString("bill_id").split("B")[1]));
             }
-            String[] val = emp.split("B");//{0112}
-            int emp_id = Integer.parseInt(val[1]);
-            emp_id++;
-            emp = "B" + emp_id;
-            return emp;
+            if(billArray.isEmpty()){
+                return "B1";
+            }
+            int max = 0;
+            for (int b : billArray) if(b>max) max = b;
+            return  "B" + ++max;
         }catch (SQLException e){
             System.out.println("Exception: (getEmpId)"  + e);
         }
