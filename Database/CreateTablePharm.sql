@@ -10,21 +10,9 @@ emp_email varchar(50) not null,
 constraint email check(emp_email like '%_@%_._%'),
 emp_pass varchar(50) unique not null,
 emp_sal decimal(7,2),
-emp_role varchar(10) check(emp_role in('Pharmacist', 'Cashier','Owner'))
+emp_role varchar(10) check(emp_role in('Pharmacist', 'Cashier'))
 );
 
-create table emp_attendence(
-emp_id char(6),
-foreign key(emp_id) references employee(emp_id),
-attendence integer
-);
-
-create table owner(
-oemp_id varchar(6),
-foreign key(oemp_id) references employee(emp_id),
-superemp_id varchar(6),
-foreign key(superemp_id) references employee(emp_id)
-);
 
 create table employee_num(
 emp_id char(6),
@@ -90,6 +78,7 @@ pat_id char(6),
 foreign key(pat_id) references patient(pat_id),
 bill_amount decimal(5,2) not null
 );
+
 
 create table med_in_bill(
 bill_id char(7),

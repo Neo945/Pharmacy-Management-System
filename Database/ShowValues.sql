@@ -1,0 +1,11 @@
+use pharmacy;
+select * from medicine;
+select * from company;
+select * from patient;
+select * from bill;
+select * from med_in_bill;
+select * from employee;
+select * from employee_num;
+Select max(bill_id) from bill;
+show create table med_in_bill;
+Select * from bill join patient on patient.pat_id = bill.pat_id;
